@@ -2,11 +2,13 @@ package view;
 
 import domain.Player;
 
+import java.util.List;
+
 public class OutputView {
     public static final String GET_DEALER_ONE_CARD_INFORMATION_MESSAGE = "딜러는 16이하라 한장의 카드를 더 받았습니다.";
 
-    public static void printPlayerInitialMessage(String[] names) {
-        System.out.println("딜러와 " + names[0] + ", " + names[1] + "에게 2장의 카드를 나누었습니다.");
+    public static void printPlayerInitialMessage(List<String> names) {
+        System.out.println("딜러와 " + names.get(1) + ", " + names.get(2) + "에게 2장의 카드를 나누었습니다.");
     }
 
     public static void printPlayerOwnCard(Player player) {
