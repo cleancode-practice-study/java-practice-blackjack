@@ -12,15 +12,18 @@ public class OutputView {
     }
 
     public static void printPlayerOwnCard(Player player) {
-        System.out.println(player.name + " 카드 : " + player.card);
+        System.out.print(player.name + " 카드 : " + player.cards);
     }
 
     public static void printDealerOneCardMessage() {
         System.out.println(GET_DEALER_ONE_CARD_INFORMATION_MESSAGE);
     }
 
-    public static void printPlayerCardTotalResult(Player player) {
-        System.out.println(player.name + " 카드 : " + player.card + " - 결과 : " + player.getCardTotalSumResult());
+    public static void printPlayerCardTotalResult(List<Player> players) {
+        for (Player player : players) {
+            printPlayerOwnCard(player);
+            System.out.println(" - 결과 : " + player.getCardTotalSum());
+        }
     }
 
     public void printGameResult() {
