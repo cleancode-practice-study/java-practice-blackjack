@@ -18,8 +18,7 @@ public class Player {
         return names.split(",");
     }
 
-    public static Player createPlayerCard(String name) {
-        List<String> cards = Player.getCard(); // player의 2장의 카드를 담은 list
+    public static Player createPlayer(String name, List<String> cards) {
         Player player = new Player(name, cards);
 
         return player;

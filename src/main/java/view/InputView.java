@@ -14,7 +14,7 @@ public class InputView {
 
     }
 
-    public String inputYesOrNoOneCard(String name) {
+    public static String inputYesOrNoOneCard(String name) {
         System.out.println(name + INPUT_YES_OR_NO_ONE_CARD);
 
         return scanner.next();
