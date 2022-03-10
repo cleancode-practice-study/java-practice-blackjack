@@ -1,12 +1,13 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
     public String name;
     public List<String> card;
 
-    Player(String playerName, List<String> cards) {
+    public Player(String playerName, List<String> cards) {
         this.name = playerName;
         this.card = cards;
     }
@@ -24,6 +25,18 @@ public class Player {
         return this.card;
     }
 
-    public String getCardTotalSumResult() {
+    public static List<String> getCard() {
+        List<String> cards = new ArrayList<>();
+
+        for (int i = 0; i < 2; i++) {
+            cards.add(Card.getRandomCard());
+        }
+
+        return cards;
+    }
+
+    public int getCardTotalSumResult() {
+        int sum = 0;
+        return sum;
     }
 }
