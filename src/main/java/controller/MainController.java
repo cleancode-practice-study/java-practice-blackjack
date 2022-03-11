@@ -36,9 +36,8 @@ public class MainController {
     }
 
     private Player checkOneMoreCardDealer(Player dealer) {
-        if (dealer.getCardTotalSum() <= DEALER_ONE_MORE_CARD_STANDARD_NUMBER) {
+        if (dealer.getCardTotalSum() <= DEALER_ONE_MORE_CARD_STANDARD_NUMBER)
             dealer.cards.add(RandomCard.getRandomCard());
-        }
 
         return dealer;
     }

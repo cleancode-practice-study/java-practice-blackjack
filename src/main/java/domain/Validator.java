@@ -26,11 +26,6 @@ public class Validator {
     }
 
     private static boolean isValidPlayerCardSumNumber(Player player) {
-        boolean isValidDealerTotalSumNumber = true;
-
-        if (player.getCardTotalSum() > WIN_STANDARD_NUMBER)
-            isValidDealerTotalSumNumber = false;
-
-        return isValidDealerTotalSumNumber;
+        return player.getCardTotalSum() <= WIN_STANDARD_NUMBER;
     }
 }
