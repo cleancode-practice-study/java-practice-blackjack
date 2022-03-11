@@ -81,7 +81,7 @@ public class MainController {
     }
 
     private Player checkOneMoreCardDealer(Player player) {
-        if (player.getCardTotalSum() < DEALER_ONE_MORE_CARD_STANDARD_NUMBER) {
+        if (player.getCardTotalSum() <= DEALER_ONE_MORE_CARD_STANDARD_NUMBER) {
             player.cards.add(RandomCard.getRandomCard());
             OutputView.printDealerOneCardMessage();
             System.out.println("");

@@ -9,11 +9,12 @@ public class Validator {
 
     // 딜러와 플레이어의 카드 숫자 합 비교
     public static Map<String, String> compareDealerAndUser(Player dealer, List<Player> users) {
-        boolean isValidUserResult = isValidUsersCardSumNumber(users);
-        boolean isValidDealerResult = isValidDealerCardSumNumber(dealer);
+        boolean isValidDealerResult = isValidPlayerCardSumNumber(dealer);
+
         Map<String, String> map = new HashMap<>();
 
         for (Player user : users) {
+            boolean isValidUserResult = isValidPlayerCardSumNumber(user);
             if (isValidDealerResult) { // 딜러 true
                 if (isValidUserResult) { // 유저 true
                     if (dealer.getCardTotalSum() > user.getCardTotalSum())
@@ -33,23 +34,12 @@ public class Validator {
         return map;
     }
 
-    private static boolean isValidDealerCardSumNumber(Player dealer) {
+    private static boolean isValidPlayerCardSumNumber(Player player) {
         boolean isValidDealerTotalSumNumber = true;
 
-        if (dealer.getCardTotalSum() > WIN_STANDARD_NUMBER)
+        if (player.getCardTotalSum() > WIN_STANDARD_NUMBER)
             isValidDealerTotalSumNumber = false;
 
         return isValidDealerTotalSumNumber;
-    }
-
-    private static boolean isValidUsersCardSumNumber(List<Player> users) {
-        boolean isValidUsersTotalSumNumber = true;
-
-        for (Player user : users) {
-            if (user.getCardTotalSum() > WIN_STANDARD_NUMBER)
-                isValidUsersTotalSumNumber = false;
-        }
-
-        return isValidUsersTotalSumNumber;
     }
 }
