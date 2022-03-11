@@ -2,121 +2,57 @@ package controller;
 
 import domain.Player;
 import domain.RandomCard;
-import domain.Validator;
-import view.InputView;
-import view.OutputView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 public class MainController {
     public static final int DEALER_ONE_MORE_CARD_STANDARD_NUMBER = 16;
+    public static final String DEALER = "딜러";
 
     public void play() {
-        List<String> names = getUserNames();
-        List<Player> users = Player.createUsers(names);
+        List<String> names = InputController.getUserNames(); // 게임 참여 이름 입력
+        List<Player> users = Player.createUserPlayers(names);
+        Player dealer = Player.createPlayer(DEALER); // 카드가 부여된 DEALER 플레이어 생성
 
-        Player dealer = Player.createDealer();
+        PrintController.printPlayerInitialMessage(names); // 딜러와 halim, jinhee에게 2장의 카드를 나누었습니다.
+        PrintController.printPlayerInitialCards(dealer, users); // 플레이어들의 초기 부여 받은 카드 출력
 
-        OutputView.printPlayerInitialMessage(names);
-        System.out.println("");
-
-        printPlayerInitialCards(dealer, users); // 초기 부여 받은 카드 출력
-        System.out.println("");
-
-        List<Player> newUserCards = checkOneMoreCardUsers(users);
-        Player newDealerCards = checkOneMoreCardDealer(dealer);
-
-        printPlayerFinalCards(newDealerCards, newUserCards);
-        System.out.println("");
-        printGameResult(newDealerCards, newUserCards);
+        PrintController.printGameResult(registerNewDealerCards(dealer), registerNewUserCards(users)); // 최종 승패 출력
     }
 
-    private List<String> getUserNames() {
-        String name = InputView.inputPlayerNames(); // view 호출, 게임의 참여할 사람 이름 입력 받기
-        String[] names = Player.splitPlayerNames(name); // model 호출, 쉼표 기준으로 잘라서 배열에 저장
-        List<String> users = new ArrayList<>(Arrays.asList(names)); // 배열을 리스트로
-
-        return users;
-    }
-
-    // 플레이어 초기 카드 출력
-    private void printPlayerInitialCards(Player dealer, List<Player> users) {
-        OutputView.printPlayerOwnCard(dealer);
-        System.out.println("");
-
+    private List<Player> registerNewUserCards(List<Player> users) {
+        List<Player> newUsersCards = new ArrayList<>();
         for (Player user : users) {
-            OutputView.printPlayerOwnCard(user);
-            System.out.println("");
-        }
-    }
-
-    private List<Player> checkOneMoreCardUsers(List<Player> users) {
-        List<Player> newUser = new ArrayList<>();
-
-        for (Player user : users) {
-            boolean check = true;
-            String choice;
-
-            while (check) {
-                choice = InputView.inputYesOrNoOneCard(user.name);
-
-                if (choice.equals("n"))
-                    check = false;
-                else {
-                    user.cards.add(RandomCard.getRandomCard());
-                }
-
-                OutputView.printPlayerOwnCard(user);
-                System.out.println("");
-            }
-
-            newUser.add(user);
-        }
-        System.out.println("");
-
-        return newUser;
-    }
-
-    private Player checkOneMoreCardDealer(Player player) {
-        if (player.getCardTotalSum() <= DEALER_ONE_MORE_CARD_STANDARD_NUMBER) {
-            player.cards.add(RandomCard.getRandomCard());
-            OutputView.printDealerOneCardMessage();
-            System.out.println("");
+            checkOneMoreCardUser(newUsersCards, user);
+            PrintController.printPlayerOwnCard(user);
         }
 
-        return player;
+        return newUsersCards;
     }
 
-
-    private void printPlayerFinalCards(Player newDealer, List<Player> newUser) {
-        OutputView.printPlayerCardTotalResult(newDealer);
-        for (Player user : newUser)
-            OutputView.printPlayerCardTotalResult(user);
-
+    private Player registerNewDealerCards(Player dealer) {
+        return checkOneMoreCardDealer(dealer);
     }
 
-    private void printGameResult(Player dealer, List<Player> users) {
-        System.out.println("## 최종 승패");
-        Map<String, String> result = Validator.compareDealerAndUser(dealer, users);
-        int dealerWinCount = getDealerWinCounter(result);
-        int dealerLoseCount = users.size() - dealerWinCount;
-        OutputView.printGameResult();
-        System.out.println(dealer.name + " : " + dealerWinCount + "승 " + dealerLoseCount + "패");
-        OutputView.printUsersWinOrLoseResult(result);
-    }
-
-    // 딜러 win count 구하는 메서드
-    private int getDealerWinCounter(Map<String, String> map) {
-        int winCount = 0;
-        for (Map.Entry<String, String> value : map.entrySet()) {
-            if (value.getValue() == "패") {
-                winCount++;
-            }
+    private Player checkOneMoreCardDealer(Player dealer) {
+        if (dealer.getCardTotalSum() <= DEALER_ONE_MORE_CARD_STANDARD_NUMBER) {
+            dealer.cards.add(RandomCard.getRandomCard());
+            PrintController.printDealerOneCardMessage();
         }
-        return winCount;
+
+        return dealer;
     }
 
+    // 수정필요 - indent 2개
+    private void checkOneMoreCardUser(List<Player> newUser, Player user) {
+        while (true) {
+            if (InputController.isNoOneMoreCard(user))
+                break;
+
+            user.cards.add(RandomCard.getRandomCard());
+            PrintController.printPlayerOwnCard(user);
+        }
+        newUser.add(user); // 한장 더 받을지 선택, 카드가 추가된 USER 플레이어
+    }
 }
