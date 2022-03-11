@@ -21,15 +21,21 @@ public class MainController {
         OutputView.printPlayerInitialMessage(names);
         System.out.println("");
 
-        printPlayerInitialCards(dealer, users); // 초기 부여받은 카드
-        printGameResult(dealer, users);
+        printPlayerInitialCards(dealer, users); // 초기 부여 받은 카드 출력
+
+        List<Player> newUserCards = checkOneMoreCardUsers(users);
+        Player newDealerCards = checkOneMoreCardDealer(dealer);
+
+        printPlayerNewCards(newDealerCards, newUserCards);
+        printGameResult(newDealerCards, newUserCards);
     }
 
-    private void printPlayerInitialCards(Player dealer, List<Player> users) {
-        OutputView.printPlayerOwnCard(dealer);
-        for (Player user : users)
-            OutputView.printPlayerOwnCard(user);
-        System.out.println("");
+    private List<String> getUserNames() {
+        String names = InputView.inputPlayerNames(); // view 호출, 게임의 참여할 사람 이름 입력 받기
+        String[] users = Player.splitPlayerNames(names); // model 호출, 쉼표 기준으로 잘라서 배열에 저장
+        List<String> players = new ArrayList<>(Arrays.asList(users)); // 배열을 리스트로
+
+        return players;
     }
 
     private Player createDealer() {
@@ -49,16 +55,16 @@ public class MainController {
         return players;
     }
 
-    private List<String> getUserNames() {
-        String names = InputView.inputPlayerNames(); // view 호출, 게임의 참여할 사람 이름 입력 받기
-        String[] users = Player.splitPlayerNames(names); // model 호출, 쉼표 기준으로 잘라서 배열에 저장
-        List<String> players = new ArrayList<>(Arrays.asList(users)); // 배열을 리스트로
 
-        return players;
+    private void printPlayerInitialCards(Player dealer, List<Player> users) {
+        OutputView.printPlayerOwnCard(dealer);
+        for (Player user : users)
+            OutputView.printPlayerOwnCard(user);
+        System.out.println("");
     }
 
     private void printGameResult(Player dealer, List<Player> users) {
-        checkOneMoreCard(dealer, users);
+
         printWinOrLoseResult(dealer, users);
     }
 
@@ -70,15 +76,13 @@ public class MainController {
 
     }
 
-    private void checkOneMoreCard(Player dealer, List<Player> users) {
-        List<Player> newUser = checkOneMoreCardPlayers(users); // 사용자 한장 더 받을지
-        Player newDealer = checkOneMoreCardDealer(dealer); // 딜러 한장 더 받는지
+    private void printPlayerNewCards(Player newDealer, List<Player> newUser) {
         OutputView.printPlayerCardTotalResult(newDealer);
         for (Player user : newUser)
             OutputView.printPlayerCardTotalResult(user);
     }
 
-    private List<Player> checkOneMoreCardPlayers(List<Player> users) {
+    private List<Player> checkOneMoreCardUsers(List<Player> users) {
         List<Player> newUser = new ArrayList<>();
 
         for (Player user : users) {
