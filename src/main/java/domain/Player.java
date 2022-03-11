@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
@@ -9,6 +10,23 @@ public class Player {
     public Player(String playerName, List<String> playerCards) {
         this.name = playerName;
         this.cards = playerCards;
+    }
+
+    public static Player createDealer() {
+        List<String> cards = RandomCard.getInitialCard(); // model 호출, player의 2장의 카드를 담은 list
+        return new Player("딜러", cards);
+    }
+
+    public static List<Player> createUsers(List<String> names) {
+        List<Player> players = new ArrayList<>();
+
+        for (String name : names) {
+            List<String> cards = RandomCard.getInitialCard(); // model 호출, player의 2장의 카드를 담은 list
+            Player player = new Player(name, cards);
+            players.add(player);
+        }
+
+        return players;
     }
 
     // 입력 받은 String, 쉼표 기준으로 String[] 반환 메서드

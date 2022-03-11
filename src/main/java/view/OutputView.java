@@ -18,7 +18,7 @@ public class OutputView {
     }
 
     public static void printPlayerOwnCard(Player player) {
-        System.out.println(player.name + " 카드 : " + player.cards);
+        System.out.print(player.name + " 카드 : " + player.cards);
     }
 
     public static void printDealerOneCardMessage() {
