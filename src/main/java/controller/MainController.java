@@ -68,6 +68,7 @@ public class MainController {
                 }
 
                 OutputView.printPlayerOwnCard(user);
+                System.out.println("");
             }
 
             newUser.add(user);
@@ -92,6 +93,7 @@ public class MainController {
         OutputView.printPlayerCardTotalResult(newDealer);
         for (Player user : newUser)
             OutputView.printPlayerCardTotalResult(user);
+
     }
 
     private void printGameResult(Player dealer, List<Player> users) {

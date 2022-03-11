@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Random;
 
 public class RandomCard {
-
     public static final int INITIAL_CARD_COUNT = 2;
 
     // 랜덤 카드 한장 반환 메서드
@@ -30,5 +29,4 @@ public class RandomCard {
 
         return cards;
     }
-
 }
