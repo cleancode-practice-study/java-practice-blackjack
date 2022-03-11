@@ -15,7 +15,6 @@ public class MainController {
         List<Player> users = Player.createUserPlayers(names);
         Player dealer = Player.createPlayer(DEALER); // 카드가 부여된 DEALER 플레이어 생성
 
-        PrintController.printPlayerInitialMessage(names); // 딜러와 halim, jinhee에게 2장의 카드를 나누었습니다.
         PrintController.printPlayerInitialCards(dealer, users); // 플레이어들의 초기 부여 받은 카드 출력
 
         PrintController.printGameResult(registerNewDealerCards(dealer), registerNewUserCards(users)); // 최종 승패 출력

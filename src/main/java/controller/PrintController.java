@@ -9,13 +9,14 @@ import java.util.List;
 import java.util.Map;
 
 public class PrintController {
-    public static void printPlayerInitialMessage(List<String> names) {
-        OutputView.printPlayerInitialMessage(names);
+    public static void printPlayerInitialMessage(List<Player> users) {
+        OutputView.printPlayerInitialMessage(users);
         System.out.println("");
     }
 
     // 플레이어 초기 카드 출력
     public static void printPlayerInitialCards(Player dealer, List<Player> users) {
+        PrintController.printPlayerInitialMessage(users);
         OutputView.printPlayerOwnCard(dealer);
         System.out.println("");
 

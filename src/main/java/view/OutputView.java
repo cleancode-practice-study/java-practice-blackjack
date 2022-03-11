@@ -2,27 +2,31 @@ package view;
 
 import domain.Player;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class OutputView {
     public static final String GET_DEALER_ONE_CARD_INFORMATION_MESSAGE = "딜러는 16이하라 한장의 카드를 더 받았습니다.";
     public static final String RESULT_MESSAGE = " - 결과 : ";
-    public static final String DEALER = "딜러 ";
+    public static final String DEALER = "딜러";
     public static final String GIVE_A_PLAYER_2_CARDS_MESSAGE = "에게 2장의 카드를 나누었습니다.";
     public static final String COLON_SYMBOL = " : ";
     public static final String CARD = " 카드 : ";
-    public static final String COMMA_SYMBOL = ", ";
+    public static final String COMMA_SYMBOL = " , ";
     public static final String WIN = "승 ";
     public static final String LOSE = "패";
     public static final String FINAL_WIN_OR_LOSE_RESULT_MESSAGE = "## 최종 승패";
 
-    public static void printPlayerInitialMessage(List<String> names) {
-        System.out.print(DEALER + "와 ");
-        for (int i = 0; i < names.size(); i++)
-            System.out.print(names.get(i).replaceAll("^[i != names.size() - 1]", names.get(i) + COMMA_SYMBOL));
+    public static void printPlayerInitialMessage(List<Player> users) {
+        List<String> names = new ArrayList<>();
+        for (Player user : users)
+            names.add(user.name);
 
-        System.out.println(GIVE_A_PLAYER_2_CARDS_MESSAGE);
+        String addCommaString = String.join(", ", names);
+
+        System.out.print(DEALER + "와 " + addCommaString + GIVE_A_PLAYER_2_CARDS_MESSAGE);
+
     }
 
     public static void printPlayerOwnCard(Player player) {
