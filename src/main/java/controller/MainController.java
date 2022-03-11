@@ -29,7 +29,8 @@ public class MainController {
         List<Player> newUserCards = checkOneMoreCardUsers(users);
         Player newDealerCards = checkOneMoreCardDealer(dealer);
 
-        printPlayerNewCards(newDealerCards, newUserCards);
+        printPlayerFinalCards(newDealerCards, newUserCards);
+        System.out.println("");
         printGameResult(newDealerCards, newUserCards);
     }
 
@@ -90,7 +91,7 @@ public class MainController {
     }
 
 
-    private void printPlayerNewCards(Player newDealer, List<Player> newUser) {
+    private void printPlayerFinalCards(Player newDealer, List<Player> newUser) {
         OutputView.printPlayerCardTotalResult(newDealer);
         for (Player user : newUser)
             OutputView.printPlayerCardTotalResult(user);
@@ -98,12 +99,24 @@ public class MainController {
     }
 
     private void printGameResult(Player dealer, List<Player> users) {
+        System.out.println("## 최종 승패");
         Map<String, String> result = Validator.compareDealerAndUser(dealer, users);
-        OutputView.printUsersWinOrLoseResult(result);
-/*        int dealerWinCount =
+        int dealerWinCount = getDealerWinCounter(result);
         int dealerLoseCount = users.size() - dealerWinCount;
         OutputView.printGameResult();
-        System.out.println(dealer.name + " : " + dealerWinCount + "승 " + dealerLoseCount + "패");*/
+        System.out.println(dealer.name + " : " + dealerWinCount + "승 " + dealerLoseCount + "패");
+        OutputView.printUsersWinOrLoseResult(result);
+    }
+
+    // 딜러 win count 구하는 메서드
+    private int getDealerWinCounter(Map<String, String> map) {
+        int winCount = 0;
+        for (Map.Entry<String, String> value : map.entrySet()) {
+            if (value.getValue() == "패") {
+                winCount++;
+            }
+        }
+        return winCount;
     }
 
 }
