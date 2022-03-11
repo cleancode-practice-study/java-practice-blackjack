@@ -38,18 +38,13 @@ public class MainController {
     private Player checkOneMoreCardDealer(Player dealer) {
         if (dealer.getCardTotalSum() <= DEALER_ONE_MORE_CARD_STANDARD_NUMBER) {
             dealer.cards.add(RandomCard.getRandomCard());
-            PrintController.printDealerOneCardMessage();
         }
 
         return dealer;
     }
 
-    // 수정필요 - indent 2개
     private void checkOneMoreCardUser(List<Player> newUser, Player user) {
-        while (true) {
-            if (InputController.isNoOneMoreCard(user))
-                break;
-
+        while (!InputController.isNoOneMoreCard(user)) {
             user.cards.add(RandomCard.getRandomCard());
             PrintController.printPlayerOwnCard(user);
         }

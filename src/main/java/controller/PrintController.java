@@ -32,18 +32,20 @@ public class PrintController {
     }
 
     public static void printDealerOneCardMessage() {
-        OutputView.printDealerOneCardMessage();
+        OutputView.printDealerOneMoreCardMessage();
         System.out.println("");
     }
 
     public static void printGameResult(Player dealer, List<Player> users) {
         int userSize = users.size();
+        if (dealer.cards.size() > 2)
+            PrintController.printDealerOneCardMessage();
 
         printPlayerFinalCardsAndSumResult(dealer, users); // 플레이어들의 최종 카드와 숫자 합 결과 출력
         Map<String, String> userWinOrLoseResult = new HashMap<>();
         for (Player user : users)
             Validator.compareDealerAndUser(userWinOrLoseResult, dealer, user); // 유저 승패 결과 구하기
-        printWinOrLoseResult(dealer, userSize, userWinOrLoseResult); // 최종 승패 결과 출력
+        printWinOrLoseResult(userSize, userWinOrLoseResult); // 최종 승패 결과 출력
     }
 
     private static void printPlayerFinalCardsAndSumResult(Player dealer, List<Player> users) {
@@ -54,10 +56,10 @@ public class PrintController {
         System.out.println("");
     }
 
-    private static void printWinOrLoseResult(Player dealer, int userSize, Map<String, String> userWinOrLoseResult) {
+    private static void printWinOrLoseResult(int userSize, Map<String, String> userWinOrLoseResult) {
         int dealerWinCount = Player.getDealerWinCounter(userWinOrLoseResult);
 
-        OutputView.printDealerWinOrLoseResult(dealer, userSize, dealerWinCount);
+        OutputView.printDealerWinOrLoseResult(userSize, dealerWinCount);
         OutputView.printUsersWinOrLoseResult(userWinOrLoseResult);
     }
 }

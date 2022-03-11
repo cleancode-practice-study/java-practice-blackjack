@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 public class Player {
-    public static final String DEALER = "딜러";
     public static final int SPECIAL_NUMBER = 10;
     public static final int WIN_STANDARD_NUMBER = 21;
     public static final int MIN_ACE_NUMBER = 1;

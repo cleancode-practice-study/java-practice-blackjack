@@ -8,7 +8,7 @@ import java.util.Map;
 public class OutputView {
     public static final String GET_DEALER_ONE_CARD_INFORMATION_MESSAGE = "딜러는 16이하라 한장의 카드를 더 받았습니다.";
     public static final String RESULT_MESSAGE = " - 결과 : ";
-    public static final String DEALER = "딜러와 ";
+    public static final String DEALER = "딜러 ";
     public static final String GIVE_A_PLAYER_2_CARDS_MESSAGE = "에게 2장의 카드를 나누었습니다.";
     public static final String COLON_SYMBOL = " : ";
     public static final String CARD = " 카드 : ";
@@ -18,7 +18,7 @@ public class OutputView {
     public static final String FINAL_WIN_OR_LOSE_RESULT_MESSAGE = "## 최종 승패";
 
     public static void printPlayerInitialMessage(List<String> names) {
-        System.out.print(DEALER);
+        System.out.print(DEALER + "와 ");
         for (int i = 0; i < names.size(); i++)
             System.out.print(names.get(i).replaceAll("^[i != names.size() - 1]", names.get(i) + COMMA_SYMBOL));
 
@@ -29,7 +29,7 @@ public class OutputView {
         System.out.print(player.name + CARD + player.cards);
     }
 
-    public static void printDealerOneCardMessage() {
+    public static void printDealerOneMoreCardMessage() {
         System.out.println(GET_DEALER_ONE_CARD_INFORMATION_MESSAGE);
     }
 
@@ -43,8 +43,8 @@ public class OutputView {
             System.out.println(entrySet.getKey() + COLON_SYMBOL + entrySet.getValue());
     }
 
-    public static void printDealerWinOrLoseResult(Player dealer, int userSize, int dealerWinCount) {
+    public static void printDealerWinOrLoseResult(int userSize, int dealerWinCount) {
         System.out.println(FINAL_WIN_OR_LOSE_RESULT_MESSAGE);
-        System.out.println(dealer.name + COLON_SYMBOL + dealerWinCount + WIN + (userSize - dealerWinCount) + LOSE);
+        System.out.println(DEALER + COLON_SYMBOL + dealerWinCount + WIN + (userSize - dealerWinCount) + LOSE);
     }
 }
