@@ -9,14 +9,11 @@ public class InputView {
 
     public static String inputPlayerNames() {
         System.out.println(INPUT_PLAYER_NAME_MESSAGE);
-
         return scanner.next();
-
     }
 
     public static String inputYesOrNoOneCard(String name) {
         System.out.println(name + INPUT_YES_OR_NO_ONE_CARD);
-
         return scanner.next();
     }
 }

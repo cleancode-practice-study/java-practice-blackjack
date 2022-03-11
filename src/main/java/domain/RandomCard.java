@@ -1,8 +1,11 @@
-package util;
+package domain;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class RandomCard {
+    // 랜덤 카드 한장 반환 메서드
     public static String getRandomCard() {
         Random random = new Random();
         String[] card = new String[2];
@@ -17,4 +20,16 @@ public class RandomCard {
 
         return card[0] + card[1];
     }
+
+    // 초기에 나눠주는 랜덤 카드 2장이 들어있는 list 반환 메서드
+    public static List<String> getInitialCard() {
+        List<String> cards = new ArrayList<>();
+
+        for (int i = 0; i < 2; i++) {
+            cards.add(getRandomCard());
+        }
+
+        return cards;
+    }
+
 }

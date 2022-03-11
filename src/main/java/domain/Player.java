@@ -1,8 +1,5 @@
 package domain;
 
-import util.RandomCard;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
@@ -14,33 +11,31 @@ public class Player {
         this.cards = playerCards;
     }
 
+    // 입력 받은 String, 쉼표 기준으로 String[] 반환 메서드
     public static String[] splitPlayerNames(String names) {
         return names.split(",");
     }
 
-    public static Player createPlayer(String name, List<String> cards) {
-        Player player = new Player(name, cards);
-
-        return player;
-    }
-
-    public static List<String> getCard() {
-        List<String> cards = new ArrayList<>();
-
-        for (int i = 0; i < 2; i++) {
-            cards.add(RandomCard.getRandomCard());
+    // Ace의 number 계산 메서드(1 또는 11)
+    private static int getAceNumber(int sum) {
+        if (sum + 10 > 21) {
+            return 1;
+        } else {
+            return 10;
         }
-
-        return cards;
     }
 
+    // 가지고 있는 카드의 숫자 합계 반환 메서드
     public int getCardTotalSum() {
         int sum = 0;
 
         for (String card : cards) {
-            if (card.charAt(0) == 'J' || card.charAt(0) == 'Q' || card.charAt(0) == 'K') {
+            if (card.charAt(0) == 'A') {
+                sum += getAceNumber(sum);
+                continue;
+            } else if (card.charAt(0) == 'J' || card.charAt(0) == 'Q' || card.charAt(0) == 'K') {
                 sum += 10;
-                break;
+                continue;
             }
 
             sum += Character.getNumericValue(card.charAt(0));
