@@ -99,6 +99,7 @@ public class MainController {
 
     private void printGameResult(Player dealer, List<Player> users) {
         Map<String, String> result = Validator.compareDealerAndUser(dealer, users);
+        OutputView.printUsersWinOrLoseResult(result);
 /*        int dealerWinCount =
         int dealerLoseCount = users.size() - dealerWinCount;
         OutputView.printGameResult();

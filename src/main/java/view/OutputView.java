@@ -31,8 +31,10 @@ public class OutputView {
         System.out.println(RESULT_MESSAGE + player.getCardTotalSum());
     }
 
-    public static void printWinOrLose(Map<String, String> map) {
-
+    public static void printUsersWinOrLoseResult(Map<String, String> map) {
+        for (Map.Entry<String, String> entrySet : map.entrySet()) {
+            System.out.println(entrySet.getKey() + " : " + entrySet.getValue());
+        }
     }
 
     public static void printGameResult() {
