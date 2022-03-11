@@ -3,6 +3,7 @@ package view;
 import domain.Player;
 
 import java.util.List;
+import java.util.Map;
 
 public class OutputView {
     public static final String GET_DEALER_ONE_CARD_INFORMATION_MESSAGE = "딜러는 16이하라 한장의 카드를 더 받았습니다.";
@@ -28,6 +29,10 @@ public class OutputView {
     public static void printPlayerCardTotalResult(Player player) {
         printPlayerOwnCard(player);
         System.out.println(RESULT_MESSAGE + player.getCardTotalSum());
+    }
+
+    public static void printWinOrLose(Map<String, String> map) {
+
     }
 
     public static void printGameResult() {

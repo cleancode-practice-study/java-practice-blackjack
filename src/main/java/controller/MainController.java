@@ -9,6 +9,7 @@ import view.OutputView;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class MainController {
     public static final int DEALER_ONE_MORE_CARD_STANDARD_NUMBER = 16;
@@ -97,11 +98,11 @@ public class MainController {
     }
 
     private void printGameResult(Player dealer, List<Player> users) {
-        int dealerWinCount = Validator.compareDealerAndUser(dealer, users);
+        Map<String, String> result = Validator.compareDealerAndUser(dealer, users);
+/*        int dealerWinCount =
         int dealerLoseCount = users.size() - dealerWinCount;
         OutputView.printGameResult();
-        System.out.println(dealer.name + " : " + dealerWinCount + "승 " + dealerLoseCount + "패");
-
+        System.out.println(dealer.name + " : " + dealerWinCount + "승 " + dealerLoseCount + "패");*/
     }
 
 }
