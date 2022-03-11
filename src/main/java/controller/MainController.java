@@ -14,16 +14,22 @@ public class MainController {
     public static final int DEALER_ONE_MORE_CARD_STANDARD_NUMBER = 16;
 
     public void play() {
+        List<String> names = getUserNames();
+
         Player dealer = createDealer();
-        List<Player> users = createUsers();
+        List<Player> users = createUsers(names);
+        OutputView.printPlayerInitialMessage(names);
         System.out.println("");
 
+        printPlayerInitialCards(dealer, users); // 초기 부여받은 카드
+        printGameResult(dealer, users);
+    }
+
+    private void printPlayerInitialCards(Player dealer, List<Player> users) {
         OutputView.printPlayerOwnCard(dealer);
         for (Player user : users)
             OutputView.printPlayerOwnCard(user);
         System.out.println("");
-
-        printGameResult(dealer, users);
     }
 
     private Player createDealer() {
@@ -31,10 +37,8 @@ public class MainController {
         return new Player("딜러", cards);
     }
 
-    private List<Player> createUsers() {
+    private List<Player> createUsers(List<String> names) {
         List<Player> players = new ArrayList<>();
-        List<String> names = getUserNames();
-        OutputView.printPlayerInitialMessage(names);
 
         for (String name : names) {
             List<String> cards = RandomCard.getInitialCard(); // model 호출, player의 2장의 카드를 담은 list
