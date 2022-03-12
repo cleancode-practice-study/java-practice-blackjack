@@ -6,6 +6,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class BlackJackGame {
+    private static final int INIT_CARD_COUNT = 2;
+    private static final int ADD_CARD_COUNT = 1;
 
     public static Dealer getDealer() {
         return new Dealer();
@@ -29,11 +31,11 @@ public class BlackJackGame {
         return new ArrayList<>(Arrays.asList(participantsNames));
     }
 
-    public static void getCards(List<Participant> participants, Dealer dealer) {
+    public static void initCards(List<Participant> participants, Dealer dealer) {
         for (Participant participant : participants) {
-            participant.receiveCards();
+            participant.receiveCards(INIT_CARD_COUNT);
         }
-        dealer.receiveCards();
+        dealer.receiveCards(INIT_CARD_COUNT);
     }
 
 }

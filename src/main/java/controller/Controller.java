@@ -15,7 +15,7 @@ public class Controller {
         Dealer dealer = BlackJackGame.getDealer();
 
         // get cards
-        BlackJackGame.getCards(participants, dealer);
+        BlackJackGame.initCards(participants, dealer);
 
         // get game result
     }
