@@ -1,6 +1,7 @@
 package controller;
 
 import model.BlackJackGame;
+import model.Dealer;
 import model.Participant;
 import view.InputView;
 
@@ -10,6 +11,7 @@ public class Controller {
     public void run() {
         // createParticipant
         List<Participant> participants = createParticipants();
+        Dealer dealer = BlackJackGame.getDealer();
 
         // get cards
 
