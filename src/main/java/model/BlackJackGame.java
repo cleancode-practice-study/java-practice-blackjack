@@ -38,4 +38,14 @@ public class BlackJackGame {
         dealer.receiveCards(INIT_CARD_COUNT);
     }
 
+    public static String getParticipantNames(List<Participant> participants) {
+        List<String> participantNames = new ArrayList<>();
+
+        for (Participant participant : participants) {
+            participantNames.add(participant.getName());
+        }
+
+        return String.join(", ", participantNames);
+    }
+
 }
