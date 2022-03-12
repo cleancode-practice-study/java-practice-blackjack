@@ -9,29 +9,23 @@ public class Validator {
     public static final String WIN = "승";
     public static final String LOSE = "패";
 
-    // 수정 필요 > indent2 , else
-    // 딜러와 플레이어의 카드 숫자 합 비교
+    // 수정 필요 > indent2
+    // 유저의 승패결과 구하는 메서드
     public static Map<String, String> getUserWinOrLoseResult(Player dealer, List<Player> users) {
         Map<String, String> userWinOrLoseResult = new HashMap<>();
 
         for (Player user : users) {
-            if (isWinnerUser(dealer, user)) {
+            boolean isValidUserResult = isValidPlayerCardResultNumber(user);
+
+            if (isValidUserResult && isLargerThanDealerNumber(dealer, user)) {// 유저 딜러 true, 유저 > 딜러
                 userWinOrLoseResult.put(user.name, WIN);
-            } else
-                userWinOrLoseResult.put(user.name, LOSE);
+                continue;
+            }
+
+            userWinOrLoseResult.put(user.name, LOSE);
         }
 
         return userWinOrLoseResult;
-    }
-
-
-    private static boolean isWinnerUser(Player dealer, Player user) {
-        boolean isValidUserResult = isValidPlayerCardResultNumber(user);
-
-        if (isValidUserResult) // 유저 true
-            return isLargerThanDealerNumber(dealer, user);
-
-        return false;
     }
 
     private static boolean isLargerThanDealerNumber(Player dealer, Player user) {
