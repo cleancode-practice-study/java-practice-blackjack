@@ -13,10 +13,10 @@ public class OutputView {
     public static final String GIVE_A_PLAYER_2_CARDS_MESSAGE = "에게 2장의 카드를 나누었습니다.";
     public static final String COLON_SYMBOL = " : ";
     public static final String CARD = " 카드 : ";
-    public static final String COMMA_SYMBOL = " , ";
     public static final String WIN = "승 ";
     public static final String LOSE = "패";
     public static final String FINAL_WIN_OR_LOSE_RESULT_MESSAGE = "## 최종 승패";
+    public static final String AND = "와 ";
 
     public static void printPlayerInitialMessage(List<Player> users) {
         List<String> names = new ArrayList<>();
@@ -24,9 +24,7 @@ public class OutputView {
             names.add(user.name);
 
         String addCommaString = String.join(", ", names);
-
-        System.out.print(DEALER + "와 " + addCommaString + GIVE_A_PLAYER_2_CARDS_MESSAGE);
-
+        System.out.print(DEALER + AND + addCommaString + GIVE_A_PLAYER_2_CARDS_MESSAGE);
     }
 
     public static void printPlayerOwnCard(Player player) {

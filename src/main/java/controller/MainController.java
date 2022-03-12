@@ -1,7 +1,6 @@
 package controller;
 
 import domain.Player;
-import domain.RandomCard;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,39 +10,44 @@ public class MainController {
     public static final String DEALER = "딜러";
 
     public void play() {
-        List<String> names = InputController.getUserNames(); // 게임 참여 이름 입력
-        List<Player> users = Player.createUserPlayers(names);
+        List<String> userNames = InputController.getUserNames(); // 게임 참여 이름 입력
+        List<Player> users = Player.createUserPlayers(userNames); // 카드가 부여된 USER 플레이어 생성
         Player dealer = Player.createPlayer(DEALER); // 카드가 부여된 DEALER 플레이어 생성
 
         PrintController.printPlayerInitialCards(dealer, users); // 플레이어들의 초기 부여 받은 카드 출력
 
-        PrintController.printGameResult(registerNewDealerCards(dealer), registerNewUserCards(users)); // 최종 승패 출력
+        PrintController.printGameResult(getFinalDealer(dealer), getFinalUsers(users)); // 최종 승패 출력
     }
 
-    private List<Player> registerNewUserCards(List<Player> users) {
-        List<Player> newUsersCards = new ArrayList<>();
+    // 최종 딜러 카드
+    private Player getFinalDealer(Player dealer) {
+        return checkOneMoreCardDealer(dealer);
+    }
+
+    // 최종 유저 카드
+    private List<Player> getFinalUsers(List<Player> users) {
+        List<Player> finalUserCards = new ArrayList<>();
+
         for (Player user : users) {
-            checkOneMoreCardUser(newUsersCards, user);
+            checkOneMoreCardUser(finalUserCards, user);
             PrintController.printPlayerOwnCard(user);
         }
 
-        return newUsersCards;
-    }
+        System.out.println("");
 
-    private Player registerNewDealerCards(Player dealer) {
-        return checkOneMoreCardDealer(dealer);
+        return finalUserCards;
     }
 
     private Player checkOneMoreCardDealer(Player dealer) {
         if (dealer.getCardTotalSum() <= DEALER_ONE_MORE_CARD_STANDARD_NUMBER)
-            dealer.cards.add(RandomCard.getRandomCard());
+            dealer.cards.add(Player.getRandomCard());
 
         return dealer;
     }
 
     private void checkOneMoreCardUser(List<Player> newUser, Player user) {
-        while (!InputController.isNoOneMoreCard(user)) {
-            user.cards.add(RandomCard.getRandomCard());
+        while (!InputController.isNoUserAnswer(user)) {
+            user.cards.add(Player.getRandomCard());
             PrintController.printPlayerOwnCard(user);
         }
         newUser.add(user); // 한장 더 받을지 선택, 카드가 추가된 USER 플레이어

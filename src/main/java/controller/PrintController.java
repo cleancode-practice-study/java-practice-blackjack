@@ -17,6 +17,8 @@ public class PrintController {
     // 플레이어 초기 카드 출력
     public static void printPlayerInitialCards(Player dealer, List<Player> users) {
         PrintController.printPlayerInitialMessage(users);
+        System.out.println("");
+
         OutputView.printPlayerOwnCard(dealer);
         System.out.println("");
 
