@@ -4,11 +4,13 @@ import domain.Player;
 import domain.Validator;
 import view.OutputView;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class PrintController {
+
+    public static final int INITIAL_CARD_COUNT = 2;
+
     public static void printPlayerInitialMessage(List<Player> users) {
         OutputView.printPlayerInitialMessage(users);
         System.out.println("");
@@ -41,14 +43,17 @@ public class PrintController {
 
     public static void printGameResult(Player dealer, List<Player> users) {
         int userSize = users.size();
-        if (dealer.cards.size() > 2)
+        List<String> dealerCard = dealer.cards;
+
+        // 딜러 한장 더 받았는지 안받았는지
+        if (dealerCard.size() > INITIAL_CARD_COUNT)
             PrintController.printDealerOneCardMessage();
 
         printPlayerFinalCardsAndSumResult(dealer, users); // 플레이어들의 최종 카드와 숫자 합 결과 출력
-        Map<String, String> userWinOrLoseResult = new HashMap<>();
-        for (Player user : users)
-            Validator.compareDealerAndUser(userWinOrLoseResult, dealer, user); // 유저 승패 결과 구하기
-        printWinOrLoseResult(userSize, userWinOrLoseResult); // 최종 승패 결과 출력
+
+        Map<String, String> userWinOrLoseResult = Validator.getUserWinOrLoseResult(dealer, users); // 유저 승패 결과 구하기
+
+        printWinOrLoseResult(userWinOrLoseResult, userSize); // 최종 승패 결과 출력
     }
 
     private static void printPlayerFinalCardsAndSumResult(Player dealer, List<Player> users) {
@@ -59,7 +64,7 @@ public class PrintController {
         System.out.println("");
     }
 
-    private static void printWinOrLoseResult(int userSize, Map<String, String> userWinOrLoseResult) {
+    private static void printWinOrLoseResult(Map<String, String> userWinOrLoseResult, int userSize) {
         int dealerWinCount = Player.getDealerWinCounter(userWinOrLoseResult);
 
         OutputView.printDealerWinOrLoseResult(userSize, dealerWinCount);
