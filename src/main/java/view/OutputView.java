@@ -2,7 +2,6 @@ package view;
 
 import domain.Player;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -18,12 +17,7 @@ public class OutputView {
     public static final String FINAL_WIN_OR_LOSE_RESULT_MESSAGE = "## 최종 승패";
     public static final String AND = "와 ";
 
-    public static void printPlayerInitialMessage(List<Player> users) {
-        List<String> names = new ArrayList<>();
-        for (Player user : users)
-            names.add(user.name);
-
-        String addCommaString = String.join(", ", names);
+    public static void printPlayerInitialMessage(List<Player> users, String addCommaString) {
         System.out.print(DEALER + AND + addCommaString + GIVE_A_PLAYER_2_CARDS_MESSAGE);
     }
 
@@ -31,13 +25,13 @@ public class OutputView {
         System.out.print(player.name + CARD + player.cards);
     }
 
-    public static void printDealerOneMoreCardMessage() {
-        System.out.println(GET_DEALER_ONE_CARD_INFORMATION_MESSAGE);
+    public static void printPlayerCardTotalResult(Player player, int result) {
+        printPlayerOwnCard(player);
+        System.out.println(RESULT_MESSAGE + result);
     }
 
-    public static void printPlayerCardTotalResult(Player player) {
-        printPlayerOwnCard(player);
-        System.out.println(RESULT_MESSAGE + player.getCardTotalSum());
+    public static void printDealerOneMoreCardMessage() {
+        System.out.println(GET_DEALER_ONE_CARD_INFORMATION_MESSAGE);
     }
 
     public static void printUsersWinOrLoseResult(Map<String, String> map) {

@@ -21,7 +21,6 @@ public class Validator {
                 userWinOrLoseResult.put(user.name, WIN);
                 continue;
             }
-
             userWinOrLoseResult.put(user.name, LOSE);
         }
 
@@ -32,12 +31,12 @@ public class Validator {
         boolean isValidDealerResult = isValidPlayerCardResultNumber(dealer);
 
         if (isValidDealerResult) // 딜러 true
-            return dealer.getCardTotalSum() < user.getCardTotalSum();
+            return ResultStatistics.getCardTotalSum(dealer.cards) < ResultStatistics.getCardTotalSum(user.cards);
 
         return true;
     }
 
     private static boolean isValidPlayerCardResultNumber(Player player) {
-        return player.getCardTotalSum() <= WIN_STANDARD_NUMBER;
+        return ResultStatistics.getCardTotalSum(player.cards) <= WIN_STANDARD_NUMBER;
     }
 }

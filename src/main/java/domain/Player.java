@@ -2,19 +2,10 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 public class Player {
-    public static final int SPECIAL_NUMBER = 10;
-    public static final int WIN_STANDARD_NUMBER = 21;
-    public static final int MIN_ACE_NUMBER = 1;
     public static final int INITIAL_CARD_COUNT = 2;
-    public static final char ACE = 'A';
-    public static final char JACK = 'J';
-    public static final char QUEEN = 'Q';
-    public static final char KING = 'K';
-    private static final String LOSE = "패";
     public String name;
     public List<String> cards;
 
@@ -22,6 +13,7 @@ public class Player {
         this.name = playerName;
         this.cards = playerCards;
     }
+
 
     public static Player createPlayer(String name) {
         List<String> cards = getInitialCard(); // model 호출, player의 2장의 카드를 담은 list
@@ -65,56 +57,13 @@ public class Player {
         return names.split(",");
     }
 
-    // 수정 필요 - indent 2개
-    // 딜러 win count 구하는 메서드
-    public static int getDealerWinCounter(Map<String, String> map) {
-        int winCount = 0;
-        for (Map.Entry<String, String> value : map.entrySet()) {
-            if (value.getValue().equals(LOSE))
-                winCount++;
-        }
-        return winCount;
-    }
+    public static String getAddedCommaUserNames(List<Player> users) {
+        List<String> names = new ArrayList<>();
+        for (Player user : users)
+            names.add(user.name);
 
-    private static boolean isSpecialNumber(String card, int sum) {
-        return isAceCard(card) && isSmallThanWinStandardNumber(card, sum) || isJackAndQueenAndKing(card);
-    }
+        String addCommaString = String.join(", ", names);
 
-    private static boolean isMinAceNumber(String card, int sum) {
-        return card.charAt(0) == ACE && sum + SPECIAL_NUMBER > WIN_STANDARD_NUMBER;
-    }
-
-    private static boolean isJackAndQueenAndKing(String card) {
-        return card.charAt(0) == JACK || card.charAt(0) == QUEEN || card.charAt(0) == KING;
-    }
-
-    private static boolean isAceCard(String card) {
-        return card.charAt(0) == ACE;
-    }
-
-    private static boolean isSmallThanWinStandardNumber(String card, int sum) {
-        return sum + SPECIAL_NUMBER < WIN_STANDARD_NUMBER;
-    }
-
-    // 수정 필요 - indent 2개
-    // 가지고 있는 카드의 숫자 합계 반환 메서드
-    public int getCardTotalSum() {
-        int sum = 0;
-
-        for (String card : cards) {
-            if (isMinAceNumber(card, sum)) {
-                sum += MIN_ACE_NUMBER;
-                continue;
-            }
-
-            if (isSpecialNumber(card, sum)) {
-                sum += SPECIAL_NUMBER;
-                continue;
-            }
-
-            sum += Character.getNumericValue(card.charAt(0));
-        }
-
-        return sum;
+        return addCommaString;
     }
 }

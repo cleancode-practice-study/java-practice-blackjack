@@ -1,6 +1,7 @@
 package controller;
 
 import domain.Player;
+import domain.ResultStatistics;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +40,7 @@ public class MainController {
     }
 
     private Player checkOneMoreCardDealer(Player dealer) {
-        if (dealer.getCardTotalSum() <= DEALER_ONE_MORE_CARD_STANDARD_NUMBER)
+        if (ResultStatistics.getCardTotalSum(dealer.cards) <= DEALER_ONE_MORE_CARD_STANDARD_NUMBER)
             dealer.cards.add(Player.getRandomCard());
 
         return dealer;

@@ -1,6 +1,7 @@
 package controller;
 
 import domain.Player;
+import domain.ResultStatistics;
 import domain.Validator;
 import view.OutputView;
 
@@ -11,14 +12,14 @@ public class PrintController {
 
     public static final int INITIAL_CARD_COUNT = 2;
 
-    public static void printPlayerInitialMessage(List<Player> users) {
-        OutputView.printPlayerInitialMessage(users);
+    public static void printPlayerInitialMessage(List<Player> users, String addedCommaUserNames) {
+        OutputView.printPlayerInitialMessage(users, Player.getAddedCommaUserNames(users));
         System.out.println("");
     }
 
     // 플레이어 초기 카드 출력
     public static void printPlayerInitialCards(Player dealer, List<Player> users) {
-        PrintController.printPlayerInitialMessage(users);
+        PrintController.printPlayerInitialMessage(users, Player.getAddedCommaUserNames(users));
         System.out.println("");
 
         OutputView.printPlayerOwnCard(dealer);
@@ -49,23 +50,26 @@ public class PrintController {
         if (dealerCard.size() > INITIAL_CARD_COUNT)
             PrintController.printDealerOneCardMessage();
 
-        printPlayerFinalCardsAndSumResult(dealer, users); // 플레이어들의 최종 카드와 숫자 합 결과 출력
+        printPlayerFinalCardsAndResult(dealer, users); // 플레이어들의 최종 카드와 숫자 합 결과 출력
 
         Map<String, String> userWinOrLoseResult = Validator.getUserWinOrLoseResult(dealer, users); // 유저 승패 결과 구하기
 
         printWinOrLoseResult(userWinOrLoseResult, userSize); // 최종 승패 결과 출력
     }
 
-    private static void printPlayerFinalCardsAndSumResult(Player dealer, List<Player> users) {
-        OutputView.printPlayerCardTotalResult(dealer);
-        for (Player user : users)
-            OutputView.printPlayerCardTotalResult(user);
+    private static void printPlayerFinalCardsAndResult(Player dealer, List<Player> users) {
+        int dealerResult = ResultStatistics.getCardTotalSum(dealer.cards);
+        OutputView.printPlayerCardTotalResult(dealer, dealerResult);
+        for (Player user : users) {
+            int userSumResult = ResultStatistics.getCardTotalSum(user.cards);
+            OutputView.printPlayerCardTotalResult(user, userSumResult);
+        }
 
         System.out.println("");
     }
 
     private static void printWinOrLoseResult(Map<String, String> userWinOrLoseResult, int userSize) {
-        int dealerWinCount = Player.getDealerWinCounter(userWinOrLoseResult);
+        int dealerWinCount = ResultStatistics.getDealerWinCounter(userWinOrLoseResult);
 
         OutputView.printDealerWinOrLoseResult(userSize, dealerWinCount);
         OutputView.printUsersWinOrLoseResult(userWinOrLoseResult);
