@@ -76,18 +76,38 @@ public class Player {
         return winCount;
     }
 
+    private static boolean isSpecialNumber(String card, int sum) {
+        return isAceCard(card) && isSmallThanWinStandardNumber(card, sum) || isJackAndQueenAndKing(card);
+    }
+
+    private static boolean isMinAceNumber(String card, int sum) {
+        return card.charAt(0) == ACE && sum + SPECIAL_NUMBER > WIN_STANDARD_NUMBER;
+    }
+
+    private static boolean isJackAndQueenAndKing(String card) {
+        return card.charAt(0) == JACK || card.charAt(0) == QUEEN || card.charAt(0) == KING;
+    }
+
+    private static boolean isAceCard(String card) {
+        return card.charAt(0) == ACE;
+    }
+
+    private static boolean isSmallThanWinStandardNumber(String card, int sum) {
+        return sum + SPECIAL_NUMBER < WIN_STANDARD_NUMBER;
+    }
+
     // 수정 필요 - indent 2개
     // 가지고 있는 카드의 숫자 합계 반환 메서드
     public int getCardTotalSum() {
         int sum = 0;
 
         for (String card : cards) {
-            if (card.charAt(0) == ACE && sum + SPECIAL_NUMBER > WIN_STANDARD_NUMBER) {
+            if (isMinAceNumber(card, sum)) {
                 sum += MIN_ACE_NUMBER;
                 continue;
             }
 
-            if ((card.charAt(0) == ACE && sum + SPECIAL_NUMBER < WIN_STANDARD_NUMBER) || card.charAt(0) == JACK || card.charAt(0) == QUEEN || card.charAt(0) == KING) {
+            if (isSpecialNumber(card, sum)) {
                 sum += SPECIAL_NUMBER;
                 continue;
             }
