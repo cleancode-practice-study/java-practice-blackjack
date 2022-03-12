@@ -1,6 +1,7 @@
 package controller;
 
 import model.BlackJackGame;
+import model.Card;
 import model.Dealer;
 import model.Participant;
 import view.InputView;
@@ -14,12 +15,12 @@ public class Controller {
         Dealer dealer = BlackJackGame.getDealer();
 
         // get cards
+        BlackJackGame.getCards(participants, dealer);
 
         // get game result
     }
     public List<Participant> createParticipants() {
         String names = InputView.getParticipantInputMessage();
-        List<Participant> participants = BlackJackGame.getParticipants(names);
-        return participants;
+        return BlackJackGame.getParticipants(names);
     }
 }

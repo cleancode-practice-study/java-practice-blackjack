@@ -1,13 +1,13 @@
 package model;
 
 public class Card {
-    private String card;
+    private final String card;
 
     public Card(String cardType) {
         this.card = cardType;
     }
 
-    public String getCard() {
+    public String getCardName() {
         return card;
     }
 }

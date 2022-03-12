@@ -29,4 +29,11 @@ public class BlackJackGame {
         return new ArrayList<>(Arrays.asList(participantsNames));
     }
 
+    public static void getCards(List<Participant> participants, Dealer dealer) {
+        for (Participant participant : participants) {
+            participant.receiveCards();
+        }
+        dealer.receiveCards();
+    }
+
 }
