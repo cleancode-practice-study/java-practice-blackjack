@@ -26,7 +26,11 @@ public class Participant {
         }
     }
 
-    public String getCards() {
+    public String getCardNames() {
         return name + " 카드: " + String.join(", ", cards);
+    }
+
+    public List<String> getCards() {
+        return cards;
     }
 }

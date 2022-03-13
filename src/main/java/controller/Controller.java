@@ -1,6 +1,7 @@
 package controller;
 
 import model.BlackJackGame;
+import model.Calculator;
 import model.Dealer;
 import model.Participant;
 import view.InputView;
@@ -19,6 +20,7 @@ public class Controller {
         getInitCards(participants, dealer);
         getAdditionalCards(participants);
         // get game result
+        System.out.println(Calculator.getCardSum(dealer.getCards()));
     }
 
     public List<Participant> createParticipants() {
@@ -32,9 +34,9 @@ public class Controller {
         String participantNames = BlackJackGame.getParticipantNames(participants);
 
         OutputView.printInitCardSetting(participantNames, dealer.getName());
-        OutputView.printReceiveCardState(dealer.getCards());
+        OutputView.printReceiveCardState(dealer.getCardNames());
         for (Participant participant : participants) {
-            OutputView.printReceiveCardState(participant.getCards());
+            OutputView.printReceiveCardState(participant.getCardNames());
         }
     }
 
@@ -63,7 +65,7 @@ public class Controller {
     }
 
     private void printCurrentCard(Participant participant) {
-        String cards = participant.getCards();
+        String cards = participant.getCardNames();
         OutputView.printReceiveCardState(cards);
     }
 
