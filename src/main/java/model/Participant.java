@@ -6,7 +6,7 @@ import java.util.List;
 public class Participant {
     private static final int INIT_COUNT = 0;
     private final String name;
-    private List<Card> cards = new ArrayList<>();
+    private List<String> cards = new ArrayList<>();
 
     public Participant(String name) {
         this.name = name;
@@ -21,14 +21,12 @@ public class Participant {
 
         while (count < iterationCount) {
             String cardName = RandomCardCreator.getRandomCard();
-            Card card = new Card(cardName);
-            cards.add(card);
-
+            cards.add(cardName);
             count ++;
         }
     }
 
-    public List<Card> getCards() {
-        return cards;
+    public String getCards() {
+        return name + " 카드: " + String.join(", ", cards);
     }
 }

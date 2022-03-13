@@ -7,18 +7,17 @@ package view;
 
 public class OutputView {
     private static final String INIT_CARD_SETTING_OUTPUT_MESSAGE = "%s와 %s에게 2장의 카드를 나누었습니다.\n";
-    private static final String RECEIVED_CARD_OUTPUT_MESSAGE = "%s 카드: %s\n";
 
     public static void printInitCardSetting(String participantNames, String dealerName) {
         System.out.println();
         System.out.printf(INIT_CARD_SETTING_OUTPUT_MESSAGE, dealerName, participantNames);
     }
 
-    public static void printParticipantReceiveCardState(String name, String cards) {
-        System.out.printf(RECEIVED_CARD_OUTPUT_MESSAGE, name, cards);
+    public static void printReceiveCardState(String cardState) {
+        System.out.println(cardState);
     }
 
-    public static void printDealerReceiveCardState(String name, String cards) {
-        System.out.printf(RECEIVED_CARD_OUTPUT_MESSAGE, name, cards);
+    public static void printLine() {
+        System.out.println();
     }
 }

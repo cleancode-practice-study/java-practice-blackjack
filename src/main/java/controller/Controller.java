@@ -29,37 +29,36 @@ public class Controller {
     public void getInitCards(List<Participant> participants, Dealer dealer) {
         BlackJackGame.initCards(participants, dealer);
 
-        List<String> names = BlackJackGame.getParticipantNames(participants);
-        String participantNames = String.join(", ", names);
+        String participantNames = BlackJackGame.getParticipantNames(participants);
 
         OutputView.printInitCardSetting(participantNames, dealer.getName());
-        OutputView.printDealerReceiveCardState(dealer.getName(), BlackJackGame.getCardNames(dealer.getCards()));
-        printParticipantCard(participants);
-    }
-
-    public void printParticipantCard(List<Participant> participants) {
+        OutputView.printReceiveCardState(dealer.getCards());
         for (Participant participant : participants) {
-            String name = participant.getName();
-            String cards = BlackJackGame.getCardNames(participant.getCards());
-
-            OutputView.printParticipantReceiveCardState(name, cards);
+            OutputView.printReceiveCardState(participant.getCards());
         }
     }
 
     public void getAdditionalCards(List<Participant> participants) {
+        OutputView.printLine();
         for (Participant participant : participants) {
-            boolean isAdded;
-            do {
-                isAdded = InputView.getAdditionCard(participant.getName());
-                if (isAdded) {
-                    participant.receiveCards(ADDITIONAL_CARD_COUNT);
-                }
-            } while (isAdded);
-
+            getAdditionalCardsLoop(participant);
         }
     }
 
+    private void getAdditionalCardsLoop(Participant participant) {
+        boolean isAdded;
+        do {
+            isAdded = InputView.getAdditionCard(participant.getName());
+            if (isAdded) {
+                participant.receiveCards(ADDITIONAL_CARD_COUNT);
+                String cards = participant.getCards();
+                OutputView.printReceiveCardState(cards);
+            }
+        } while (isAdded);
 
+        String cards = participant.getCards();
+        OutputView.printReceiveCardState(cards);
+    }
 
 
 }
