@@ -16,7 +16,6 @@ public class MainController {
         Player dealer = Player.createPlayer(DEALER); // 카드가 부여된 DEALER 플레이어 생성
 
         PrintController.printPlayerInitialCards(dealer, users); // 플레이어들의 초기 부여 받은 카드 출력
-
         PrintController.printGameResult(getFinalDealer(dealer), getFinalUsers(users)); // 최종 승패 출력
     }
 
@@ -30,7 +29,7 @@ public class MainController {
         List<Player> finalUserCards = new ArrayList<>();
 
         for (Player user : users) {
-            checkOneMoreCardUser(finalUserCards, user);
+            finalUserCards = checkOneMoreCardUser(user);
             PrintController.printPlayerOwnCard(user);
         }
 
@@ -46,11 +45,15 @@ public class MainController {
         return dealer;
     }
 
-    private void checkOneMoreCardUser(List<Player> newUser, Player user) {
+    private List<Player> checkOneMoreCardUser(Player user) {
+        List<Player> finalUserCards = new ArrayList<>();
+
         while (!InputController.isNoUserAnswer(user)) {
             user.cards.add(Player.getRandomCard());
             PrintController.printPlayerOwnCard(user);
         }
-        newUser.add(user); // 한장 더 받을지 선택, 카드가 추가된 USER 플레이어
+        finalUserCards.add(user); // 한장 더 받을지 선택, 카드가 추가된 USER 플레이어
+
+        return finalUserCards;
     }
 }

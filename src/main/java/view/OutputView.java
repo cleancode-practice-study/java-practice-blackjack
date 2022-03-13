@@ -2,7 +2,6 @@ package view;
 
 import domain.Player;
 
-import java.util.List;
 import java.util.Map;
 
 public class OutputView {
@@ -17,7 +16,7 @@ public class OutputView {
     public static final String FINAL_WIN_OR_LOSE_RESULT_MESSAGE = "## 최종 승패";
     public static final String AND = "와 ";
 
-    public static void printPlayerInitialMessage(List<Player> users, String addCommaString) {
+    public static void printPlayerInitialMessage(String addCommaString) {
         System.out.print(DEALER + AND + addCommaString + GIVE_A_PLAYER_2_CARDS_MESSAGE);
     }
 

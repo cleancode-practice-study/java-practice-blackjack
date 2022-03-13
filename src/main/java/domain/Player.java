@@ -14,7 +14,6 @@ public class Player {
         this.cards = playerCards;
     }
 
-
     public static Player createPlayer(String name) {
         List<String> cards = getInitialCard(); // model 호출, player의 2장의 카드를 담은 list
 
@@ -62,8 +61,6 @@ public class Player {
         for (Player user : users)
             names.add(user.name);
 
-        String addCommaString = String.join(", ", names);
-
-        return addCommaString;
+        return String.join(", ", names);
     }
 }

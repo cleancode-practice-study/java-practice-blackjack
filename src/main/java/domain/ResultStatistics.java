@@ -17,10 +17,12 @@ public class ResultStatistics {
     // 딜러 win count 구하는 메서드
     public static int getDealerWinCounter(Map<String, String> map) {
         int winCount = 0;
+
         for (Map.Entry<String, String> value : map.entrySet()) {
             if (value.getValue().equals(LOSE))
                 winCount++;
         }
+
         return winCount;
     }
 
