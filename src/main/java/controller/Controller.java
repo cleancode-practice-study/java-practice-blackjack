@@ -49,16 +49,22 @@ public class Controller {
         boolean isAdded;
         do {
             isAdded = InputView.getAdditionCard(participant.getName());
-            if (isAdded) {
-                participant.receiveCards(ADDITIONAL_CARD_COUNT);
-                String cards = participant.getCards();
-                OutputView.printReceiveCardState(cards);
-            }
+            addAdditionalCard(isAdded, participant);
         } while (isAdded);
 
+        printCurrentCard(participant);
+    }
+
+    private void addAdditionalCard(boolean isAdded, Participant participant) {
+        if (isAdded) {
+            participant.receiveCards(ADDITIONAL_CARD_COUNT);
+            printCurrentCard(participant);
+        }
+    }
+
+    private void printCurrentCard(Participant participant) {
         String cards = participant.getCards();
         OutputView.printReceiveCardState(cards);
     }
-
 
 }
