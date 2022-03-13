@@ -11,6 +11,7 @@ import java.util.List;
 
 public class Controller {
     private static final int ADDITIONAL_CARD_COUNT = 1;
+    private static final int ADDITIONAL_CARD_NUMBER_STANDARD = 16;
     public void run() {
         // createParticipant
         List<Participant> participants = createParticipants();
@@ -18,9 +19,14 @@ public class Controller {
 
         // get cards
         getInitCards(participants, dealer);
-        getAdditionalCards(participants);
+        getParticipantAdditionalCards(participants);
+
+        // if dealer's cards sum in under 21, dealer get one more card
+        getDealerCard(dealer);
+        getCardState(dealer, participants);
+
         // get game result
-        System.out.println(Calculator.getCardSum(dealer.getCards()));
+
     }
 
     public List<Participant> createParticipants() {
@@ -40,7 +46,7 @@ public class Controller {
         }
     }
 
-    public void getAdditionalCards(List<Participant> participants) {
+    public void getParticipantAdditionalCards(List<Participant> participants) {
         OutputView.printLine();
         for (Participant participant : participants) {
             getAdditionalCardsLoop(participant);
@@ -67,6 +73,25 @@ public class Controller {
     private void printCurrentCard(Participant participant) {
         String cards = participant.getCardNames();
         OutputView.printReceiveCardState(cards);
+    }
+
+    private void getDealerCard(Dealer dealer) {
+        if (Calculator.getCardSum(dealer.getCards()) <= ADDITIONAL_CARD_NUMBER_STANDARD) {
+            getDealerAdditionalCards(dealer);
+        }
+    }
+
+    public void getDealerAdditionalCards(Dealer dealer) {
+        OutputView.printLine();
+        OutputView.printAdditionalCard();
+        dealer.receiveCards(ADDITIONAL_CARD_COUNT);
+    }
+
+    public void getCardState(Dealer dealer, List<Participant> participants) {
+        printCurrentCard(dealer);
+        for (Participant participant : participants) {
+            printCurrentCard(participant);
+        }
     }
 
 }

@@ -7,6 +7,7 @@ package view;
 
 public class OutputView {
     private static final String INIT_CARD_SETTING_OUTPUT_MESSAGE = "%s와 %s에게 2장의 카드를 나누었습니다.\n";
+    private static final String ADDITIONAL_CARD_OUTPUT_MESSAGE = "딜러는 16이하라 한장의 카드를 더 받았습니다.\n";
 
     public static void printInitCardSetting(String participantNames, String dealerName) {
         System.out.println();
@@ -19,5 +20,9 @@ public class OutputView {
 
     public static void printLine() {
         System.out.println();
+    }
+
+    public static void printAdditionalCard() {
+        System.out.println(ADDITIONAL_CARD_OUTPUT_MESSAGE);
     }
 }
