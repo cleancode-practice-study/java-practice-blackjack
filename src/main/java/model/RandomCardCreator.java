@@ -3,7 +3,6 @@ package model;
 import java.util.*;
 
 public class RandomCardCreator {
-    private static final int CARD_INCLUSIVE = 0;
     private static final int CARD_NUMBER_PER_TYPE = 12;
     private static final int CARD_TYPE_COUNT = 3;
 
@@ -28,6 +27,6 @@ public class RandomCardCreator {
     }
 
     private static int getRandomNumber(int end) {
-        return random.nextInt(end) + CARD_INCLUSIVE;
+        return random.nextInt(end);
     }
 }
