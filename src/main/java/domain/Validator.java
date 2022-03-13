@@ -44,31 +44,30 @@ public class Validator {
             userWinOrLoseResult.put(userName, TIE);
     }
 
-
     private static boolean isValidDealerAndUserNumber(Player dealer, Player user) {
-        boolean isValidDealerResult = isValidPlayerCardResultNumber(dealer);
-        boolean isValidUserResult = isValidPlayerCardResultNumber(user);
+        boolean isValidDealerResult = isValidPlayerNumber(dealer);
+        boolean isValidUserResult = isValidPlayerNumber(user);
 
         return isValidDealerResult && isValidUserResult;
     }
 
     private static boolean isNotValidDealerAndUserNumber(Player dealer, Player user) {
-        boolean isValidDealerResult = isValidPlayerCardResultNumber(dealer);
-        boolean isValidUserResult = isValidPlayerCardResultNumber(user);
+        boolean isValidDealerResult = isValidPlayerNumber(dealer);
+        boolean isValidUserResult = isValidPlayerNumber(user);
 
         return !isValidDealerResult && !isValidUserResult;
     }
 
     private static boolean isValidUserNumber(Player dealer, Player user) {
-        boolean isValidDealerResult = isValidPlayerCardResultNumber(dealer);
-        boolean isValidUserResult = isValidPlayerCardResultNumber(user);
+        boolean isValidDealerResult = isValidPlayerNumber(dealer);
+        boolean isValidUserResult = isValidPlayerNumber(user);
 
         return !isValidDealerResult && isValidUserResult;
     }
 
     private static boolean isValidDealerNumber(Player dealer, Player user) {
-        boolean isValidDealerResult = isValidPlayerCardResultNumber(dealer);
-        boolean isValidUserResult = isValidPlayerCardResultNumber(user);
+        boolean isValidDealerResult = isValidPlayerNumber(dealer);
+        boolean isValidUserResult = isValidPlayerNumber(user);
 
         return isValidDealerResult && !isValidUserResult;
     }
@@ -81,7 +80,7 @@ public class Validator {
         return ResultStatistics.getCardTotalSum(dealer.cards) == ResultStatistics.getCardTotalSum(user.cards);
     }
 
-    private static boolean isValidPlayerCardResultNumber(Player player) {
+    private static boolean isValidPlayerNumber(Player player) {
         return ResultStatistics.getCardTotalSum(player.cards) <= WIN_STANDARD_NUMBER;
     }
 }

@@ -16,12 +16,7 @@ public class MainController {
         Player dealer = Player.createPlayer(DEALER); // 카드가 부여된 DEALER 플레이어 생성
 
         PrintController.printPlayerInitialCards(dealer, users); // 플레이어들의 초기 부여 받은 카드 출력
-        PrintController.printGameResult(getFinalDealer(dealer), getFinalUsers(users)); // 최종 승패 출력
-    }
-
-    // 최종 딜러 카드
-    private Player getFinalDealer(Player dealer) {
-        return checkOneMoreCardDealer(dealer);
+        PrintController.printGameResult(getFinalUsers(users), getFinalDealer(dealer)); // 최종 승패 출력
     }
 
     // 최종 유저 카드
@@ -29,7 +24,7 @@ public class MainController {
         List<Player> finalUserCards = new ArrayList<>();
 
         for (Player user : users) {
-            Player finalUserCard = checkOneMoreCardUser(user);
+            Player finalUserCard = checkUserOneMoreCard(user);
             PrintController.printPlayerOwnCard(finalUserCard);
             finalUserCards.add(finalUserCard);
         }
@@ -39,17 +34,20 @@ public class MainController {
         return finalUserCards;
     }
 
-    private Player checkOneMoreCardDealer(Player dealer) {
-        List<String> dealerCards = dealer.cards;
+    // 최종 딜러 카드
+    private Player getFinalDealer(Player dealer) {
+        List<String> finalDealerCards = dealer.cards;
         String randomCard = Player.getRandomCard();
 
-        if (ResultStatistics.getCardTotalSum(dealerCards) <= DEALER_ONE_MORE_CARD_STANDARD_NUMBER)
-            dealerCards.add(randomCard);
+        if (ResultStatistics.getCardTotalSum(finalDealerCards) <= DEALER_ONE_MORE_CARD_STANDARD_NUMBER) {
+            finalDealerCards.add(randomCard);
+            PrintController.printDealerOneMoreCardMessage();
+        }
 
         return dealer;
     }
 
-    private Player checkOneMoreCardUser(Player user) {
+    private Player checkUserOneMoreCard(Player user) {
         List<String> userCards = user.cards;
         String randomCard = Player.getRandomCard();
 

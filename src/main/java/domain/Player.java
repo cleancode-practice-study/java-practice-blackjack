@@ -23,7 +23,7 @@ public class Player {
     public static List<Player> createUserPlayers(List<String> userNames) {
         List<Player> users = new ArrayList<>();
         for (String name : userNames) {
-            Player user = Player.createPlayer(name);
+            Player user = createPlayer(name);
             users.add(user);
         }
 
@@ -58,6 +58,7 @@ public class Player {
         return names.split(",");
     }
 
+    // 콤마 포함 문자열 반환
     public static String getAddedCommaUserNames(List<Player> users) {
         List<String> names = new ArrayList<>();
 

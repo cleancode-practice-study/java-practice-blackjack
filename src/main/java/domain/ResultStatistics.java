@@ -16,8 +16,8 @@ public class ResultStatistics {
     private static final String WIN = "승";
     private static final String LOSE = "패";
 
-    // 딜러 결과 count 구하는 메서드
-    public static List<Integer> getDealerCount(Map<String, String> map) {
+    // 딜러 승패 결과 구하는 메서드
+    public static List<Integer> getDealerWinOrLoseResult(Map<String, String> map) {
         int winCount = 0;
         int loseCount = 0;
         int tieCount = 0;
