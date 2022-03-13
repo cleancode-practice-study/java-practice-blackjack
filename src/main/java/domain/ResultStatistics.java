@@ -1,5 +1,7 @@
 package domain;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -11,22 +13,28 @@ public class ResultStatistics {
     public static final char JACK = 'J';
     public static final char QUEEN = 'Q';
     public static final char KING = 'K';
+    private static final String WIN = "승";
     private static final String LOSE = "패";
 
-    // 수정 필요 - indent 2개
-    // 딜러 win count 구하는 메서드
-    public static int getDealerWinCounter(Map<String, String> map) {
+    // 딜러 결과 count 구하는 메서드
+    public static List<Integer> getDealerCount(Map<String, String> map) {
         int winCount = 0;
+        int loseCount = 0;
+        int tieCount = 0;
 
         for (Map.Entry<String, String> value : map.entrySet()) {
             if (value.getValue().equals(LOSE))
                 winCount++;
+            else if (value.getValue().equals(WIN)) {
+                loseCount++;
+            } else {
+                tieCount++;
+            }
         }
 
-        return winCount;
+        return new ArrayList<>(Arrays.asList(winCount, loseCount, tieCount));
     }
 
-    // 수정 필요 - indent 2개
     // 가지고 있는 카드의 숫자 합계 반환 메서드
     public static int getCardTotalSum(List<String> cards) {
         int sum = 0;

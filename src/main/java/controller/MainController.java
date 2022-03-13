@@ -29,8 +29,9 @@ public class MainController {
         List<Player> finalUserCards = new ArrayList<>();
 
         for (Player user : users) {
-            finalUserCards = checkOneMoreCardUser(user);
-            PrintController.printPlayerOwnCard(user);
+            Player finalUserCard = checkOneMoreCardUser(user);
+            PrintController.printPlayerOwnCard(finalUserCard);
+            finalUserCards.add(finalUserCard);
         }
 
         System.out.println("");
@@ -45,15 +46,12 @@ public class MainController {
         return dealer;
     }
 
-    private List<Player> checkOneMoreCardUser(Player user) {
-        List<Player> finalUserCards = new ArrayList<>();
-
+    private Player checkOneMoreCardUser(Player user) {
         while (!InputController.isNoUserAnswer(user)) {
             user.cards.add(Player.getRandomCard());
             PrintController.printPlayerOwnCard(user);
         }
-        finalUserCards.add(user); // 한장 더 받을지 선택, 카드가 추가된 USER 플레이어
 
-        return finalUserCards;
+        return user;
     }
 }
