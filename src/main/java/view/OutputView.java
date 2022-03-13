@@ -25,4 +25,8 @@ public class OutputView {
     public static void printAdditionalCard() {
         System.out.println(ADDITIONAL_CARD_OUTPUT_MESSAGE);
     }
+
+    public static void printCardFinalState(String finalCardState) {
+        System.out.println(finalCardState);
+    }
 }

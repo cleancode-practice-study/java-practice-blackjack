@@ -8,7 +8,6 @@ public class Participant {
 
     private List<String> cards = new ArrayList<>();
     private final String name;
-    private int cardSum;
 
     public Participant(String name) {
         this.name = name;
@@ -38,5 +37,9 @@ public class Participant {
 
     public int getCardSum() {
         return Calculator.getCardSum(cards);
+    }
+
+    public String getCardSumResult() {
+        return getCardNames() + " - 결과: " + getCardSum();
     }
 }

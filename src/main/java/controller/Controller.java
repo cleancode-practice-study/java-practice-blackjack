@@ -1,7 +1,6 @@
 package controller;
 
 import model.BlackJackGame;
-import model.Calculator;
 import model.Dealer;
 import model.Participant;
 import view.InputView;
@@ -23,10 +22,9 @@ public class Controller {
 
         // if dealer's cards sum in under 21, dealer get one more card
         getDealerCard(dealer);
-        getCardState(dealer, participants);
 
         // get game result
-
+        getFinalCardState(dealer, participants);
     }
 
     public List<Participant> createParticipants() {
@@ -87,10 +85,13 @@ public class Controller {
         dealer.receiveCards(ADDITIONAL_CARD_COUNT);
     }
 
-    public void getCardState(Dealer dealer, List<Participant> participants) {
-        printCurrentCard(dealer);
+    public void getFinalCardState(Dealer dealer, List<Participant> participants) {
+        String dealerState = dealer.getCardSumResult();
+        OutputView.printCardFinalState(dealerState);
+
         for (Participant participant : participants) {
-            printCurrentCard(participant);
+            String participantState = participant.getCardSumResult();
+            OutputView.printCardFinalState(participantState);
         }
     }
 
