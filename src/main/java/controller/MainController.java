@@ -40,15 +40,21 @@ public class MainController {
     }
 
     private Player checkOneMoreCardDealer(Player dealer) {
-        if (ResultStatistics.getCardTotalSum(dealer.cards) <= DEALER_ONE_MORE_CARD_STANDARD_NUMBER)
-            dealer.cards.add(Player.getRandomCard());
+        List<String> dealerCards = dealer.cards;
+        String randomCard = Player.getRandomCard();
+
+        if (ResultStatistics.getCardTotalSum(dealerCards) <= DEALER_ONE_MORE_CARD_STANDARD_NUMBER)
+            dealerCards.add(randomCard);
 
         return dealer;
     }
 
     private Player checkOneMoreCardUser(Player user) {
+        List<String> userCards = user.cards;
+        String randomCard = Player.getRandomCard();
+
         while (!InputController.isNoUserAnswer(user)) {
-            user.cards.add(Player.getRandomCard());
+            userCards.add(randomCard);
             PrintController.printPlayerOwnCard(user);
         }
 

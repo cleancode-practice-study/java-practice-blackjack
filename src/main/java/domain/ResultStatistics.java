@@ -23,9 +23,11 @@ public class ResultStatistics {
         int tieCount = 0;
 
         for (Map.Entry<String, String> value : map.entrySet()) {
-            if (value.getValue().equals(LOSE))
+            String result = value.getValue();
+
+            if (result.equals(LOSE))
                 winCount++;
-            else if (value.getValue().equals(WIN)) {
+            else if (result.equals(WIN)) {
                 loseCount++;
             } else {
                 tieCount++;
@@ -40,39 +42,54 @@ public class ResultStatistics {
         int sum = 0;
 
         for (String card : cards) {
-            if (isAddMinAceNumber(card, sum)) {
+            char number = card.charAt(0);
+
+            if (isAddMinAceNumber(number, sum)) {
                 sum += MIN_ACE_NUMBER;
                 continue;
             }
 
-            if (isAddSpecialNumber(card, sum)) {
+            if (isAddSpecialNumber(number, sum)) {
                 sum += SPECIAL_NUMBER;
                 continue;
             }
 
-            sum += Character.getNumericValue(card.charAt(0));
+            sum += Character.getNumericValue(number);
         }
 
         return sum;
     }
 
-    private static boolean isAddSpecialNumber(String card, int sum) {
-        return isAceCard(card) && isSmallThanWinStandardNumber(card, sum) || isJackAndQueenAndKingCards(card);
+    private static boolean isAddSpecialNumber(char number, int sum) {
+        return isAceCard(number) && isSmallThanWinStandardNumber(number, sum) || isJackAndQueenAndKingCards(number);
     }
 
-    private static boolean isAddMinAceNumber(String card, int sum) {
-        return card.charAt(0) == ACE && sum + SPECIAL_NUMBER > WIN_STANDARD_NUMBER;
+    private static boolean isAddMinAceNumber(char number, int sum) {
+        return isAceCard(number) && sum + SPECIAL_NUMBER > WIN_STANDARD_NUMBER;
     }
 
-    private static boolean isJackAndQueenAndKingCards(String card) {
-        return card.charAt(0) == JACK || card.charAt(0) == QUEEN || card.charAt(0) == KING;
+    private static boolean isJackAndQueenAndKingCards(char number) {
+        return isJackCard(number) || isQueenCard(number) || isKingCard(number);
     }
 
-    private static boolean isAceCard(String card) {
-        return card.charAt(0) == ACE;
-    }
-
-    private static boolean isSmallThanWinStandardNumber(String card, int sum) {
+    private static boolean isSmallThanWinStandardNumber(char number, int sum) {
         return sum + SPECIAL_NUMBER < WIN_STANDARD_NUMBER;
     }
+
+    private static boolean isAceCard(char number) {
+        return number == ACE;
+    }
+
+    private static boolean isJackCard(char number) {
+        return number == JACK;
+    }
+
+    private static boolean isQueenCard(char number) {
+        return number == QUEEN;
+    }
+
+    private static boolean isKingCard(char number) {
+        return number == KING;
+    }
+
 }

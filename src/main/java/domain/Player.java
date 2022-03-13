@@ -22,8 +22,10 @@ public class Player {
 
     public static List<Player> createUserPlayers(List<String> userNames) {
         List<Player> users = new ArrayList<>();
-        for (String name : userNames)
-            users.add(Player.createPlayer(name));
+        for (String name : userNames) {
+            Player user = Player.createPlayer(name);
+            users.add(user);
+        }
 
         return users;
     }
@@ -58,8 +60,11 @@ public class Player {
 
     public static String getAddedCommaUserNames(List<Player> users) {
         List<String> names = new ArrayList<>();
-        for (Player user : users)
-            names.add(user.name);
+
+        for (Player user : users) {
+            String userName = user.name;
+            names.add(userName);
+        }
 
         return String.join(", ", names);
     }

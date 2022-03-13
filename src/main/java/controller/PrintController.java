@@ -12,14 +12,16 @@ public class PrintController {
 
     public static final int INITIAL_CARD_COUNT = 2;
 
-    public static void printPlayerInitialMessage(List<Player> users, String addedCommaUserNames) {
-        OutputView.printPlayerInitialMessage(Player.getAddedCommaUserNames(users));
+    public static void printPlayerInitialMessage(List<Player> users) {
+        String names = Player.getAddedCommaUserNames(users);
+
+        OutputView.printPlayerInitialMessage(names);
         System.out.println("");
     }
 
     // 플레이어 초기 카드 출력
     public static void printPlayerInitialCards(Player dealer, List<Player> users) {
-        PrintController.printPlayerInitialMessage(users, Player.getAddedCommaUserNames(users));
+        printPlayerInitialMessage(users);
         System.out.println("");
 
         OutputView.printPlayerOwnCard(dealer);
@@ -37,31 +39,37 @@ public class PrintController {
         System.out.println("");
     }
 
-    public static void printDealerOneCardMessage() {
-        OutputView.printDealerOneMoreCardMessage();
-        System.out.println("");
-    }
-
     public static void printGameResult(Player dealer, List<Player> users) {
-        int userSize = users.size();
-        List<String> dealerCard = dealer.cards;
+        if (isDealerOneMoreCard(dealer))
+            printDealerOneCardMessage();
 
-        // 딜러 한장 더 받았는지 안받았는지
-        if (dealerCard.size() > INITIAL_CARD_COUNT)
-            PrintController.printDealerOneCardMessage();
-
-        printPlayerFinalCardsAndResult(dealer, users); // 플레이어들의 최종 카드와 숫자 합 결과 출력
-
+        printPlayerFinalCardsAndResultNumber(dealer, users); // 플레이어들의 최종 카드와 숫자 합 결과 출력
         Map<String, String> userWinOrLoseResult = Validator.getUserWinOrLoseResult(dealer, users); // 유저 승패 결과 구하기
         printWinOrLoseResult(userWinOrLoseResult); // 최종 승패 결과 출력
     }
 
-    private static void printPlayerFinalCardsAndResult(Player dealer, List<Player> users) {
-        int dealerResult = ResultStatistics.getCardTotalSum(dealer.cards);
+    private static void printDealerOneCardMessage() {
+        OutputView.printDealerOneMoreCardMessage();
+        System.out.println("");
+    }
+
+    private static boolean isDealerOneMoreCard(Player dealer) {
+        List<String> dealerCard = dealer.cards;
+
+        return dealerCard.size() > INITIAL_CARD_COUNT;
+    }
+
+    private static void printPlayerFinalCardsAndResultNumber(Player dealer, List<Player> users) {
+        List<String> dealerCard = dealer.cards;
+
+        int dealerResult = ResultStatistics.getCardTotalSum(dealerCard);
         OutputView.printPlayerCardTotalResult(dealer, dealerResult);
+
         for (Player user : users) {
-            int userSumResult = ResultStatistics.getCardTotalSum(user.cards);
-            OutputView.printPlayerCardTotalResult(user, userSumResult);
+            List<String> userCards = user.cards;
+
+            int userResultNumber = ResultStatistics.getCardTotalSum(userCards);
+            OutputView.printPlayerCardTotalResult(user, userResultNumber);
         }
 
         System.out.println("");
@@ -70,7 +78,7 @@ public class PrintController {
     private static void printWinOrLoseResult(Map<String, String> userWinOrLoseResult) {
         List<Integer> dealerCount = ResultStatistics.getDealerCount(userWinOrLoseResult);
 
-        OutputView.printDealerWinOrLoseResult(dealerCount);
-        OutputView.printUsersWinOrLoseResult(userWinOrLoseResult);
+        OutputView.printDealerWinOrLoseResult(dealerCount); // 딜러 승패 결과
+        OutputView.printUsersWinOrLoseResult(userWinOrLoseResult); // 유저 승패 결과
     }
 }
