@@ -1,7 +1,5 @@
 package domain;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Validator {
@@ -9,35 +7,27 @@ public class Validator {
     public static final String WIN = "승";
     public static final String LOSE = "패";
     public static final String TIE = "무";
+    public static final char ACE = 'A';
+    public static final char JACK = 'J';
+    public static final char QUEEN = 'Q';
+    public static final char KING = 'K';
+    public static final int TEN = 10;
 
-    // 유저의 승패결과 구하는 메서드
-    public static Map<String, String> getUserWinOrLoseResult(Player dealer, List<Player> users) {
-        Map<String, String> userWinOrLoseResult = new HashMap<>();
-
-        for (Player user : users) {
-            checkUserWin(userWinOrLoseResult, dealer, user);
-            checkUserLose(userWinOrLoseResult, dealer, user);
-            checkUserTie(userWinOrLoseResult, dealer, user);
-        }
-
-        return userWinOrLoseResult;
-    }
-
-    private static void checkUserWin(Map<String, String> userWinOrLoseResult, Player dealer, Player user) {
+    static void checkUserWin(Map<String, String> userWinOrLoseResult, Player dealer, Player user) {
         String userName = user.name;
 
         if ((isValidDealerAndUserNumber(dealer, user) && isLargerThanDealerNumber(dealer, user)) || isValidUserNumber(dealer, user))
             userWinOrLoseResult.put(userName, WIN);
     }
 
-    private static void checkUserLose(Map<String, String> userWinOrLoseResult, Player dealer, Player user) {
+    static void checkUserLose(Map<String, String> userWinOrLoseResult, Player dealer, Player user) {
         String userName = user.name;
 
         if ((isValidDealerAndUserNumber(dealer, user) && !isLargerThanDealerNumber(dealer, user)) || isValidDealerNumber(dealer, user))
             userWinOrLoseResult.put(userName, LOSE);
     }
 
-    private static void checkUserTie(Map<String, String> userWinOrLoseResult, Player dealer, Player user) {
+    static void checkUserTie(Map<String, String> userWinOrLoseResult, Player dealer, Player user) {
         String userName = user.name;
 
         if ((isValidDealerAndUserNumber(dealer, user) && isEqualUserNumberAndDealerNumber(dealer, user)) || isNotValidDealerAndUserNumber(dealer, user))
@@ -73,14 +63,46 @@ public class Validator {
     }
 
     private static boolean isLargerThanDealerNumber(Player dealer, Player user) {
-        return ResultStatistics.getCardTotalSum(dealer.cards) < ResultStatistics.getCardTotalSum(user.cards);
+        return Result.getResultNumber(dealer.cards) < Result.getResultNumber(user.cards);
     }
 
     private static boolean isEqualUserNumberAndDealerNumber(Player dealer, Player user) {
-        return ResultStatistics.getCardTotalSum(dealer.cards) == ResultStatistics.getCardTotalSum(user.cards);
+        return Result.getResultNumber(dealer.cards) == Result.getResultNumber(user.cards);
     }
 
     private static boolean isValidPlayerNumber(Player player) {
-        return ResultStatistics.getCardTotalSum(player.cards) <= STANDARD_NUMBER;
+        return Result.getResultNumber(player.cards) <= STANDARD_NUMBER;
+    }
+
+    static boolean isMinAceNumber(char number, int sum) {
+        return isAceCard(number) && sum + TEN > STANDARD_NUMBER;
+    }
+
+    static boolean isMaxAceNumber(char number, int sum) {
+        return isAceCard(number) && sum + TEN <= STANDARD_NUMBER;
+    }
+
+    static boolean isTenNumber(char number) {
+        return isJackAndQueenAndKingCard(number);
+    }
+
+    private static boolean isJackAndQueenAndKingCard(char number) {
+        return isJackCard(number) || isQueenCard(number) || isKingCard(number);
+    }
+
+    private static boolean isAceCard(char number) {
+        return number == ACE;
+    }
+
+    private static boolean isJackCard(char number) {
+        return number == JACK;
+    }
+
+    private static boolean isQueenCard(char number) {
+        return number == QUEEN;
+    }
+
+    private static boolean isKingCard(char number) {
+        return number == KING;
     }
 }

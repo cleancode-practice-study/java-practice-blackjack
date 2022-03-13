@@ -1,7 +1,8 @@
 package controller;
 
 import domain.Player;
-import domain.ResultStatistics;
+import domain.RandomCard;
+import domain.Result;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,8 +13,8 @@ public class MainController {
 
     public void play() {
         List<String> userNames = InputController.getUserNames(); // 게임 참여 이름 입력
-        List<Player> users = Player.createUserPlayers(userNames); // 카드가 부여된 USER 플레이어 생성
-        Player dealer = Player.createPlayer(DEALER); // 카드가 부여된 DEALER 플레이어 생성
+        List<Player> users = Player.createUserPlayers(userNames);
+        Player dealer = Player.createPlayer(DEALER);
 
         PrintController.printPlayerInitialCards(dealer, users); // 플레이어들의 초기 부여 받은 카드 출력
         PrintController.printGameResult(getFinalUsers(users), getFinalDealer(dealer)); // 최종 승패 출력
@@ -37,9 +38,9 @@ public class MainController {
     // 최종 딜러 카드
     private Player getFinalDealer(Player dealer) {
         List<String> finalDealerCards = dealer.cards;
-        String randomCard = Player.getRandomCard();
 
-        if (ResultStatistics.getCardTotalSum(finalDealerCards) <= DEALER_ONE_MORE_CARD_STANDARD_NUMBER) {
+        if (Result.getResultNumber(finalDealerCards) <= DEALER_ONE_MORE_CARD_STANDARD_NUMBER) {
+            String randomCard = RandomCard.getRandomCard();
             finalDealerCards.add(randomCard);
             PrintController.printDealerOneMoreCardMessage();
         }
@@ -51,7 +52,7 @@ public class MainController {
         List<String> userCards = user.cards;
 
         while (!InputController.isNoUserAnswer(user)) {
-            String randomCard = Player.getRandomCard();
+            String randomCard = RandomCard.getRandomCard();
             userCards.add(randomCard);
             PrintController.printPlayerOwnCard(user);
         }

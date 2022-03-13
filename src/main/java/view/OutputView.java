@@ -20,21 +20,21 @@ public class OutputView {
     public static final int LOSE_COUNT_INDEX = 1;
     public static final int TIE_COUNT_INDEX = 2;
 
-    public static void printPlayerInitialMessage(String addCommaString) {
-        System.out.print(DEALER + addCommaString + GIVE_A_PLAYER_2_CARDS_MESSAGE);
+    public static void printPlayerInitialMessage(String fullNames) {
+        System.out.print(DEALER + fullNames + GIVE_A_PLAYER_2_CARDS_MESSAGE);
+    }
+
+    public static void printDealerOneMoreCardMessage() {
+        System.out.println(GET_DEALER_ONE_CARD_INFORMATION_MESSAGE);
     }
 
     public static void printPlayerOwnCard(Player player) {
         System.out.print(player.name + CARD + player.cards);
     }
 
-    public static void printPlayerCardTotalResult(Player player, int result) {
+    public static void printTotalPlayerResult(Player player, int result) {
         printPlayerOwnCard(player);
         System.out.println(RESULT_MESSAGE + result);
-    }
-
-    public static void printDealerOneMoreCardMessage() {
-        System.out.println(GET_DEALER_ONE_CARD_INFORMATION_MESSAGE);
     }
 
     public static void printUsersWinOrLoseResult(Map<String, String> map) {

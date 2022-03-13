@@ -2,7 +2,6 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class Player {
     public static final int INITIAL_CARD_COUNT = 2;
@@ -35,38 +34,8 @@ public class Player {
         List<String> cards = new ArrayList<>();
 
         for (int i = 0; i < INITIAL_CARD_COUNT; i++)
-            cards.add(getRandomCard());
+            cards.add(RandomCard.getRandomCard());
 
         return cards;
-    }
-
-    // 랜덤 카드 한장 반환 메서드
-    public static String getRandomCard() {
-        Random random = new Random();
-
-        String[] shapes = {"클로버", "다이아몬드", "스페이드", "하트"};
-        String[] numbers = {"2", "3", "4", "5", "6", "7", "8", "9", "A", "J", "K", "Q"};
-
-        int randomShapeIdx = random.nextInt(shapes.length);
-        int randomNumberIdx = random.nextInt(numbers.length);
-
-        return numbers[randomNumberIdx] + shapes[randomShapeIdx];
-    }
-
-    // 입력 받은 String, 쉼표 기준으로 String[] 반환 메서드
-    public static String[] splitPlayerNames(String names) {
-        return names.split(",");
-    }
-
-    // 콤마 포함 문자열 반환
-    public static String getAddedCommaUserNames(List<Player> users) {
-        List<String> names = new ArrayList<>();
-
-        for (Player user : users) {
-            String userName = user.name;
-            names.add(userName);
-        }
-
-        return String.join(", ", names);
     }
 }
