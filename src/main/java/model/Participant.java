@@ -5,8 +5,10 @@ import java.util.List;
 
 public class Participant {
     private static final int INIT_COUNT = 0;
-    private final String name;
+
     private List<String> cards = new ArrayList<>();
+    private final String name;
+    private int cardSum;
 
     public Participant(String name) {
         this.name = name;
@@ -32,5 +34,9 @@ public class Participant {
 
     public List<String> getCards() {
         return cards;
+    }
+
+    public int getCardSum() {
+        return Calculator.getCardSum(cards);
     }
 }

@@ -76,7 +76,7 @@ public class Controller {
     }
 
     private void getDealerCard(Dealer dealer) {
-        if (Calculator.getCardSum(dealer.getCards()) <= ADDITIONAL_CARD_NUMBER_STANDARD) {
+        if (dealer.getCardSum() <= ADDITIONAL_CARD_NUMBER_STANDARD) {
             getDealerAdditionalCards(dealer);
         }
     }
