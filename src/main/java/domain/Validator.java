@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Validator {
-    private static final int WIN_STANDARD_NUMBER = 21;
+    private static final int STANDARD_NUMBER = 21;
     public static final String WIN = "승";
     public static final String LOSE = "패";
     public static final String TIE = "무";
@@ -81,6 +81,6 @@ public class Validator {
     }
 
     private static boolean isValidPlayerNumber(Player player) {
-        return ResultStatistics.getCardTotalSum(player.cards) <= WIN_STANDARD_NUMBER;
+        return ResultStatistics.getCardTotalSum(player.cards) <= STANDARD_NUMBER;
     }
 }

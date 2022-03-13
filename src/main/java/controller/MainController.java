@@ -49,9 +49,9 @@ public class MainController {
 
     private Player checkUserOneMoreCard(Player user) {
         List<String> userCards = user.cards;
-        String randomCard = Player.getRandomCard();
 
         while (!InputController.isNoUserAnswer(user)) {
+            String randomCard = Player.getRandomCard();
             userCards.add(randomCard);
             PrintController.printPlayerOwnCard(user);
         }

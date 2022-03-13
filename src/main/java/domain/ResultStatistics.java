@@ -6,9 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 public class ResultStatistics {
-    public static final int SPECIAL_NUMBER = 10;
-    public static final int WIN_STANDARD_NUMBER = 21;
-    public static final int MIN_ACE_NUMBER = 1;
+    public static final int STANDARD_NUMBER = 21;
+    public static final int ONE = 1;
+    public static final int TEN = 10;
+    public static final int ELEVEN = 11;
     public static final char ACE = 'A';
     public static final char JACK = 'J';
     public static final char QUEEN = 'Q';
@@ -44,13 +45,18 @@ public class ResultStatistics {
         for (String card : cards) {
             char number = card.charAt(0);
 
-            if (isAddMinAceNumber(number, sum)) {
-                sum += MIN_ACE_NUMBER;
+            if (isMinAceNumber(number, sum)) {
+                sum += ONE;
                 continue;
             }
 
-            if (isAddSpecialNumber(number, sum)) {
-                sum += SPECIAL_NUMBER;
+            if (isMaxAceNumber(number, sum)) {
+                sum += ELEVEN;
+                continue;
+            }
+
+            if (isTenNumber(number)) {
+                sum += TEN;
                 continue;
             }
 
@@ -60,20 +66,20 @@ public class ResultStatistics {
         return sum;
     }
 
-    private static boolean isAddSpecialNumber(char number, int sum) {
-        return isAceCard(number) && isSmallThanWinStandardNumber(number, sum) || isJackAndQueenAndKingCards(number);
+    private static boolean isMinAceNumber(char number, int sum) {
+        return isAceCard(number) && sum + TEN > STANDARD_NUMBER;
     }
 
-    private static boolean isAddMinAceNumber(char number, int sum) {
-        return isAceCard(number) && sum + SPECIAL_NUMBER > WIN_STANDARD_NUMBER;
+    private static boolean isMaxAceNumber(char number, int sum) {
+        return isAceCard(number) && sum + TEN <= STANDARD_NUMBER;
     }
 
-    private static boolean isJackAndQueenAndKingCards(char number) {
+    private static boolean isTenNumber(char number) {
+        return isJackAndQueenAndKingCard(number);
+    }
+
+    private static boolean isJackAndQueenAndKingCard(char number) {
         return isJackCard(number) || isQueenCard(number) || isKingCard(number);
-    }
-
-    private static boolean isSmallThanWinStandardNumber(char number, int sum) {
-        return sum + SPECIAL_NUMBER < WIN_STANDARD_NUMBER;
     }
 
     private static boolean isAceCard(char number) {

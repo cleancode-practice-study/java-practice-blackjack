@@ -7,22 +7,21 @@ import java.util.Map;
 
 public class OutputView {
     public static final String GET_DEALER_ONE_CARD_INFORMATION_MESSAGE = "딜러는 16이하라 한장의 카드를 더 받았습니다.";
-    public static final String RESULT_MESSAGE = " - 결과 : ";
-    public static final String DEALER = "딜러";
     public static final String GIVE_A_PLAYER_2_CARDS_MESSAGE = "에게 2장의 카드를 나누었습니다.";
+    public static final String RESULT_MESSAGE = " - 결과 : ";
+    public static final String DEALER = "딜러와 ";
     public static final String COLON_SYMBOL = " : ";
     public static final String CARD = " 카드 : ";
     public static final String WIN = "승 ";
     public static final String LOSE = "패 ";
-    public static final String FINAL_WIN_OR_LOSE_RESULT_MESSAGE = "## 최종 승패";
-    public static final String AND = "와 ";
     public static final String TIE = "무";
+    public static final String FINAL_WIN_OR_LOSE_RESULT_MESSAGE = "## 최종 승패";
     public static final int WIN_COUNT_INDEX = 0;
     public static final int LOSE_COUNT_INDEX = 1;
     public static final int TIE_COUNT_INDEX = 2;
 
     public static void printPlayerInitialMessage(String addCommaString) {
-        System.out.print(DEALER + AND + addCommaString + GIVE_A_PLAYER_2_CARDS_MESSAGE);
+        System.out.print(DEALER + addCommaString + GIVE_A_PLAYER_2_CARDS_MESSAGE);
     }
 
     public static void printPlayerOwnCard(Player player) {

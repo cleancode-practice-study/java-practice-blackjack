@@ -20,7 +20,6 @@ public class PrintController {
         System.out.println("");
 
         printPlayerOwnCard(dealer);
-
         for (Player user : users)
             printPlayerOwnCard(user);
 
@@ -33,9 +32,9 @@ public class PrintController {
     }
 
     public static void printGameResult(List<Player> users, Player dealer) {
-        printTotalPlayerResult(dealer, users); // 플레이어들의 최종 카드와 숫자 합 결과 출력
+        printTotalPlayerResult(dealer, users); // 플레이어들의 최종 카드와 결과 출력
         Map<String, String> userWinOrLoseResult = Validator.getUserWinOrLoseResult(dealer, users); // 유저 승패 결과 구하기
-        printWinOrLoseResult(userWinOrLoseResult); // 최종 승패 결과 출력
+        printWinOrLoseResult(userWinOrLoseResult); // 최종 승패 결과 출력 (딜러+유저)
     }
 
     private static void printPlayerInitialMessage(List<Player> users) {
@@ -46,10 +45,10 @@ public class PrintController {
     }
 
     private static void printPlayerResult(Player player) {
-        List<String> dealerCards = player.cards;
+        List<String> playersCards = player.cards;
 
-        int dealerResult = ResultStatistics.getCardTotalSum(dealerCards);
-        OutputView.printPlayerCardTotalResult(player, dealerResult);
+        int playersResult = ResultStatistics.getCardTotalSum(playersCards);
+        OutputView.printPlayerCardTotalResult(player, playersResult);
     }
 
     private static void printTotalPlayerResult(Player dealer, List<Player> users) {
@@ -63,9 +62,9 @@ public class PrintController {
 
     // 승패 결과 출력
     private static void printWinOrLoseResult(Map<String, String> userWinOrLoseResult) {
-        List<Integer> dealerCount = ResultStatistics.getDealerWinOrLoseResult(userWinOrLoseResult);
+        List<Integer> dealerResult = ResultStatistics.getDealerWinOrLoseResult(userWinOrLoseResult);
 
-        OutputView.printDealerWinOrLoseResult(dealerCount); // 딜러 승패 결과
+        OutputView.printDealerWinOrLoseResult(dealerResult); // 딜러 승패 결과
         OutputView.printUsersWinOrLoseResult(userWinOrLoseResult); // 유저 승패 결과
     }
 }
