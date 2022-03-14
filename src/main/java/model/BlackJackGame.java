@@ -9,7 +9,7 @@ public class BlackJackGame {
     private static final int STANDARD_NUMBER = 21;
     private static final String WIN = "승";
     private static final String LOSE = "패";
-    private static final String DRAW = "승";
+    private static final String DRAW = "무";
 
     public static Dealer getDealer() {
         return new Dealer();
