@@ -24,7 +24,10 @@ public class Controller {
         getDealerCard(dealer);
 
         // get game result
-        getFinalCardState(dealer, participants);
+        getFinalCardState(participants, dealer);
+        BlackJackGame.getResult(participants, dealer);
+        getFinalGameResult(participants, dealer);
+
     }
 
     public List<Participant> createParticipants() {
@@ -85,13 +88,22 @@ public class Controller {
         dealer.receiveCards(ADDITIONAL_CARD_COUNT);
     }
 
-    public void getFinalCardState(Dealer dealer, List<Participant> participants) {
+    public void getFinalCardState(List<Participant> participants, Dealer dealer) {
         String dealerState = dealer.getCardSumResult();
         OutputView.printCardFinalState(dealerState);
 
         for (Participant participant : participants) {
             String participantState = participant.getCardSumResult();
             OutputView.printCardFinalState(participantState);
+        }
+    }
+
+    public void getFinalGameResult(List<Participant> participants, Dealer dealer) {
+        OutputView.printFinalResult();
+        OutputView.printFinalGameResult(dealer.getGameResult());
+
+        for (Participant participant : participants) {
+            OutputView.printFinalGameResult(participant.getGameResult());
         }
     }
 
