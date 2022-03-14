@@ -11,7 +11,6 @@ public class Participant {
     private static final String LOSE = "패";
     private static final String DRAW = "무";
 
-
     private List<String> cards = new ArrayList<>();
     private Map<String, Integer> gameResult = new HashMap<>();
     private final String name;
@@ -54,17 +53,24 @@ public class Participant {
         String result = name + ": ";
 
         if (gameResult.containsKey(WIN)) {
-            result += gameResult.get(WIN) + WIN + " ";
+            result += getEachGameResult(WIN);
         }
 
         if (gameResult.containsKey(LOSE)) {
-            result += gameResult.get(LOSE) + LOSE + " ";
+            result += getEachGameResult(LOSE);
         }
 
         if (gameResult.containsKey(DRAW)) {
-            result += gameResult.get(DRAW) + DRAW + " ";
+            result += getEachGameResult(DRAW);
         }
 
         return result;
+    }
+
+    private String getEachGameResult(String type) {
+        if (gameResult.size() > 1 || gameResult.get(type) > 1) {
+            return gameResult.get(type) + type + " ";
+        }
+        return type;
     }
 }

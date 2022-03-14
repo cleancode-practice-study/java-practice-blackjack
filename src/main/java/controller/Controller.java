@@ -11,23 +11,19 @@ import java.util.List;
 public class Controller {
     private static final int ADDITIONAL_CARD_COUNT = 1;
     private static final int ADDITIONAL_CARD_NUMBER_STANDARD = 16;
+
     public void run() {
-        // createParticipant
         List<Participant> participants = createParticipants();
         Dealer dealer = BlackJackGame.getDealer();
 
-        // get cards
         getInitCards(participants, dealer);
         getParticipantAdditionalCards(participants);
 
-        // if dealer's cards sum in under 21, dealer get one more card
         getDealerCard(dealer);
 
-        // get game result
         getFinalCardState(participants, dealer);
-        BlackJackGame.getResult(participants, dealer);
-        getFinalGameResult(participants, dealer);
-
+        BlackJackGame.setResult(participants, dealer);
+        printFinalGameResult(participants, dealer);
     }
 
     public List<Participant> createParticipants() {
@@ -98,7 +94,7 @@ public class Controller {
         }
     }
 
-    public void getFinalGameResult(List<Participant> participants, Dealer dealer) {
+    public void printFinalGameResult(List<Participant> participants, Dealer dealer) {
         OutputView.printFinalResult();
         OutputView.printFinalGameResult(dealer.getGameResult());
 

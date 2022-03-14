@@ -50,8 +50,7 @@ public class BlackJackGame {
         return String.join(", ", participantNames);
     }
 
-    // 딜러 기준으로 승패무 결정
-    public static void getResult(List<Participant> participants, Dealer dealer) {
+    public static void setResult(List<Participant> participants, Dealer dealer) {
         int differenceBetweenDealer = STANDARD_NUMBER - dealer.getCardSum();
 
         for (Participant participant : participants) {
