@@ -10,7 +10,6 @@ import java.util.List;
 
 public class Controller {
     private static final int ADDITIONAL_CARD_COUNT = 1;
-    private static final int ADDITIONAL_CARD_NUMBER_STANDARD = 16;
 
     public void run() {
         List<Participant> participants = createParticipants();
@@ -73,7 +72,7 @@ public class Controller {
     }
 
     private void getDealerCard(Dealer dealer) {
-        if (dealer.getCardSum() <= ADDITIONAL_CARD_NUMBER_STANDARD) {
+        if (dealer.isEnough()) {
             getDealerAdditionalCards(dealer);
         }
     }

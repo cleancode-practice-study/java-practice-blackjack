@@ -11,8 +11,8 @@ public class Participant {
     private static final String LOSE = "패";
     private static final String DRAW = "무";
 
-    private List<String> cards = new ArrayList<>();
-    private Map<String, Integer> gameResult = new HashMap<>();
+    private final List<String> cards = new ArrayList<>();
+    private final Map<String, Integer> gameResult = new HashMap<>();
     private final String name;
 
     public Participant(String name) {
