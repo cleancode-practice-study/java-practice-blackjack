@@ -10,12 +10,12 @@ public class Result {
     private static final String LOSE = "패";
 
     // 딜러 승패 결과 구하는 메서드
-    public static List<Integer> getDealerWinOrLoseResult(Map<String, String> map) {
+    public static List<Integer> getDealerWinOrLoseResult(Map<String, String> userResult) {
         int winCount = 0;
         int loseCount = 0;
         int tieCount = 0;
 
-        for (Map.Entry<String, String> value : map.entrySet()) {
+        for (Map.Entry<String, String> value : userResult.entrySet()) {
             String result = value.getValue();
 
             if (result.equals(LOSE))
