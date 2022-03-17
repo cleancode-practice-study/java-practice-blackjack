@@ -19,9 +19,9 @@ public class Player {
         return new Player(name, cards);
     }
 
-    public static List<Player> createUserPlayers(List<String> userNames) {
+    public static List<Player> createUserPlayers(List<String> names) {
         List<Player> users = new ArrayList<>();
-        for (String name : userNames) {
+        for (String name : names) {
             Player user = createPlayer(name);
             users.add(user);
         }
