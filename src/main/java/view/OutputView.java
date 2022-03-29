@@ -1,6 +1,7 @@
 package view;
 
 import model.Participant;
+import model.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +26,8 @@ public class OutputView {
         return String.join(", ", participantNames);
     }
 
-    public static void printReceiveCardState(String cardState) {
-        System.out.println(cardState);
+    public static void printReceiveCardState(String name, List<String> cards) {
+        System.out.println(name + "카드: " + String.join(", ", cards));
     }
 
     public static void printLine() {
@@ -37,8 +38,8 @@ public class OutputView {
         System.out.println(ADDITIONAL_CARD_OUTPUT_MESSAGE);
     }
 
-    public static void printCardFinalState(String finalCardState) {
-        System.out.println(finalCardState);
+    public static void printCardFinalState(String name, List<String> cards, int cardSum) {
+        System.out.println(name + " 카드: " + String.join(", ", cards) + " - 결과: " + cardSum);
     }
 
     public static void printFinalResult() {

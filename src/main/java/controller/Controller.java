@@ -35,9 +35,9 @@ public class Controller {
 
         OutputView.printInitCardSetting(participants, dealer.getName());
 
-        OutputView.printReceiveCardState(dealer.getCardNames());
+        OutputView.printReceiveCardState(dealer.getName(), dealer.getCards());
         for (Participant participant : participants) {
-            OutputView.printReceiveCardState(participant.getCardNames());
+            OutputView.printReceiveCardState(participant.getName(), participant.getCards());
         }
     }
 
@@ -66,8 +66,7 @@ public class Controller {
     }
 
     private void printCurrentCard(Participant participant) {
-        String cards = participant.getCardNames();
-        OutputView.printReceiveCardState(cards);
+        OutputView.printReceiveCardState(participant.getName(), participant.getCards());
     }
 
     private void receiveDealerCard(Dealer dealer) {
@@ -83,12 +82,10 @@ public class Controller {
     }
 
     public void printFinalCardState(List<Participant> participants, Dealer dealer) {
-        String dealerState = dealer.getCardSumResult();
-        OutputView.printCardFinalState(dealerState);
+        OutputView.printCardFinalState(dealer.getName(), dealer.getCards(), dealer.getCardSum());
 
         for (Participant participant : participants) {
-            String participantState = participant.getCardSumResult();
-            OutputView.printCardFinalState(participantState);
+            OutputView.printCardFinalState(participant.getName(), participant.getCards(), participant.getCardSum());
         }
     }
 

@@ -19,6 +19,8 @@ public abstract class Player {
         return name;
     }
 
+    public List<String> getCards() { return cards; }
+
     public void receiveCards(int iterationCount) {
         int count = INIT_COUNT;
 
@@ -29,16 +31,8 @@ public abstract class Player {
         }
     }
 
-    public String getCardNames() {
-        return name + " 카드: " + String.join(", ", cards);
-    }
-
     public int getCardSum() {
         return Calculator.getCardSum(cards);
-    }
-
-    public String getCardSumResult() {
-        return getCardNames() + " - 결과: " + getCardSum();
     }
 
     public void addGameResult(String result) {
