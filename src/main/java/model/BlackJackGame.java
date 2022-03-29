@@ -15,7 +15,7 @@ public class BlackJackGame {
         return new Dealer();
     }
 
-    public static List<Participant> getParticipants(String names) {
+    public static List<Participant> getParticipantsByNames(String names) {
         List<String> splitNames = splitNames(names);
 
         List<Participant> participants = new ArrayList<>();
@@ -38,16 +38,6 @@ public class BlackJackGame {
             participant.receiveCards(INIT_CARD_COUNT);
         }
         dealer.receiveCards(INIT_CARD_COUNT);
-    }
-
-    public static String getParticipantNames(List<Participant> participants) {
-        List<String> participantNames = new ArrayList<>();
-
-        for (Participant participant : participants) {
-            participantNames.add(participant.getName());
-        }
-
-        return String.join(", ", participantNames);
     }
 
     public static void setResult(List<Participant> participants, Dealer dealer) {

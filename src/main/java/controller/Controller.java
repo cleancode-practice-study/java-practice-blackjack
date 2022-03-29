@@ -15,52 +15,51 @@ public class Controller {
         List<Participant> participants = createParticipants();
         Dealer dealer = BlackJackGame.getDealer();
 
-        getInitCards(participants, dealer);
-        getParticipantAdditionalCards(participants);
+        initCards(participants, dealer);
+        
+        receiveParticipantsAdditionalCards(participants);
+        receiveDealerCard(dealer);
 
-        getDealerCard(dealer);
-
-        getFinalCardState(participants, dealer);
+        printFinalCardState(participants, dealer);
         BlackJackGame.setResult(participants, dealer);
         printFinalGameResult(participants, dealer);
     }
 
     public List<Participant> createParticipants() {
         String names = InputView.getParticipantNames();
-        return BlackJackGame.getParticipants(names);
+        return BlackJackGame.getParticipantsByNames(names);
     }
 
-    public void getInitCards(List<Participant> participants, Dealer dealer) {
+    public void initCards(List<Participant> participants, Dealer dealer) {
         BlackJackGame.initCards(participants, dealer);
 
-        String participantNames = BlackJackGame.getParticipantNames(participants);
+        OutputView.printInitCardSetting(participants, dealer.getName());
 
-        OutputView.printInitCardSetting(participantNames, dealer.getName());
         OutputView.printReceiveCardState(dealer.getCardNames());
         for (Participant participant : participants) {
             OutputView.printReceiveCardState(participant.getCardNames());
         }
     }
 
-    public void getParticipantAdditionalCards(List<Participant> participants) {
+    public void receiveParticipantsAdditionalCards(List<Participant> participants) {
         OutputView.printLine();
         for (Participant participant : participants) {
-            getAdditionalCardsLoop(participant);
+            receiveEachParticipantAdditionalCards(participant);
         }
     }
 
-    private void getAdditionalCardsLoop(Participant participant) {
-        boolean isAdded;
+    private void receiveEachParticipantAdditionalCards(Participant participant) {
+        boolean canAdded;
         do {
-            isAdded = InputView.getAdditionCard(participant.getName());
-            addAdditionalCard(isAdded, participant);
-        } while (isAdded);
+            canAdded = InputView.getAdditionCard(participant.getName());
+            addAdditionalCard(canAdded, participant);
+        } while (canAdded);
 
         printCurrentCard(participant);
     }
 
-    private void addAdditionalCard(boolean isAdded, Participant participant) {
-        if (isAdded) {
+    private void addAdditionalCard(boolean canAdded, Participant participant) {
+        if (canAdded) {
             participant.receiveCards(ADDITIONAL_CARD_COUNT);
             printCurrentCard(participant);
         }
@@ -71,19 +70,19 @@ public class Controller {
         OutputView.printReceiveCardState(cards);
     }
 
-    private void getDealerCard(Dealer dealer) {
+    private void receiveDealerCard(Dealer dealer) {
         if (dealer.isEnough()) {
-            getDealerAdditionalCards(dealer);
+            receiveDealerAdditionalCards(dealer);
         }
     }
 
-    public void getDealerAdditionalCards(Dealer dealer) {
+    public void receiveDealerAdditionalCards(Dealer dealer) {
         OutputView.printLine();
         OutputView.printAdditionalCard();
         dealer.receiveCards(ADDITIONAL_CARD_COUNT);
     }
 
-    public void getFinalCardState(List<Participant> participants, Dealer dealer) {
+    public void printFinalCardState(List<Participant> participants, Dealer dealer) {
         String dealerState = dealer.getCardSumResult();
         OutputView.printCardFinalState(dealerState);
 
