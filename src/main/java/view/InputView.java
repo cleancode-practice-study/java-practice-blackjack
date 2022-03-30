@@ -13,7 +13,7 @@ public class InputView {
         return scanner.next();
     }
 
-    public static boolean getAdditionCard(String name) {
+    public static boolean canGetAdditionCard(String name) {
         boolean isAdded = false;
         System.out.printf(ADDITION_CARD_INPUT_MESSAGE, name);
 

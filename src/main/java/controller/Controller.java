@@ -51,7 +51,7 @@ public class Controller {
     private void receiveEachParticipantAdditionalCards(Participant participant) {
         boolean canAdded;
         do {
-            canAdded = InputView.getAdditionCard(participant.getName());
+            canAdded = InputView.canGetAdditionCard(participant.getName());
             addAdditionalCard(canAdded, participant);
         } while (canAdded);
 
