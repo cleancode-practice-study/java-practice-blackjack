@@ -13,10 +13,6 @@ public class Cards {
         return cards;
     }
 
-    public int getCardSum() {
-        return Calculator.getCardSum(cards);
-    }
-
     public void addCard(Card card) {
         cards.add(card);
     }

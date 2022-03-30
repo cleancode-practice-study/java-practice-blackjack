@@ -58,7 +58,7 @@ public class BlackJackGame {
         Map<String, String> participantGameResult = new HashMap<>();
 
         for (Participant participant : participants) {
-            String participantResult = participant.getGameResult(Calculator.getCardSum(dealer.getCards().getCards()));
+            String participantResult = participant.getGameResult(Calculator.getCardSum(dealer.getCards()));
             participantGameResult.put(participant.getName(), participantResult);
         }
 

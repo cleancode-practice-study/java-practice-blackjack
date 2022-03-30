@@ -11,7 +11,7 @@ public class Dealer extends Player{
     }
 
     public boolean isEnough() {
-        return Calculator.getCardSum(cards.getCards()) <= 16;
+        return Calculator.getCardSum(cards) <= 16;
     }
 
     public String getGameResult(String result) {

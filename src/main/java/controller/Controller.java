@@ -86,11 +86,11 @@ public class Controller {
     public void printFinalCardState(List<Participant> participants, Dealer dealer) {
         List<String> cardState;
         cardState = BlackJackGame.getCardStates(dealer.getCards());
-        OutputView.printCardFinalState(dealer.getName(), cardState, Calculator.getCardSum(dealer.getCards().getCards()));
+        OutputView.printCardFinalState(dealer.getName(), cardState, Calculator.getCardSum(dealer.getCards()));
 
         for (Participant participant : participants) {
             cardState = BlackJackGame.getCardStates(participant.getCards());
-            OutputView.printCardFinalState(participant.getName(), cardState, Calculator.getCardSum(participant.getCards().getCards()));
+            OutputView.printCardFinalState(participant.getName(), cardState, Calculator.getCardSum(participant.getCards()));
         }
     }
 

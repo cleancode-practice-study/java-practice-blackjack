@@ -12,7 +12,7 @@ public class Participant extends Player{
     }
 
     public String getGameResult(int dealerCardSum) {
-        int cardSum = Calculator.getCardSum(cards.getCards());
+        int cardSum = Calculator.getCardSum(cards);
 
         if (dealerCardSum > cardSum || cardSum > STANDARD_NUMBER) {
             return LOSE;
