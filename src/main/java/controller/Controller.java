@@ -7,6 +7,7 @@ import view.InputView;
 import view.OutputView;
 
 import java.util.List;
+import java.util.Map;
 
 public class Controller {
     private static final int ADDITIONAL_CARD_COUNT = 1;
@@ -21,7 +22,6 @@ public class Controller {
         receiveDealerCard(dealer);
 
         printFinalCardState(participants, dealer);
-        BlackJackGame.setResult(participants, dealer);
         printFinalGameResult(participants, dealer);
     }
 
@@ -90,11 +90,15 @@ public class Controller {
     }
 
     public void printFinalGameResult(List<Participant> participants, Dealer dealer) {
+        Map<String, String> participantGameResult = BlackJackGame.getParticipantGameResult(participants, dealer);
+        List<String> dealerGameResult = BlackJackGame.getDealerGameResult(participantGameResult, dealer);
+
         OutputView.printFinalResult();
-        OutputView.printFinalGameResult(dealer.getGameResult());
+        OutputView.printFinalDealerResult(dealer.getName(), dealerGameResult);
 
         for (Participant participant : participants) {
-            OutputView.printFinalGameResult(participant.getGameResult());
+            String participantName = participant.getName();
+            OutputView.printFinalParticipantResult(participantName, participantGameResult.get(participantName));
         }
     }
 

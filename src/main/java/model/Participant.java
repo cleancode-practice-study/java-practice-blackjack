@@ -1,13 +1,24 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 public class Participant extends Player{
-    // 딜러 카드를 참가자들한테 넘겨서 결과를 구하자?
+    private static final int STANDARD_NUMBER = 21;
+    private static final String WIN = "승";
+    private static final String LOSE = "패";
+    private static final String DRAW = "무";
+
     public Participant(String name) {
         this.name = name;
+    }
+
+    public String getGameResult(int dealerCardSum) {
+        if (dealerCardSum > getCardSum() || getCardSum() > STANDARD_NUMBER) {
+            return LOSE;
+        }
+
+        if (dealerCardSum < getCardSum()) {
+            return WIN;
+        }
+
+        return DRAW;
     }
 }

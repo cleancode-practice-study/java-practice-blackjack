@@ -1,12 +1,9 @@
 package model;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class BlackJackGame {
     private static final int INIT_CARD_COUNT = 2;
-    private static final int STANDARD_NUMBER = 21;
     private static final String WIN = "승";
     private static final String LOSE = "패";
     private static final String DRAW = "무";
@@ -40,46 +37,44 @@ public class BlackJackGame {
         dealer.receiveCards(INIT_CARD_COUNT);
     }
 
-    public static void setResult(List<Participant> participants, Dealer dealer) {
-        int differenceBetweenDealer = STANDARD_NUMBER - dealer.getCardSum();
+    public static Map<String, String> getParticipantGameResult(List<Participant> participants, Dealer dealer) {
+        Map<String, String> participantGameResult = new HashMap<>();
 
         for (Participant participant : participants) {
-            String participantResult = getParticipantResult(participant, differenceBetweenDealer);
-            participant.addGameResult(participantResult);
-
-            String dealerResult = getDealerResult(participantResult);
-            dealer.addGameResult(dealerResult);
+            String participantResult = participant.getGameResult(dealer.getCardSum());
+            participantGameResult.put(participant.getName(), participantResult);
         }
+
+        return participantGameResult;
     }
 
-    private static String getParticipantResult(Participant participant, int dealerResult) {
-        int participantResult = STANDARD_NUMBER - participant.getCardSum();
+    public static List<String> getDealerGameResult(Map<String, String> participantGameResult, Dealer dealer) {
+        Map<String, Integer> dealerGameResult = new HashMap<>();
 
-        if (participant.getCardSum() > 21) {
-            return LOSE;
+        for (String name : participantGameResult.keySet()) {
+            String participantResult = participantGameResult.get(name);
+            String dealerResult = dealer.getGameResult(participantResult);
+            dealerGameResult.put(dealerResult, dealerGameResult.getOrDefault(dealerResult, 0) + 1);
         }
 
-        if (dealerResult > participantResult) {
-            return WIN;
-        }
-
-        if (dealerResult < participantResult) {
-            return LOSE;
-        }
-
-        return DRAW;
+        return getResultForPrint(dealerGameResult);
     }
 
-    private static String getDealerResult(String result) {
-        if (result.equals(WIN)) {
-            return LOSE;
+    private static List<String> getResultForPrint(Map<String, Integer> finalGameResult) {
+        List<String> resultForPrint = new ArrayList<>();
+        if (finalGameResult.containsKey(WIN)) {
+            resultForPrint.add(finalGameResult.get(WIN) + WIN);
         }
 
-        if (result.equals(LOSE)) {
-            return WIN;
+        if (finalGameResult.containsKey(LOSE)) {
+            resultForPrint.add(finalGameResult.get(LOSE) + LOSE);
         }
 
-        return DRAW;
+        if (finalGameResult.containsKey(DRAW)) {
+            resultForPrint.add(finalGameResult.get(DRAW) + DRAW);
+        }
+
+        return resultForPrint;
     }
 
 }
