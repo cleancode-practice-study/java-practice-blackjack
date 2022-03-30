@@ -5,12 +5,13 @@ public class Dealer extends Player{
     private static final String LOSE = "패";
     private static final String DRAW = "무";
 
-    public Dealer() {
+    public Dealer(Cards cards) {
         this.name = "딜러";
+        this.cards = cards;
     }
 
     public boolean isEnough() {
-        return getCardSum() <= 16;
+        return Calculator.getCardSum(cards.getCards()) <= 16;
     }
 
     public String getGameResult(String result) {

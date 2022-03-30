@@ -8,15 +8,12 @@ public class RandomCardCreator {
 
     private static final Random random = new Random();
 
-    public static String getRandomCard() {
-        String card;
-
+    public static Card getRandomCard() {
         int randomCardNumber = getRandomNumber(CARD_NUMBER_PER_TYPE);
         int randomCardType = getRandomNumber(CARD_TYPE_COUNT);
 
-        card = CardNumber.valueOf(randomCardNumber).getCardNumber() + CardType.valueOf(randomCardType).getCardType();
 
-        return card;
+        return new Card(CardNumber.valueOf(randomCardNumber).getCardNumber() + CardType.valueOf(randomCardType).getCardType());
     }
 
     private static int getRandomNumber(int end) {

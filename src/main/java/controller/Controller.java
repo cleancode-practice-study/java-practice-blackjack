@@ -1,6 +1,7 @@
 package controller;
 
 import model.BlackJackGame;
+import model.Calculator;
 import model.Dealer;
 import model.Participant;
 import view.InputView;
@@ -10,8 +11,6 @@ import java.util.List;
 import java.util.Map;
 
 public class Controller {
-    private static final int ADDITIONAL_CARD_COUNT = 1;
-
     public void run() {
         List<Participant> participants = createParticipants();
         Dealer dealer = BlackJackGame.getDealer();
@@ -31,13 +30,15 @@ public class Controller {
     }
 
     public void initCards(List<Participant> participants, Dealer dealer) {
-        BlackJackGame.initCards(participants, dealer);
-
         OutputView.printInitCardSetting(participants, dealer.getName());
 
-        OutputView.printReceiveCardState(dealer.getName(), dealer.getCards());
+        List<String> cardState = BlackJackGame.getCardStates(dealer.getCards());
+
+        OutputView.printReceiveCardState(dealer.getName(), cardState);
+
         for (Participant participant : participants) {
-            OutputView.printReceiveCardState(participant.getName(), participant.getCards());
+            cardState = BlackJackGame.getCardStates(participant.getCards());
+            OutputView.printReceiveCardState(participant.getName(), cardState);
         }
     }
 
@@ -60,13 +61,14 @@ public class Controller {
 
     private void addAdditionalCard(boolean canAdded, Participant participant) {
         if (canAdded) {
-            participant.receiveCards(ADDITIONAL_CARD_COUNT);
+            participant.receiveCard();
             printCurrentCard(participant);
         }
     }
 
     private void printCurrentCard(Participant participant) {
-        OutputView.printReceiveCardState(participant.getName(), participant.getCards());
+        List<String> cardState = BlackJackGame.getCardStates(participant.getCards());
+        OutputView.printReceiveCardState(participant.getName(), cardState);
     }
 
     private void receiveDealerCard(Dealer dealer) {
@@ -78,14 +80,17 @@ public class Controller {
     public void receiveDealerAdditionalCards(Dealer dealer) {
         OutputView.printLine();
         OutputView.printAdditionalCard();
-        dealer.receiveCards(ADDITIONAL_CARD_COUNT);
+        dealer.receiveCard();
     }
 
     public void printFinalCardState(List<Participant> participants, Dealer dealer) {
-        OutputView.printCardFinalState(dealer.getName(), dealer.getCards(), dealer.getCardSum());
+        List<String> cardState;
+        cardState = BlackJackGame.getCardStates(dealer.getCards());
+        OutputView.printCardFinalState(dealer.getName(), cardState, Calculator.getCardSum(dealer.getCards().getCards()));
 
         for (Participant participant : participants) {
-            OutputView.printCardFinalState(participant.getName(), participant.getCards(), participant.getCardSum());
+            cardState = BlackJackGame.getCardStates(participant.getCards());
+            OutputView.printCardFinalState(participant.getName(), cardState, Calculator.getCardSum(participant.getCards().getCards()));
         }
     }
 

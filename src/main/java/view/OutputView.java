@@ -1,5 +1,7 @@
 package view;
 
+import model.Card;
+import model.Cards;
 import model.Participant;
 
 import java.util.ArrayList;

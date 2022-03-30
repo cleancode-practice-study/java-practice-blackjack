@@ -8,17 +8,17 @@ public class Calculator {
     private static final int A_NUMBER_ONE = 1;
     private static final int A_NUMBER_ELEVEN = 11;
 
-    public static int getCardSum(List<String> cards) {
+    public static int getCardSum(List<Card> cards) {
         int sumOne = 0;
         int sumEleven = 0;
 
-        for (String card : cards) {
-            String cardNumber = card.replaceAll("[가-힣]", "");
+        for (Card card : cards) {
+            String cardNumber = card.getCard().replaceAll("[가-힣]", "");
             sumOne += convertToNumberAIsOne(cardNumber);
         }
 
-        for (String card : cards) {
-            String cardNumber = card.replaceAll("[가-힣]", "");
+        for (Card card : cards) {
+            String cardNumber = card.getCard().replaceAll("[가-힣]", "");
             sumEleven += convertToNumberAIsEleven(cardNumber);
         }
 
