@@ -1,7 +1,5 @@
 package view;
 
-import model.Card;
-import model.Cards;
 import model.Participant;
 
 import java.util.ArrayList;
@@ -30,8 +28,8 @@ public class OutputView {
         return String.join(", ", participantNames);
     }
 
-    public static void printReceiveCardState(String name, List<String> cards) {
-        System.out.printf(CURRENT_CARD_STATE_OUTPUT_MESSAGE, name, String.join(", ", cards));
+    public static void printReceiveCardState(String name, List<String> cardState) {
+        System.out.printf(CURRENT_CARD_STATE_OUTPUT_MESSAGE, name, String.join(", ", cardState));
     }
 
     public static void printLine() {
