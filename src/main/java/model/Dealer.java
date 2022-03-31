@@ -1,10 +1,6 @@
 package model;
 
 public class Dealer extends Player{
-    private static final String WIN = "승";
-    private static final String LOSE = "패";
-    private static final String DRAW = "무";
-
     public Dealer(Cards cards) {
         this.name = "딜러";
         this.cards = cards;
@@ -15,14 +11,14 @@ public class Dealer extends Player{
     }
 
     public String getGameResult(String result) {
-        if (result.equals(WIN)) {
-            return LOSE;
+        if (result.equals(GameResultType.WIN.getCardType())) {
+            return GameResultType.LOSE.getCardType();
         }
 
-        if (result.equals(LOSE)) {
-            return WIN;
+        if (result.equals(GameResultType.LOSE.getCardType())) {
+            return GameResultType.WIN.getCardType();
         }
 
-        return DRAW;
+        return GameResultType.DRAW.getCardType();
     }
 }

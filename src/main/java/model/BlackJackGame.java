@@ -4,9 +4,6 @@ import java.util.*;
 
 public class BlackJackGame {
     private static final int INIT_CARD_COUNT = 2;
-    private static final String WIN = "승";
-    private static final String LOSE = "패";
-    private static final String DRAW = "무";
 
     public static Dealer getDealer() {
         Cards cards = getInitCards();
@@ -79,16 +76,16 @@ public class BlackJackGame {
 
     private static List<String> getResultForPrint(Map<String, Integer> finalGameResult) {
         List<String> resultForPrint = new ArrayList<>();
-        if (finalGameResult.containsKey(WIN)) {
-            resultForPrint.add(finalGameResult.get(WIN) + WIN);
+        if (finalGameResult.containsKey(GameResultType.WIN.getCardType())) {
+            resultForPrint.add(finalGameResult.get(GameResultType.WIN.getCardType()) + GameResultType.WIN.getCardType());
         }
 
-        if (finalGameResult.containsKey(LOSE)) {
-            resultForPrint.add(finalGameResult.get(LOSE) + LOSE);
+        if (finalGameResult.containsKey(GameResultType.LOSE.getCardType())) {
+            resultForPrint.add(finalGameResult.get(GameResultType.LOSE.getCardType()) + GameResultType.LOSE.getCardType());
         }
 
-        if (finalGameResult.containsKey(DRAW)) {
-            resultForPrint.add(finalGameResult.get(DRAW) + DRAW);
+        if (finalGameResult.containsKey(GameResultType.DRAW.getCardType())) {
+            resultForPrint.add(finalGameResult.get(GameResultType.DRAW.getCardType()) + GameResultType.DRAW.getCardType());
         }
 
         return resultForPrint;
