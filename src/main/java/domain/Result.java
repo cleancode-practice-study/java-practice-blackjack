@@ -1,6 +1,9 @@
 package domain;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Result {
     private static final int ONE = 1;
@@ -8,26 +11,26 @@ public class Result {
     private static final int ELEVEN = 11;
     private static final String WIN = "승";
     private static final String LOSE = "패";
+    private static final String TIE = "무";
 
     // 딜러 승패 결과 구하는 메서드
-    public static List<Integer> getDealerWinOrLoseResult(Map<String, String> userResult) {
-        int winCount = 0;
-        int loseCount = 0;
-        int tieCount = 0;
-
-        for (Map.Entry<String, String> value : userResult.entrySet()) {
-            String result = value.getValue();
-
-            if (result.equals(LOSE))
-                winCount++;
-            else if (result.equals(WIN)) {
-                loseCount++;
-            } else {
-                tieCount++;
+    public static Map<String, Integer> getDealerResult(Map<String, String> userResult) {
+        Map<String, Integer> dealerResult = new HashMap<String, Integer>() {
+            {
+                put(WIN, 0);
+                put(LOSE, 0);
+                put(TIE, 0);
             }
-        }
+        };
 
-        return new ArrayList<>(Arrays.asList(winCount, loseCount, tieCount));
+        List<String> result = new ArrayList<>();
+        for (String userName : userResult.keySet())
+            result.add(userResult.get(userName));
+
+        for (String str : result)
+            dealerResult.put(str, dealerResult.getOrDefault(str, 0) + 1);
+
+        return dealerResult;
     }
 
     // 카드 숫자 합계 반환 메서드
