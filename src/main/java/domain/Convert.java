@@ -14,7 +14,7 @@ public class Convert {
         List<String> names = new ArrayList<>();
 
         for (Player user : users) {
-            String userName = user.name;
+            String userName = user.getName();
             names.add(userName);
         }
 

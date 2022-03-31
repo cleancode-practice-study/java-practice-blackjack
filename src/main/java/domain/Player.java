@@ -4,13 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
-    public static final int INITIAL_CARD_COUNT = 2;
-    public String name;
-    public List<String> cards;
+    private static final int INITIAL_CARD_COUNT = 2;
+    private String name;
+    private List<String> cards;
 
     public Player(String playerName, List<String> playerCards) {
         this.name = playerName;
         this.cards = playerCards;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public List<String> getCards() {
+        return this.cards;
     }
 
     public static Player createPlayer(String name) {

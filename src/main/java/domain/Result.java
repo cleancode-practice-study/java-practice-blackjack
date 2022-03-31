@@ -3,9 +3,9 @@ package domain;
 import java.util.*;
 
 public class Result {
-    public static final int ONE = 1;
-    public static final int TEN = 10;
-    public static final int ELEVEN = 11;
+    private static final int ONE = 1;
+    private static final int TEN = 10;
+    private static final int ELEVEN = 11;
     private static final String WIN = "승";
     private static final String LOSE = "패";
 
@@ -70,5 +70,4 @@ public class Result {
 
         return userWinOrLoseResult;
     }
-
 }

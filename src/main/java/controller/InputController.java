@@ -20,7 +20,7 @@ public class InputController {
     }
 
     public static boolean isNoUserAnswer(Player user) {
-        String userName = user.name;
+        String userName = user.getName();
         String answer = InputView.inputYesOrNoOneCard(userName);
 
         return answer.equals(NO);

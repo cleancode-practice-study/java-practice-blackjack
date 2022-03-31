@@ -37,7 +37,7 @@ public class MainController {
 
     // 최종 딜러 카드
     private Player getFinalDealer(Player dealer) {
-        List<String> finalDealerCards = dealer.cards;
+        List<String> finalDealerCards = dealer.getCards();
 
         if (Result.getResultNumber(finalDealerCards) <= DEALER_ONE_MORE_CARD_STANDARD_NUMBER) {
             String randomCard = RandomCard.getRandomCard();
@@ -49,7 +49,7 @@ public class MainController {
     }
 
     private Player checkUserOneMoreCard(Player user) {
-        List<String> userCards = user.cards;
+        List<String> userCards = user.getCards();
 
         while (!InputController.isNoUserAnswer(user)) {
             String randomCard = RandomCard.getRandomCard();

@@ -4,31 +4,31 @@ import java.util.Map;
 
 public class Validator {
     private static final int STANDARD_NUMBER = 21;
-    public static final String WIN = "승";
-    public static final String LOSE = "패";
-    public static final String TIE = "무";
-    public static final char ACE = 'A';
-    public static final char JACK = 'J';
-    public static final char QUEEN = 'Q';
-    public static final char KING = 'K';
-    public static final int TEN = 10;
+    private static final String WIN = "승";
+    private static final String LOSE = "패";
+    private static final String TIE = "무";
+    private static final char ACE = 'A';
+    private static final char JACK = 'J';
+    private static final char QUEEN = 'Q';
+    private static final char KING = 'K';
+    private static final int TEN = 10;
 
-    static void checkUserWin(Map<String, String> userWinOrLoseResult, Player dealer, Player user) {
-        String userName = user.name;
+    public static void checkUserWin(Map<String, String> userWinOrLoseResult, Player dealer, Player user) {
+        String userName = user.getName();
 
         if ((isValidDealerAndUserNumber(dealer, user) && isLargerThanDealerNumber(dealer, user)) || isValidUserNumber(dealer, user))
             userWinOrLoseResult.put(userName, WIN);
     }
 
-    static void checkUserLose(Map<String, String> userWinOrLoseResult, Player dealer, Player user) {
-        String userName = user.name;
+    public static void checkUserLose(Map<String, String> userWinOrLoseResult, Player dealer, Player user) {
+        String userName = user.getName();
 
         if ((isValidDealerAndUserNumber(dealer, user) && !isLargerThanDealerNumber(dealer, user)) || isValidDealerNumber(dealer, user))
             userWinOrLoseResult.put(userName, LOSE);
     }
 
-    static void checkUserTie(Map<String, String> userWinOrLoseResult, Player dealer, Player user) {
-        String userName = user.name;
+    public static void checkUserTie(Map<String, String> userWinOrLoseResult, Player dealer, Player user) {
+        String userName = user.getName();
 
         if ((isValidDealerAndUserNumber(dealer, user) && isEqualUserNumberAndDealerNumber(dealer, user)) || isNotValidDealerAndUserNumber(dealer, user))
             userWinOrLoseResult.put(userName, TIE);
@@ -63,15 +63,15 @@ public class Validator {
     }
 
     private static boolean isLargerThanDealerNumber(Player dealer, Player user) {
-        return Result.getResultNumber(dealer.cards) < Result.getResultNumber(user.cards);
+        return Result.getResultNumber(dealer.getCards()) < Result.getResultNumber(user.getCards());
     }
 
     private static boolean isEqualUserNumberAndDealerNumber(Player dealer, Player user) {
-        return Result.getResultNumber(dealer.cards) == Result.getResultNumber(user.cards);
+        return Result.getResultNumber(dealer.getCards()) == Result.getResultNumber(user.getCards());
     }
 
     private static boolean isValidPlayerNumber(Player player) {
-        return Result.getResultNumber(player.cards) <= STANDARD_NUMBER;
+        return Result.getResultNumber(player.getCards()) <= STANDARD_NUMBER;
     }
 
     static boolean isMinAceNumber(char number, int sum) {
