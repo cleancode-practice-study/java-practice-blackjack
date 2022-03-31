@@ -5,6 +5,8 @@ import java.util.Random;
 public class Card {
     private static final int MAX_ACE_NUMBER = 11;
     private static final int STANDARD_NUMBER = 21;
+    private static final int NUMBERS_COUNT = 12;
+    private static final int SHAPES_COUNT = 4;
     private static final char ACE = 'A';
     private static final char JACK = 'J';
     private static final char QUEEN = 'Q';
@@ -13,13 +15,13 @@ public class Card {
     public static String getRandomOneCard() {
         Random random = new Random();
 
-        String[] shapes = {"클로버", "다이아몬드", "스페이드", "하트"};
-        String[] numbers = {"2", "3", "4", "5", "6", "7", "8", "9", "A", "J", "K", "Q"};
+        int randomShapeIdx = random.nextInt(SHAPES_COUNT);
+        int randomNumberIdx = random.nextInt(NUMBERS_COUNT);
 
-        int randomShapeIdx = random.nextInt(shapes.length);
-        int randomNumberIdx = random.nextInt(numbers.length);
+        String number = CardNumbers.getNumber(randomNumberIdx);
+        String shape = CardShapes.getShape(randomShapeIdx);
 
-        return numbers[randomNumberIdx] + shapes[randomShapeIdx];
+        return number + shape;
     }
 
     static boolean isMinAceNumber(char number, int sum) {
