@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
+    private static final int STANDARD_NUMBER = 21;
     private static final int INITIAL_CARD_COUNT = 2;
     private String name;
     private List<String> cards;
@@ -42,8 +43,48 @@ public class Player {
         List<String> cards = new ArrayList<>();
 
         for (int i = 0; i < INITIAL_CARD_COUNT; i++)
-            cards.add(RandomCard.getRandomCard());
+            cards.add(Card.getRandomOneCard());
 
         return cards;
+    }
+
+    static boolean isValidDealerAndUserNumber(Player dealer, Player user) {
+        boolean isValidDealerResult = isValidPlayerNumber(dealer);
+        boolean isValidUserResult = isValidPlayerNumber(user);
+
+        return isValidDealerResult && isValidUserResult;
+    }
+
+    static boolean isNotValidDealerAndUserNumber(Player dealer, Player user) {
+        boolean isValidDealerResult = isValidPlayerNumber(dealer);
+        boolean isValidUserResult = isValidPlayerNumber(user);
+
+        return !isValidDealerResult && !isValidUserResult;
+    }
+
+    static boolean isValidUserNumber(Player dealer, Player user) {
+        boolean isValidDealerResult = isValidPlayerNumber(dealer);
+        boolean isValidUserResult = isValidPlayerNumber(user);
+
+        return !isValidDealerResult && isValidUserResult;
+    }
+
+    static boolean isValidDealerNumber(Player dealer, Player user) {
+        boolean isValidDealerResult = isValidPlayerNumber(dealer);
+        boolean isValidUserResult = isValidPlayerNumber(user);
+
+        return isValidDealerResult && !isValidUserResult;
+    }
+
+    static boolean isLargerThanDealerNumber(Player dealer, Player user) {
+        return Result.getSumNumber(dealer.getCards()) < Result.getSumNumber(user.getCards());
+    }
+
+    static boolean isEqualUserNumberAndDealerNumber(Player dealer, Player user) {
+        return Result.getSumNumber(dealer.getCards()) == Result.getSumNumber(user.getCards());
+    }
+
+    private static boolean isValidPlayerNumber(Player player) {
+        return Result.getSumNumber(player.getCards()) <= STANDARD_NUMBER;
     }
 }

@@ -33,9 +33,9 @@ public class PrintController {
 
     public static void printGameResult(List<Player> users, Player dealer) {
         printTotalPlayerResult(dealer, users); // 플레이어들의 최종 카드와 결과 출력
-        Map<String, String> userWinOrLoseResult = Result.getUserWinOrLoseResult(dealer, users); // 유저 승패 결과 구하기
+        Map<String, String> userResult = Result.getUserResult(dealer, users); // 유저 승패 결과 구하기
 
-        printWinOrLoseResult(userWinOrLoseResult); // 최종 승패 결과 출력 (딜러+유저)
+        printWinOrLoseResult(userResult); // 최종 승패 결과 출력 (딜러+유저)
     }
 
     private static void printPlayerInitialMessage(List<Player> users) {
@@ -48,7 +48,7 @@ public class PrintController {
     private static void printPlayerResult(Player player) {
         List<String> playersCards = player.getCards();
 
-        int playersResult = Result.getResultNumber(playersCards);
+        int playersResult = Result.getSumNumber(playersCards);
         OutputView.printTotalPlayerResult(player, playersResult);
     }
 
@@ -62,9 +62,10 @@ public class PrintController {
     }
 
     // 승패 결과 출력
-    private static void printWinOrLoseResult(Map<String, String> userWinOrLoseResult) {
-        Map<String, Integer> dealerResult = Result.getDealerResult(userWinOrLoseResult);
+    private static void printWinOrLoseResult(Map<String, String> userResult) {
+        Map<String, Integer> dealerResult = Result.getDealerResult(userResult);
+
         OutputView.printDealerResult(dealerResult); // 딜러 승패 결과
-        OutputView.printUsersResult(userWinOrLoseResult); // 유저 승패 결과
+        OutputView.printUserResult(userResult); // 유저 승패 결과
     }
 }

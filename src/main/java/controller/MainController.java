@@ -1,7 +1,7 @@
 package controller;
 
+import domain.Card;
 import domain.Player;
-import domain.RandomCard;
 import domain.Result;
 
 import java.util.ArrayList;
@@ -39,8 +39,8 @@ public class MainController {
     private Player getFinalDealer(Player dealer) {
         List<String> finalDealerCards = dealer.getCards();
 
-        if (Result.getResultNumber(finalDealerCards) <= DEALER_ONE_MORE_CARD_STANDARD_NUMBER) {
-            String randomCard = RandomCard.getRandomCard();
+        if (Result.getSumNumber(finalDealerCards) <= DEALER_ONE_MORE_CARD_STANDARD_NUMBER) {
+            String randomCard = Card.getRandomOneCard();
             finalDealerCards.add(randomCard);
             PrintController.printDealerOneMoreCardMessage();
         }
@@ -52,7 +52,7 @@ public class MainController {
         List<String> userCards = user.getCards();
 
         while (!InputController.isNoUserAnswer(user)) {
-            String randomCard = RandomCard.getRandomCard();
+            String randomCard = Card.getRandomOneCard();
             userCards.add(randomCard);
             PrintController.printPlayerOwnCard(user);
         }

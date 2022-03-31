@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 public class Result {
-    private static final int ONE = 1;
+    private static final int MIN_ACE_NUMBER = 1;
     private static final int TEN = 10;
-    private static final int ELEVEN = 11;
+    private static final int MAX_ACE_NUMBER = 11;
     private static final String WIN = "승";
     private static final String LOSE = "패";
     private static final String TIE = "무";
@@ -34,23 +34,23 @@ public class Result {
     }
 
     // 카드 숫자 합계 반환 메서드
-    public static int getResultNumber(List<String> cards) {
+    public static int getSumNumber(List<String> cards) {
         int sum = 0;
 
         for (String card : cards) {
             char number = card.charAt(0);
 
-            if (Validator.isMinAceNumber(number, sum)) {
-                sum += ONE;
+            if (Card.isMinAceNumber(number, sum)) {
+                sum += MIN_ACE_NUMBER;
                 continue;
             }
 
-            if (Validator.isMaxAceNumber(number, sum)) {
-                sum += ELEVEN;
+            if (Card.isMaxAceNumber(number, sum)) {
+                sum += MAX_ACE_NUMBER;
                 continue;
             }
 
-            if (Validator.isTenNumber(number)) {
+            if (Card.isJackAndQueenAndKingCard(number)) {
                 sum += TEN;
                 continue;
             }
@@ -62,15 +62,41 @@ public class Result {
     }
 
     // 유저의 승패결과 구하는 메서드
-    public static Map<String, String> getUserWinOrLoseResult(Player dealer, List<Player> users) {
-        Map<String, String> userWinOrLoseResult = new HashMap<>();
+    public static Map<String, String> getUserResult(Player dealer, List<Player> users) {
+        Map<String, String> userResult = new HashMap<>();
 
-        for (Player user : users) {
-            Validator.checkUserWin(userWinOrLoseResult, dealer, user);
-            Validator.checkUserLose(userWinOrLoseResult, dealer, user);
-            Validator.checkUserTie(userWinOrLoseResult, dealer, user);
-        }
+        for (Player user : users)
+            checkUserResult(userResult, dealer, user);
 
-        return userWinOrLoseResult;
+        return userResult;
     }
+
+    public static void checkUserResult(Map<String, String> userResult, Player dealer, Player user) {
+        checkUserWin(userResult, dealer, user);
+        checkUserLose(userResult, dealer, user);
+        checkUserTie(userResult, dealer, user);
+    }
+
+    public static void checkUserWin(Map<String, String> userResult, Player dealer, Player user) {
+        String userName = user.getName();
+
+        if ((Player.isValidDealerAndUserNumber(dealer, user) && Player.isLargerThanDealerNumber(dealer, user)) || Player.isValidUserNumber(dealer, user))
+            userResult.put(userName, WIN);
+    }
+
+    public static void checkUserLose(Map<String, String> userResult, Player dealer, Player user) {
+        String userName = user.getName();
+
+        if ((Player.isValidDealerAndUserNumber(dealer, user) && !Player.isLargerThanDealerNumber(dealer, user)) || Player.isValidDealerNumber(dealer, user))
+            userResult.put(userName, LOSE);
+    }
+
+    public static void checkUserTie(Map<String, String> userResult, Player dealer, Player user) {
+        String userName = user.getName();
+
+        if ((Player.isValidDealerAndUserNumber(dealer, user) && Player.isEqualUserNumberAndDealerNumber(dealer, user)) || Player.isNotValidDealerAndUserNumber(dealer, user))
+            userResult.put(userName, TIE);
+    }
+
+
 }
