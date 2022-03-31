@@ -15,7 +15,7 @@ public class Controller {
         List<Participant> participants = createParticipants();
         Dealer dealer = BlackJackGame.getDealer();
 
-        initCards(participants, dealer);
+        printInitCardState(participants, dealer);
         
         receiveParticipantsAdditionalCards(participants);
         receiveDealerCard(dealer);
@@ -29,7 +29,7 @@ public class Controller {
         return BlackJackGame.getParticipantsByNames(names);
     }
 
-    public void initCards(List<Participant> participants, Dealer dealer) {
+    public void printInitCardState(List<Participant> participants, Dealer dealer) {
         OutputView.printInitCardSetting(participants, dealer.getName());
 
         List<String> cardState = BlackJackGame.getCardStates(dealer.getCards());

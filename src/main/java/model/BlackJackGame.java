@@ -1,7 +1,7 @@
 package model;
 
 import java.util.*;
-// 딜러와 참가자 초기화 -> 이름, 카드 2장 생성해서 딜러, 참가자 객체 생성하기
+
 public class BlackJackGame {
     private static final int INIT_CARD_COUNT = 2;
     private static final String WIN = "승";
