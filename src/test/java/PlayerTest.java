@@ -19,14 +19,14 @@ public class PlayerTest {
 
         //then
         assertThat(users.size()).isEqualTo(2);
-        assertThat(users.get(0).name).isEqualTo("halim");
-        assertThat(users.get(1).name).isEqualTo("jinhee");
+        assertThat(users.get(0).getName()).isEqualTo("halim");
+        assertThat(users.get(1).getName()).isEqualTo("jinhee");
     }
 
     @Test
     void 초기_랜덤_카드를_지급하는_경우() {
         //when
-        List<String> cards = Player.getInitialCard();
+        List<String> cards = Player.getInitialCards();
 
         //then
         assertThat(cards.size()).isEqualTo(2);

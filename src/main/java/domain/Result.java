@@ -68,30 +68,30 @@ public class Result {
         return sum;
     }
 
-    public static void checkUserResult(Map<String, String> userResult, Player dealer, Player user) {
+    private static void checkUserResult(Map<String, String> userResult, Player dealer, Player user) {
         checkUserWin(userResult, dealer, user);
         checkUserLose(userResult, dealer, user);
         checkUserTie(userResult, dealer, user);
     }
 
-    public static void checkUserWin(Map<String, String> userResult, Player dealer, Player user) {
+    private static void checkUserWin(Map<String, String> userResult, Player dealer, Player user) {
         String userName = user.getName();
 
         if ((Player.isValidDealerAndUserNumber(dealer, user) && Player.isLargerThanDealerNumber(dealer, user)) || Player.isValidUserNumber(dealer, user))
             userResult.put(userName, ResultTypes.WIN.getResultType());
     }
 
-    public static void checkUserLose(Map<String, String> userResult, Player dealer, Player user) {
+    private static void checkUserLose(Map<String, String> userResult, Player dealer, Player user) {
         String userName = user.getName();
 
         if ((Player.isValidDealerAndUserNumber(dealer, user) && !Player.isLargerThanDealerNumber(dealer, user)) || Player.isValidDealerNumber(dealer, user))
             userResult.put(userName, ResultTypes.LOSE.getResultType());
     }
 
-    public static void checkUserTie(Map<String, String> userResult, Player dealer, Player user) {
+    private static void checkUserTie(Map<String, String> userResult, Player dealer, Player user) {
         String userName = user.getName();
 
-        if ((Player.isValidDealerAndUserNumber(dealer, user) && Player.isEqualUserNumberAndDealerNumber(dealer, user)) || Player.isNotValidDealerAndUserNumber(dealer, user))
+        if ((Player.isValidDealerAndUserNumber(dealer, user) && Player.isEqualUserAndDealerNumber(dealer, user)) || Player.isNotValidDealerAndUserNumber(dealer, user))
             userResult.put(userName, ResultTypes.TIE.getResultType());
     }
 }

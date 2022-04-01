@@ -25,8 +25,8 @@ public class ConvertTest {
     void 콤마를_포함하여_출력하는_경우() {
         //given
         List<Player> users = new ArrayList<>();
-        Player user1 = Player.createPlayer("halim");
-        Player user2 = Player.createPlayer("jinhee");
+        Player user1 = Player.create("halim");
+        Player user2 = Player.create("jinhee");
         users.add(user1);
         users.add(user2);
 

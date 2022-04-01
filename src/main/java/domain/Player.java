@@ -9,7 +9,7 @@ public class Player {
     private String name;
     private List<String> cards;
 
-    private Player(String playerName, List<String> playerCards) {
+    public Player(String playerName, List<String> playerCards) {
         this.name = playerName;
         this.cards = playerCards;
     }
@@ -22,7 +22,7 @@ public class Player {
         return this.cards;
     }
 
-    public static Player createPlayer(String name) {
+    public static Player create(String name) {
         List<String> cards = getInitialCards(); // model 호출, player의 2장의 카드를 담은 list
 
         return new Player(name, cards);
@@ -31,7 +31,7 @@ public class Player {
     public static List<Player> createUserPlayers(List<String> names) {
         List<Player> users = new ArrayList<>();
         for (String name : names) {
-            Player user = createPlayer(name);
+            Player user = create(name);
             users.add(user);
         }
 
@@ -68,7 +68,7 @@ public class Player {
         return Result.getSumNumber(dealer.getCards()) < Result.getSumNumber(user.getCards());
     }
 
-    static boolean isEqualUserNumberAndDealerNumber(Player dealer, Player user) {
+    static boolean isEqualUserAndDealerNumber(Player dealer, Player user) {
         return Result.getSumNumber(dealer.getCards()) == Result.getSumNumber(user.getCards());
     }
 

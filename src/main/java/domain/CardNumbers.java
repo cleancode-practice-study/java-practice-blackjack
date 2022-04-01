@@ -17,7 +17,6 @@ public enum CardNumbers {
     private static int count = 0;
     private final int idx;
     private final String number;
-    ;
 
     CardNumbers(int cardIdx, String cardNumber) {
         this.idx = cardIdx;

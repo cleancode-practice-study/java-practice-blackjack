@@ -1,5 +1,6 @@
 import domain.Player;
 import domain.Result;
+import domain.ResultTypes;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
@@ -17,7 +18,7 @@ public class ResultTest {
         cards.add("A스페이드");
 
         //when
-        int result = Result.getResultNumber(cards);
+        int result = Result.getSumNumber(cards);
 
         //then
         assertThat(result).isEqualTo(14);
@@ -33,12 +34,12 @@ public class ResultTest {
         userResult.put("dowon", "무");
 
         //when
-        List<Integer> dealerResult = Result.getDealerWinOrLoseResult(userResult);
+        Map<String, Integer> dealerResult = Result.getDealerResult(userResult);
 
         //then
-        int winCount = dealerResult.get(0);
-        int loseCount = dealerResult.get(1);
-        int tieCount = dealerResult.get(2);
+        int winCount = dealerResult.get(ResultTypes.LOSE.getResultType());
+        int loseCount = dealerResult.get(ResultTypes.WIN.getResultType());
+        int tieCount = dealerResult.get(ResultTypes.TIE.getResultType());
 
         assertThat(winCount).isEqualTo(2);
         assertThat(loseCount).isEqualTo(1);
@@ -60,7 +61,7 @@ public class ResultTest {
         users.add(user2);
 
         //when
-        Map<String, String> userResult = Result.getUserWinOrLoseResult(dealer, users);
+        Map<String, String> userResult = Result.getUserResult(dealer, users);
 
         //then
         assertThat(userResult).contains(entry("halim", "무"), entry("jinhee", "승"));

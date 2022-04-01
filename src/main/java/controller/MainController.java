@@ -14,7 +14,7 @@ public class MainController {
     public void play() {
         List<String> userNames = InputController.getUserNames(); // 게임 참여 이름 입력
         List<Player> users = Player.createUserPlayers(userNames);
-        Player dealer = Player.createPlayer(DEALER);
+        Player dealer = Player.create(DEALER);
 
         PrintController.printPlayerInitialCards(dealer, users); // 플레이어들의 초기 부여 받은 카드 출력
         PrintController.printGameResult(getFinalUsers(users), getFinalDealer(dealer)); // 최종 승패 출력
