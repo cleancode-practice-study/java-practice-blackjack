@@ -1,10 +1,8 @@
 package view;
 
-import model.BlackJackGame;
 import model.DealerGameResult;
-import model.Participant;
+import model.Participants;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class OutputView {
@@ -15,19 +13,10 @@ public class OutputView {
     private static final String FINAL_GAME_RESULT_GUIDE_OUTPUT_MESSAGE = "## 최종 승패";
     private static final String FINAL_GAME_RESULT_OUTPUT_MESSAGE = "%s: %s\n";
 
-    public static void printInitCardSetting(List<Participant> participants, String dealerName) {
+    public static void printInitCardSetting(Participants participants, String dealerName) {
         System.out.println();
-        String participantNames = getParticipantEachNames(participants);
+        String participantNames = String.join(", ", participants.getParticipantNames());
         System.out.printf(INIT_CARD_SETTING_OUTPUT_MESSAGE, dealerName, participantNames);
-    }
-    private static String getParticipantEachNames(List<Participant> participants) {
-        List<String> participantNames = new ArrayList<>();
-
-        for (Participant participant : participants) {
-            participantNames.add(participant.getName());
-        }
-
-        return String.join(", ", participantNames);
     }
 
     public static void printReceiveCardState(String name, List<String> cardState) {

@@ -11,7 +11,7 @@ public class BlackJackGame {
         return new Dealer(cards);
     }
 
-    public static List<Participant> getParticipantsByNames(String names) {
+    public static Participants getParticipantsByNames(String names) {
         List<String> splitNames = splitNames(names);
 
         List<Participant> participants = new ArrayList<>();
@@ -22,7 +22,7 @@ public class BlackJackGame {
             participants.add(participant);
         }
 
-        return participants;
+        return new Participants(participants);
     }
 
     private static Cards getInitCards() {
