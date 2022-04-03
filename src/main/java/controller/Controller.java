@@ -1,14 +1,10 @@
 package controller;
 
-import model.BlackJackGame;
-import model.Calculator;
-import model.Dealer;
-import model.Participant;
+import model.*;
 import view.InputView;
 import view.OutputView;
 
 import java.util.List;
-import java.util.Map;
 
 public class Controller {
     public void run() {
@@ -95,15 +91,15 @@ public class Controller {
     }
 
     public void printFinalGameResult(List<Participant> participants, Dealer dealer) {
-        Map<String, String> participantGameResult = BlackJackGame.getParticipantGameResult(participants, dealer);
-        List<String> dealerGameResult = BlackJackGame.getDealerGameResult(participantGameResult, dealer);
+        ParticipantGameResult participantGameResult = BlackJackGame.getParticipantGameResult(participants, dealer);
+        DealerGameResult dealerGameResult = BlackJackGame.getDealerGameResult(participantGameResult, dealer);
 
         OutputView.printFinalResult();
         OutputView.printFinalDealerResult(dealer.getName(), dealerGameResult);
 
         for (Participant participant : participants) {
             String participantName = participant.getName();
-            OutputView.printFinalParticipantResult(participantName, participantGameResult.get(participantName));
+            OutputView.printFinalParticipantResult(participantName, participantGameResult.getParticipantResult(participantName));
         }
     }
 

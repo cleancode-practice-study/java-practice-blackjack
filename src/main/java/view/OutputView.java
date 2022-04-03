@@ -1,5 +1,7 @@
 package view;
 
+import model.BlackJackGame;
+import model.DealerGameResult;
 import model.Participant;
 
 import java.util.ArrayList;
@@ -49,7 +51,8 @@ public class OutputView {
         System.out.println(FINAL_GAME_RESULT_GUIDE_OUTPUT_MESSAGE);
     }
 
-    public static void printFinalDealerResult(String name, List<String> dealerResult) {
+    public static void printFinalDealerResult(String name, DealerGameResult dealerGameResult) {
+        List<String> dealerResult = dealerGameResult.getResultForPrint();
         System.out.printf(FINAL_GAME_RESULT_OUTPUT_MESSAGE, name, String.join(" ", dealerResult));
     }
 

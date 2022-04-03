@@ -1,6 +1,6 @@
 package model;
 
-public class Dealer extends Player{
+public class Dealer extends Player {
     public Dealer(Cards cards) {
         this.name = "딜러";
         this.cards = cards;

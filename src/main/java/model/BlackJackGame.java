@@ -51,7 +51,7 @@ public class BlackJackGame {
         return cardNames;
     }
 
-    public static Map<String, String> getParticipantGameResult(List<Participant> participants, Dealer dealer) {
+    public static ParticipantGameResult getParticipantGameResult(List<Participant> participants, Dealer dealer) {
         Map<String, String> participantGameResult = new HashMap<>();
 
         for (Participant participant : participants) {
@@ -59,36 +59,18 @@ public class BlackJackGame {
             participantGameResult.put(participant.getName(), participantResult);
         }
 
-        return participantGameResult;
+        return new ParticipantGameResult(participantGameResult);
     }
 
-    public static List<String> getDealerGameResult(Map<String, String> participantGameResult, Dealer dealer) {
+    public static DealerGameResult getDealerGameResult(ParticipantGameResult participantGameResult, Dealer dealer) {
         Map<String, Integer> dealerGameResult = new HashMap<>();
 
-        for (String name : participantGameResult.keySet()) {
-            String participantResult = participantGameResult.get(name);
+        for (String name : participantGameResult.getKeySet()) {
+            String participantResult = participantGameResult.getParticipantResult(name);
             String dealerResult = dealer.getGameResult(participantResult);
             dealerGameResult.put(dealerResult, dealerGameResult.getOrDefault(dealerResult, 0) + 1);
         }
 
-        return getResultForPrint(dealerGameResult);
+        return new DealerGameResult(dealerGameResult);
     }
-
-    private static List<String> getResultForPrint(Map<String, Integer> finalGameResult) {
-        List<String> resultForPrint = new ArrayList<>();
-        if (finalGameResult.containsKey(GameResultType.WIN.getCardType())) {
-            resultForPrint.add(finalGameResult.get(GameResultType.WIN.getCardType()) + GameResultType.WIN.getCardType());
-        }
-
-        if (finalGameResult.containsKey(GameResultType.LOSE.getCardType())) {
-            resultForPrint.add(finalGameResult.get(GameResultType.LOSE.getCardType()) + GameResultType.LOSE.getCardType());
-        }
-
-        if (finalGameResult.containsKey(GameResultType.DRAW.getCardType())) {
-            resultForPrint.add(finalGameResult.get(GameResultType.DRAW.getCardType()) + GameResultType.DRAW.getCardType());
-        }
-
-        return resultForPrint;
-    }
-
 }
