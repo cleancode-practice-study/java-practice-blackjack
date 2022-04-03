@@ -28,7 +28,7 @@ public class Controller {
     public void printInitCardState(Participants participants, Dealer dealer) {
         OutputView.printInitCardSetting(participants, dealer.getName());
 
-        List<String> cardState = BlackJackGame.getCardStates(dealer.getCards());
+        CardState cardState = BlackJackGame.getCardStates(dealer.getCards());
 
         OutputView.printReceiveCardState(dealer.getName(), cardState);
 
@@ -63,7 +63,7 @@ public class Controller {
     }
 
     private void printCurrentCard(Participant participant) {
-        List<String> cardState = BlackJackGame.getCardStates(participant.getCards());
+        CardState cardState = BlackJackGame.getCardStates(participant.getCards());
         OutputView.printReceiveCardState(participant.getName(), cardState);
     }
 
@@ -80,7 +80,7 @@ public class Controller {
     }
 
     public void printFinalCardState(Participants participants, Dealer dealer) {
-        List<String> cardState;
+        CardState cardState;
         cardState = BlackJackGame.getCardStates(dealer.getCards());
         OutputView.printCardFinalState(dealer.getName(), cardState, Calculator.getCardSum(dealer.getCards()));
 

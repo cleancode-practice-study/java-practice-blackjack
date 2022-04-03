@@ -1,5 +1,6 @@
 package view;
 
+import model.CardState;
 import model.DealerGameResult;
 import model.Participants;
 
@@ -19,8 +20,8 @@ public class OutputView {
         System.out.printf(INIT_CARD_SETTING_OUTPUT_MESSAGE, dealerName, participantNames);
     }
 
-    public static void printReceiveCardState(String name, List<String> cardState) {
-        System.out.printf(CURRENT_CARD_STATE_OUTPUT_MESSAGE, name, String.join(", ", cardState));
+    public static void printReceiveCardState(String name, CardState cardState) {
+        System.out.printf(CURRENT_CARD_STATE_OUTPUT_MESSAGE, name, String.join(", ", cardState.getCardState()));
     }
 
     public static void printLine() {
@@ -31,8 +32,8 @@ public class OutputView {
         System.out.println(ADDITIONAL_CARD_OUTPUT_MESSAGE);
     }
 
-    public static void printCardFinalState(String name, List<String> cards, int cardSum) {
-        System.out.printf(FINAL_CARD_STATE_OUTPUT_MESSAGE, name, String.join(", ", cards), cardSum);
+    public static void printCardFinalState(String name, CardState cardState, int cardSum) {
+        System.out.printf(FINAL_CARD_STATE_OUTPUT_MESSAGE, name, String.join(", ", cardState.getCardState()), cardSum);
     }
 
     public static void printFinalResult() {

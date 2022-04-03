@@ -40,15 +40,15 @@ public class BlackJackGame {
         return new ArrayList<>(Arrays.asList(participantsNames));
     }
 
-    public static List<String> getCardStates(Cards cards) {
-        List<Card> playerCard = cards.getCards();
+    public static CardState getCardStates(Cards cards) {
+        List<Card> currentCards = cards.getCards();
         List<String> cardNames = new ArrayList<>();
 
-        for (Card card : playerCard) {
+        for (Card card : currentCards) {
             cardNames.add(card.getCard());
         }
 
-        return cardNames;
+        return new CardState(cardNames);
     }
 
     public static ParticipantGameResult getParticipantGameResult(List<Participant> participants, Dealer dealer) {
