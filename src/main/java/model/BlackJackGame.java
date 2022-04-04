@@ -51,10 +51,10 @@ public class BlackJackGame {
         return new CardState(cardNames);
     }
 
-    public static ParticipantGameResult getParticipantGameResult(List<Participant> participants, Dealer dealer) {
+    public static ParticipantGameResult getParticipantGameResult(Participants participants, Dealer dealer) {
         Map<String, String> participantGameResult = new HashMap<>();
 
-        for (Participant participant : participants) {
+        for (Participant participant : participants.getParticipants()) {
             String participantResult = participant.getGameResult(Calculator.getCardSum(dealer.getCards()));
             participantGameResult.put(participant.getName(), participantResult);
         }

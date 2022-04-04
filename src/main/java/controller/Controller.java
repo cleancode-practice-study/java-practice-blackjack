@@ -4,8 +4,6 @@ import model.*;
 import view.InputView;
 import view.OutputView;
 
-import java.util.List;
-
 public class Controller {
     public void run() {
         Participants participants = createParticipants();
@@ -91,7 +89,7 @@ public class Controller {
     }
 
     public void printFinalGameResult(Participants participants, Dealer dealer) {
-        ParticipantGameResult participantGameResult = BlackJackGame.getParticipantGameResult(participants.getParticipants(), dealer);
+        ParticipantGameResult participantGameResult = BlackJackGame.getParticipantGameResult(participants, dealer);
         DealerGameResult dealerGameResult = BlackJackGame.getDealerGameResult(participantGameResult, dealer);
 
         OutputView.printFinalResult();
