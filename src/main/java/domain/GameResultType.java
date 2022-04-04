@@ -1,4 +1,4 @@
-package demain;
+package domain;
 
 public enum GameResultType {
     WIN("승"),

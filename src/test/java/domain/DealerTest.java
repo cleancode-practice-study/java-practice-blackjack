@@ -1,9 +1,5 @@
 package domain;
 
-import demain.Card;
-import demain.Cards;
-import demain.Dealer;
-import demain.GameResultType;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;

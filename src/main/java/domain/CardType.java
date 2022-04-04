@@ -1,4 +1,4 @@
-package demain;
+package domain;
 
 public enum CardType {
     SPADE(0, "스페이드"),

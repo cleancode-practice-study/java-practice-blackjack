@@ -1,4 +1,4 @@
-package demain;
+package domain;
 
 public class Dealer extends Player {
     public Dealer(Cards cards) {

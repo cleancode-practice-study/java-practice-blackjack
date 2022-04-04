@@ -1,4 +1,4 @@
-package demain;
+package domain;
 
 public class Card {
     String card;

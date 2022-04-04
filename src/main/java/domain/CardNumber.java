@@ -1,4 +1,4 @@
-package demain;
+package domain;
 
 public enum CardNumber {
     ONE(0, "1"),

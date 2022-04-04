@@ -1,4 +1,4 @@
-package demain;
+package domain;
 
 public abstract class Player {
     protected Cards cards;

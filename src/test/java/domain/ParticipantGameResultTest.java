@@ -1,6 +1,5 @@
 package domain;
 
-import demain.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;

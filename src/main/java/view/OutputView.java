@@ -1,8 +1,8 @@
 package view;
 
-import demain.CardState;
-import demain.DealerGameResult;
-import demain.Participants;
+import domain.CardState;
+import domain.DealerGameResult;
+import domain.Participants;
 
 import java.util.List;
 

@@ -1,6 +1,5 @@
 package domain;
 
-import demain.CardType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

@@ -1,6 +1,5 @@
 package controller;
 
-import demain.*;
 import domain.*;
 import view.InputView;
 import view.OutputView;
