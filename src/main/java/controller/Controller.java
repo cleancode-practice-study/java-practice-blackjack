@@ -68,14 +68,10 @@ public class Controller {
 
     private void receiveDealerCard(Dealer dealer) {
         if (dealer.isEnough()) {
-            receiveDealerAdditionalCards(dealer);
+            OutputView.printLine();
+            OutputView.printAdditionalCard();
+            dealer.receiveCard();
         }
-    }
-
-    public void receiveDealerAdditionalCards(Dealer dealer) {
-        OutputView.printLine();
-        OutputView.printAdditionalCard();
-        dealer.receiveCard();
     }
 
     public void printFinalCardState(Participants participants, Dealer dealer) {

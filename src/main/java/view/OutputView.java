@@ -49,7 +49,4 @@ public class OutputView {
     public static void printFinalParticipantResult(String name, String result) {
         System.out.printf(FINAL_GAME_RESULT_OUTPUT_MESSAGE, name, result);
     }
-
-
-
 }
