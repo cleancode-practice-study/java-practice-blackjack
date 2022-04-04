@@ -1,4 +1,4 @@
-package model;
+package demain;
 
 import java.util.List;
 

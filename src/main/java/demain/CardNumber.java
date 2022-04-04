@@ -1,4 +1,4 @@
-package model;
+package demain;
 
 public enum CardNumber {
     ONE(0, "1"),

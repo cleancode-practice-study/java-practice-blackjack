@@ -1,4 +1,4 @@
-package model;
+package demain;
 
 public enum CardType {
     SPADE(0, "스페이드"),

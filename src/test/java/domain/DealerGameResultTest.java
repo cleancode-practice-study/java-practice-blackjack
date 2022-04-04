@@ -1,5 +1,7 @@
-package model;
+package domain;
 
+import demain.DealerGameResult;
+import demain.GameResultType;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;

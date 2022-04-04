@@ -1,4 +1,4 @@
-package model;
+package demain;
 
 public class Dealer extends Player {
     public Dealer(Cards cards) {

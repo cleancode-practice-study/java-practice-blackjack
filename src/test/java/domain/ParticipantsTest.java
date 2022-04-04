@@ -1,5 +1,9 @@
-package model;
+package domain;
 
+import demain.Card;
+import demain.Cards;
+import demain.Participant;
+import demain.Participants;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;

@@ -1,4 +1,4 @@
-package model;
+package demain;
 
 public abstract class Player {
     protected Cards cards;

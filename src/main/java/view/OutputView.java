@@ -1,8 +1,8 @@
 package view;
 
-import model.CardState;
-import model.DealerGameResult;
-import model.Participants;
+import demain.CardState;
+import demain.DealerGameResult;
+import demain.Participants;
 
 import java.util.List;
 

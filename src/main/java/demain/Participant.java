@@ -1,4 +1,4 @@
-package model;
+package demain;
 
 public class Participant extends Player{
     private static final int STANDARD_NUMBER = 21;

@@ -1,5 +1,7 @@
-package model;
+package domain;
 
+import demain.Card;
+import demain.Cards;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
