@@ -19,8 +19,20 @@ public class Controller {
     }
 
     public Participants createParticipants() {
-        String names = InputView.getParticipantNames();
+        String names;
+
+        do {
+            names = InputView.getParticipantNames();
+            printErrorMessage(names);
+        } while (!names.contains(","));
+
         return BlackJackGame.getParticipantsByNames(names);
+    }
+
+    private void printErrorMessage(String names) {
+        if (!names.contains(",")) {
+            OutputView.printInputNamesErrorMessage();
+        }
     }
 
     public void printInitCardState(Participants participants, Dealer dealer) {
