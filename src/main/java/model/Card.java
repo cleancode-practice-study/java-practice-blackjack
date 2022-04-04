@@ -1,7 +1,5 @@
 package model;
 
-// 카드가 가지고 있을 만한 정보?
-// 카드 이름
 public class Card {
     String card;
 
