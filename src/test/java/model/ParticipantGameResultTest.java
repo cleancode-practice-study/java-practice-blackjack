@@ -9,14 +9,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ParticipantGameResultTest {
     @Test
     public void 참가자_게임_결과_확인() {
-        Map<String, String> gameResult = new HashMap<>();
+        Map<Participant, String> gameResult = new HashMap<>();
 
-        gameResult.put("진희", GameResultType.WIN.getCardType());
-        gameResult.put("포뇨", GameResultType.DRAW.getCardType());
+        Participant participantOne = new Participant("진희", new Cards(Arrays.asList(new Card("6하트"), new Card("J다이아몬드"))));
+        Participant participantTwo = new Participant("포뇨", new Cards(Arrays.asList(new Card("10스페이드"), new Card("3클로버"))));
+
+
+        gameResult.put(participantOne, GameResultType.WIN.getCardType());
+        gameResult.put(participantTwo, GameResultType.DRAW.getCardType());
 
         ParticipantGameResult participantGameResult = new ParticipantGameResult(gameResult);
 
-        assertThat(participantGameResult.getParticipantResult("진희")).isEqualTo(GameResultType.WIN.getCardType());
-        assertThat(participantGameResult.getParticipantResult("포뇨")).isEqualTo(GameResultType.DRAW.getCardType());
+        assertThat(participantGameResult.getParticipantResult(participantOne)).isEqualTo(GameResultType.WIN.getCardType());
+        assertThat(participantGameResult.getParticipantResult(participantTwo)).isEqualTo(GameResultType.DRAW.getCardType());
     }
 }

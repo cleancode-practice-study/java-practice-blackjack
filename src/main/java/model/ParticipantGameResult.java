@@ -4,17 +4,17 @@ import java.util.Map;
 import java.util.Set;
 
 public class ParticipantGameResult {
-    Map<String, String> gameResult;
+    Map<Participant, String> gameResult;
 
-    public ParticipantGameResult (Map<String, String> gameResult) {
+    public ParticipantGameResult (Map<Participant, String> gameResult) {
         this.gameResult = gameResult;
     }
 
-    public Set<String> getKeySet() {
+    public Set<Participant> getKeySet() {
         return gameResult.keySet();
     }
 
-    public String getParticipantResult(String name) {
-        return gameResult.get(name);
+    public String getParticipantResult(Participant participant) {
+        return gameResult.get(participant);
     }
 }

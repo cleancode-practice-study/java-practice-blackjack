@@ -52,11 +52,11 @@ public class BlackJackGame {
     }
 
     public static ParticipantGameResult getParticipantGameResult(Participants participants, Dealer dealer) {
-        Map<String, String> participantGameResult = new HashMap<>();
+        Map<Participant, String> participantGameResult = new HashMap<>();
 
         for (Participant participant : participants.getParticipants()) {
             String participantResult = participant.getGameResult(Calculator.getCardSum(dealer.getCards()));
-            participantGameResult.put(participant.getName(), participantResult);
+            participantGameResult.put(participant, participantResult);
         }
 
         return new ParticipantGameResult(participantGameResult);
@@ -65,8 +65,8 @@ public class BlackJackGame {
     public static DealerGameResult getDealerGameResult(ParticipantGameResult participantGameResult, Dealer dealer) {
         Map<String, Integer> dealerGameResult = new HashMap<>();
 
-        for (String name : participantGameResult.getKeySet()) {
-            String participantResult = participantGameResult.getParticipantResult(name);
+        for (Participant participant : participantGameResult.getKeySet()) {
+            String participantResult = participantGameResult.getParticipantResult(participant);
             String dealerResult = dealer.getGameResult(participantResult);
             dealerGameResult.put(dealerResult, dealerGameResult.getOrDefault(dealerResult, 0) + 1);
         }

@@ -97,7 +97,7 @@ public class Controller {
 
         for (Participant participant : participants.getParticipants()) {
             String participantName = participant.getName();
-            OutputView.printFinalParticipantResult(participantName, participantGameResult.getParticipantResult(participantName));
+            OutputView.printFinalParticipantResult(participantName, participantGameResult.getParticipantResult(participant));
         }
     }
 

@@ -53,8 +53,8 @@ public class BlackJackGameTest {
 
         ParticipantGameResult participantGameResult = BlackJackGame.getParticipantGameResult(participants, dealer);
 
-        assertThat(participantGameResult.getParticipantResult("진희")).isEqualTo("승");
-        assertThat(participantGameResult.getParticipantResult("포뇨")).isEqualTo("승");
+        assertThat(participantGameResult.getParticipantResult(participantOne)).isEqualTo("승");
+        assertThat(participantGameResult.getParticipantResult(participantTwo)).isEqualTo("승");
     }
 
     @Test
