@@ -23,7 +23,7 @@ public class Calculator {
             sumEleven += convertToNumberAIsEleven(cardNumber);
         }
 
-        if ((sumOne > 21 && sumEleven > 21) && (Math.abs(CARD_STANDARD - sumOne) < Math.abs(CARD_STANDARD - sumEleven)) ) {
+        if ((sumOne >= 21 && sumEleven >= 21) && (Math.abs(CARD_STANDARD - sumOne) < Math.abs(CARD_STANDARD - sumEleven)) ) {
             return sumOne;
         }
 
