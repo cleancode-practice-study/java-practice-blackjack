@@ -56,13 +56,29 @@ public class Controller {
     }
 
     private void receiveEachParticipantAdditionalCards(Participant participant) {
-        boolean canAdded;
+        boolean isAdded;
         do {
-            canAdded = InputView.canGetAdditionCard(participant.getName());
-            addAdditionalCard(canAdded, participant);
-        } while (canAdded);
+            isAdded = getWhetherAdd(participant.getName());
+            addAdditionalCard(isAdded, participant);
+        } while (isAdded);
 
         printCurrentCard(participant);
+    }
+
+    private boolean getWhetherAdd(String name) {
+        String whetherAddOrNot = InputView.canGetAdditionCard(name);
+
+        if (whetherAddOrNot.equals("y")) {
+            return true;
+        }
+
+        if (whetherAddOrNot.equals("n")) {
+            return false;
+        }
+
+        OutputView.printInputAdditionalCardErrorMessage();
+
+        return getWhetherAdd(name);
     }
 
     private void addAdditionalCard(boolean canAdded, Participant participant) {
