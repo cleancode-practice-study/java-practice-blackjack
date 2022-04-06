@@ -23,13 +23,13 @@ public class Controller {
 
         do {
             names = InputView.getParticipantNames();
-            printErrorMessage(names);
+            checkInputNames(names);
         } while (!names.contains(","));
 
         return BlackJackGame.getParticipantsByNames(names);
     }
 
-    private void printErrorMessage(String names) {
+    private void checkInputNames(String names) {
         if (!names.contains(",")) {
             OutputView.printInputNamesErrorMessage();
         }
