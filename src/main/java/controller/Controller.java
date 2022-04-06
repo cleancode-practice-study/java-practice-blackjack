@@ -58,14 +58,14 @@ public class Controller {
     private void receiveEachParticipantAdditionalCards(Participant participant) {
         boolean isAdded;
         do {
-            isAdded = getWhetherAdd(participant.getName());
+            isAdded = getWhetherAddOrNot(participant.getName());
             addAdditionalCard(isAdded, participant);
         } while (isAdded);
 
         printCurrentCard(participant);
     }
 
-    private boolean getWhetherAdd(String name) {
+    private boolean getWhetherAddOrNot(String name) {
         String whetherAddOrNot = InputView.canGetAdditionCard(name);
 
         if (whetherAddOrNot.equals("y")) {
@@ -78,11 +78,11 @@ public class Controller {
 
         OutputView.printInputAdditionalCardErrorMessage();
 
-        return getWhetherAdd(name);
+        return getWhetherAddOrNot(name);
     }
 
-    private void addAdditionalCard(boolean canAdded, Participant participant) {
-        if (canAdded) {
+    private void addAdditionalCard(boolean isAdded, Participant participant) {
+        if (isAdded) {
             participant.receiveCard();
             printCurrentCard(participant);
         }
