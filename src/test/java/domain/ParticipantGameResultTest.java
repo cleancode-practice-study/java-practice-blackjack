@@ -11,8 +11,10 @@ public class ParticipantGameResultTest {
     public void 참가자_게임_결과_확인() {
         Map<Participant, String> gameResult = new HashMap<>();
 
-        Participant participantOne = new Participant("진희", new Cards(Arrays.asList(new Card("6하트"), new Card("J다이아몬드"))));
-        Participant participantTwo = new Participant("포뇨", new Cards(Arrays.asList(new Card("10스페이드"), new Card("3클로버"))));
+        Participant participantOne = new Participant("진희", new Cards(Arrays.asList
+                (new Card(CardNumber.SIX, CardType.HEART), new Card(CardNumber.JACK, CardType.DIAMOND))));
+        Participant participantTwo = new Participant("포뇨", new Cards(Arrays.asList
+                (new Card(CardNumber.TEN, CardType.SPADE), new Card(CardNumber.THREE, CardType.CLOVER))));
 
 
         gameResult.put(participantOne, GameResultType.WIN.getCardType());

@@ -30,7 +30,8 @@ public class BlackJackGameTest {
 
     @Test
     public void 카드_현재_상태_확인() {
-        Cards cards = new Cards(Arrays.asList(new Card("6하트"), new Card("A스페이드"), new Card("10다이아몬드")));
+        Cards cards = new Cards(Arrays.asList
+                (new Card(CardNumber.SIX, CardType.HEART), new Card(CardNumber.ACE, CardType.SPADE), new Card(CardNumber.TEN, CardType.DIAMOND)));
 
         CardState cardState = BlackJackGame.getCardStates(cards);
 
@@ -39,13 +40,16 @@ public class BlackJackGameTest {
 
     @Test
     public void 참가자_게임_결과_확인() {
-        Cards dealerCards = new Cards(Arrays.asList(new Card("3클로버"), new Card("11스페이드"), new Card("4하트")));
+        Cards dealerCards = new Cards(Arrays.asList
+                (new Card(CardNumber.THREE, CardType.DIAMOND), new Card(CardNumber.TEN, CardType.SPADE), new Card(CardNumber.FOUR, CardType.HEART)));
         Dealer dealer = new Dealer(dealerCards);
 
-        Cards cardsOne = new Cards(Arrays.asList(new Card("1하트"), new Card("A스페이드"), new Card("9다이아몬드")));
+        Cards cardsOne = new Cards(Arrays.asList
+                (new Card(CardNumber.ONE, CardType.HEART), new Card(CardNumber.ACE, CardType.SPADE), new Card(CardNumber.NINE, CardType.CLOVER)));
         Participant participantOne = new Participant("진희", cardsOne);
 
-        Cards cardsTwo = new Cards(Arrays.asList(new Card("2스페이드"), new Card("J스페이드"), new Card("8다이아몬드")));
+        Cards cardsTwo = new Cards(Arrays.asList
+                (new Card(CardNumber.TWO, CardType.SPADE), new Card(CardNumber.JACK, CardType.SPADE), new Card(CardNumber.EIGHT, CardType.DIAMOND)));
         Participant participantTwo = new Participant("포뇨", cardsTwo);
 
         List<Participant> participant = Arrays.asList(participantOne, participantTwo);
@@ -59,13 +63,16 @@ public class BlackJackGameTest {
 
     @Test
     public void 딜러_게임_결과_확인() {
-        Cards dealerCards = new Cards(Arrays.asList(new Card("3클로버"), new Card("11스페이드"), new Card("4하트")));
+        Cards dealerCards = new Cards(Arrays.asList
+                (new Card(CardNumber.THREE, CardType.DIAMOND), new Card(CardNumber.TEN, CardType.SPADE), new Card(CardNumber.FOUR, CardType.HEART)));
         Dealer dealer = new Dealer(dealerCards);
 
-        Cards cardsOne = new Cards(Arrays.asList(new Card("1하트"), new Card("A스페이드"), new Card("9다이아몬드")));
+        Cards cardsOne = new Cards(Arrays.asList
+                (new Card(CardNumber.ONE, CardType.HEART), new Card(CardNumber.ACE, CardType.SPADE), new Card(CardNumber.NINE, CardType.CLOVER)));
         Participant participantOne = new Participant("진희", cardsOne);
 
-        Cards cardsTwo = new Cards(Arrays.asList(new Card("2스페이드"), new Card("J스페이드"), new Card("8다이아몬드")));
+        Cards cardsTwo = new Cards(Arrays.asList
+                (new Card(CardNumber.TWO, CardType.SPADE), new Card(CardNumber.JACK, CardType.SPADE), new Card(CardNumber.EIGHT, CardType.DIAMOND)));
         Participant participantTwo = new Participant("포뇨", cardsTwo);
 
         List<Participant> participant = Arrays.asList(participantOne, participantTwo);

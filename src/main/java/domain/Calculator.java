@@ -14,16 +14,16 @@ public class Calculator {
         int sumEleven = 0;
 
         for (Card card : playerCards) {
-            String cardNumber = card.getCard().replaceAll("[가-힣]", "");
+            String cardNumber = card.getCardNumber();
             sumOne += convertToNumberAIsOne(cardNumber);
         }
 
         for (Card card : playerCards) {
-            String cardNumber = card.getCard().replaceAll("[가-힣]", "");
+            String cardNumber = card.getCardNumber();
             sumEleven += convertToNumberAIsEleven(cardNumber);
         }
 
-        if ((sumOne >= 21 && sumEleven >= 21) && (Math.abs(CARD_STANDARD - sumOne) < Math.abs(CARD_STANDARD - sumEleven)) ) {
+        if ((sumOne >= CARD_STANDARD && sumEleven >= CARD_STANDARD) && (Math.abs(CARD_STANDARD - sumOne) < Math.abs(CARD_STANDARD - sumEleven)) ) {
             return sumOne;
         }
 

@@ -8,17 +8,20 @@ public class RandomCardCreator {
 
     private static final Random random = new Random();
 
-    private static final Set<String> cards = new HashSet<>();
+    private static final Set<Card> cards = new HashSet<>();
 
     public static Card getRandomCard() {
         int randomCardNumber = getRandomNumber(CARD_NUMBER_PER_TYPE);
         int randomCardType = getRandomNumber(CARD_TYPE_COUNT);
 
-        String cardName = CardNumber.valueOf(randomCardNumber).getCardNumber() + CardType.valueOf(randomCardType).getCardType();
+        CardNumber cardNumber = CardNumber.valueOf(randomCardNumber);
+        CardType cardType = CardType.valueOf(randomCardType);
 
-        if (!cards.contains(cardName)) {
-            cards.add(cardName);
-            return new Card(cardName);
+        Card card = new Card(cardNumber, cardType);
+
+        if (!cards.contains(card)) {
+            cards.add(card);
+            return card;
         }
 
         return getRandomCard();

@@ -9,8 +9,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ParticipantsTest {
     @Test
     public void 참가자_생성() {
-        Participant participantOne = new Participant("진희", new Cards(Arrays.asList(new Card("6하트"), new Card("J클로버"))));
-        Participant participantTwo = new Participant("포뇨", new Cards(Arrays.asList(new Card("2하트"), new Card("K다이아몬드"))));
+        Participant participantOne = new Participant("진희", new Cards(Arrays.asList
+                (new Card(CardNumber.SIX, CardType.HEART), new Card(CardNumber.JACK, CardType.CLOVER))));
+        Participant participantTwo = new Participant("포뇨", new Cards(Arrays.asList
+                (new Card(CardNumber.TWO, CardType.HEART), new Card(CardNumber.KING, CardType.DIAMOND))));
 
         List<Participant> participant = Arrays.asList(participantOne, participantTwo);
 
@@ -23,8 +25,10 @@ public class ParticipantsTest {
 
     @Test
     public void 참가자_이름_반환() {
-        Participant participantOne = new Participant("진희", new Cards(Arrays.asList(new Card("6하트"), new Card("J클로버"))));
-        Participant participantTwo = new Participant("포뇨", new Cards(Arrays.asList(new Card("2하트"), new Card("K다이아몬드"))));
+        Participant participantOne = new Participant("진희", new Cards(Arrays.asList
+                (new Card(CardNumber.SIX, CardType.HEART), new Card(CardNumber.JACK, CardType.CLOVER))));
+        Participant participantTwo = new Participant("포뇨", new Cards(Arrays.asList
+                (new Card(CardNumber.TWO, CardType.HEART), new Card(CardNumber.KING, CardType.DIAMOND))));
 
         List<Participant> participant = Arrays.asList(participantOne, participantTwo);
 

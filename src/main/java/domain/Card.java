@@ -1,14 +1,19 @@
 package domain;
 
 public class Card {
-    String card;
+    CardNumber cardNumber;
+    CardType cardType;
 
-    public Card(String card) {
-        this.card = card;
+    public Card(CardNumber cardNumber, CardType cardType) {
+        this.cardNumber = cardNumber;
+        this.cardType = cardType;
     }
 
     public String getCard() {
-        return card;
+        return cardNumber.getCardNumber() + cardType.getCardType();
     }
 
+    public String getCardNumber() {
+        return cardNumber.getCardNumber();
+    }
 }
