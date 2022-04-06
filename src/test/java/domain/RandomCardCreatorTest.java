@@ -11,4 +11,12 @@ public class RandomCardCreatorTest {
 
         assertThat(card).isNotNull();
     }
+
+    @Test
+    public void 카드_확인() {
+        Card card = RandomCardCreator.getRandomCard();
+
+        assertThat(card.getCard()).containsAnyOf(CardType.SPADE.getCardType(), CardType.DIAMOND.getCardType(),
+                CardType.CLOVER.getCardType(), CardType.HEART.getCardType());
+    }
 }
