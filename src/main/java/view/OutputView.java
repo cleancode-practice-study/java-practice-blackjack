@@ -2,6 +2,7 @@ package view;
 
 import domain.CardState;
 import domain.DealerGameResult;
+import domain.GameResultType;
 import domain.Participants;
 
 import java.util.List;
@@ -56,7 +57,7 @@ public class OutputView {
         System.out.printf(FINAL_GAME_RESULT_OUTPUT_MESSAGE, name, String.join(" ", dealerResult));
     }
 
-    public static void printFinalParticipantResult(String name, String result) {
-        System.out.printf(FINAL_GAME_RESULT_OUTPUT_MESSAGE, name, result);
+    public static void printFinalParticipantResult(String name, GameResultType gameResultType) {
+        System.out.printf(FINAL_GAME_RESULT_OUTPUT_MESSAGE, name, gameResultType.getCardType());
     }
 }

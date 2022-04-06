@@ -8,17 +8,17 @@ public class Participant extends Player{
         this.cards = cards;
     }
 
-    public String getGameResult(int dealerCardSum) {
+    public GameResultType getGameResult(int dealerCardSum) {
         int cardSum = Calculator.getCardSum(cards);
 
         if (dealerCardSum > cardSum || cardSum > STANDARD_NUMBER) {
-            return GameResultType.LOSE.getCardType();
+            return GameResultType.LOSE;
         }
 
         if (dealerCardSum < cardSum) {
-            return GameResultType.WIN.getCardType();
+            return GameResultType.WIN;
         }
 
-        return GameResultType.DRAW.getCardType();
+        return GameResultType.DRAW;
     }
 }

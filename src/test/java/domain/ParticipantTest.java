@@ -30,9 +30,9 @@ public class ParticipantTest {
 
         int dealerCardSum = 18;
 
-        String gameResult = participant.getGameResult(dealerCardSum);
+        GameResultType gameResult = participant.getGameResult(dealerCardSum);
 
-        assertThat(gameResult).isEqualTo(GameResultType.WIN.getCardType());
+        assertThat(gameResult).isEqualTo(GameResultType.WIN);
     }
 
     @Test
@@ -45,9 +45,9 @@ public class ParticipantTest {
 
         int dealerCardSum = 18;
 
-        String gameResult = participant.getGameResult(dealerCardSum);
+        GameResultType gameResult = participant.getGameResult(dealerCardSum);
 
-        assertThat(gameResult).isEqualTo(GameResultType.LOSE.getCardType());
+        assertThat(gameResult).isEqualTo(GameResultType.LOSE);
     }
 
     @Test
@@ -60,8 +60,8 @@ public class ParticipantTest {
 
         int dealerCardSum = 18;
 
-        String gameResult = participant.getGameResult(dealerCardSum);
+        GameResultType gameResult = participant.getGameResult(dealerCardSum);
 
-        assertThat(gameResult).isEqualTo(GameResultType.DRAW.getCardType());
+        assertThat(gameResult).isEqualTo(GameResultType.DRAW);
     }
 }

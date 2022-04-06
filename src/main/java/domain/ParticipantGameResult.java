@@ -4,9 +4,9 @@ import java.util.Map;
 import java.util.Set;
 
 public class ParticipantGameResult {
-    Map<Participant, String> gameResult;
+    Map<Participant, GameResultType> gameResult;
 
-    public ParticipantGameResult (Map<Participant, String> gameResult) {
+    public ParticipantGameResult (Map<Participant, GameResultType> gameResult) {
         this.gameResult = gameResult;
     }
 
@@ -14,7 +14,7 @@ public class ParticipantGameResult {
         return gameResult.keySet();
     }
 
-    public String getParticipantResult(Participant participant) {
+    public GameResultType getParticipantResult(Participant participant) {
         return gameResult.get(participant);
     }
 }

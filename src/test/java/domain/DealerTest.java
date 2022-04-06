@@ -44,9 +44,9 @@ public class DealerTest {
         Dealer dealer = new Dealer(new Cards(Arrays.asList
                 (new Card(CardNumber.SEVEN, CardType.HEART), new Card(CardNumber.JACK, CardType.CLOVER))));
 
-        String dealerGameResult = dealer.getGameResult(GameResultType.WIN.getCardType());
+        GameResultType dealerGameResult = dealer.getGameResult(GameResultType.WIN);
 
-        assertThat(dealerGameResult).isEqualTo(GameResultType.LOSE.getCardType());
+        assertThat(dealerGameResult).isEqualTo(GameResultType.LOSE);
     }
 
     @Test
@@ -54,9 +54,9 @@ public class DealerTest {
         Dealer dealer = new Dealer(new Cards(Arrays.asList
                 (new Card(CardNumber.SEVEN, CardType.HEART), new Card(CardNumber.JACK, CardType.CLOVER))));
 
-        String dealerGameResult = dealer.getGameResult(GameResultType.LOSE.getCardType());
+        GameResultType dealerGameResult = dealer.getGameResult(GameResultType.LOSE);
 
-        assertThat(dealerGameResult).isEqualTo(GameResultType.WIN.getCardType());
+        assertThat(dealerGameResult).isEqualTo(GameResultType.WIN);
     }
 
     @Test
@@ -64,9 +64,9 @@ public class DealerTest {
         Dealer dealer = new Dealer(new Cards(Arrays.asList
                 (new Card(CardNumber.SEVEN, CardType.HEART), new Card(CardNumber.JACK, CardType.CLOVER))));
 
-        String dealerGameResult = dealer.getGameResult(GameResultType.DRAW.getCardType());
+        GameResultType dealerGameResult = dealer.getGameResult(GameResultType.DRAW);
 
-        assertThat(dealerGameResult).isEqualTo(GameResultType.DRAW.getCardType());
+        assertThat(dealerGameResult).isEqualTo(GameResultType.DRAW);
     }
 
 }

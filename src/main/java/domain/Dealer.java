@@ -12,15 +12,15 @@ public class Dealer extends Player {
         return Calculator.getCardSum(cards) <= ADDITIONAL_CARD_STANDARD;
     }
 
-    public String getGameResult(String result) {
-        if (result.equals(GameResultType.WIN.getCardType())) {
-            return GameResultType.LOSE.getCardType();
+    public GameResultType getGameResult(GameResultType result) {
+        if (result.equals(GameResultType.WIN)) {
+            return GameResultType.LOSE;
         }
 
-        if (result.equals(GameResultType.LOSE.getCardType())) {
-            return GameResultType.WIN.getCardType();
+        if (result.equals(GameResultType.LOSE)) {
+            return GameResultType.WIN;
         }
 
-        return GameResultType.DRAW.getCardType();
+        return GameResultType.DRAW;
     }
 }
