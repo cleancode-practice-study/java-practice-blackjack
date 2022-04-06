@@ -102,8 +102,7 @@ public class Controller {
     }
 
     public void printFinalCardState(Participants participants, Dealer dealer) {
-        CardState cardState;
-        cardState = BlackJackGame.getCardStates(dealer.getCards());
+        CardState cardState = BlackJackGame.getCardStates(dealer.getCards());
         OutputView.printCardFinalState(dealer.getName(), cardState, Calculator.getCardSum(dealer.getCards()));
 
         for (Participant participant : participants.getParticipants()) {
