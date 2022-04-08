@@ -12,32 +12,40 @@ public class Card {
     private static final char QUEEN = 'Q';
     private static final char KING = 'K';
 
-    public static String getRandomOneCard() {
+    private final CardNumbers number;
+    private final CardShapes shape;
+
+    public Card(CardNumbers number, CardShapes shape) {
+        this.number = number;
+        this.shape = shape;
+    }
+
+    public static Card getRandomCard() {
         Random random = new Random();
 
-        int randomShapeIdx = random.nextInt(SHAPES_COUNT);
         int randomNumberIdx = random.nextInt(NUMBERS_COUNT);
+        int randomShapeIdx = random.nextInt(SHAPES_COUNT);
 
-        String number = CardNumbers.getNumber(randomNumberIdx);
-        String shape = CardShapes.getShape(randomShapeIdx);
+        CardNumbers number = CardNumbers.valueOf(randomNumberIdx);
+        CardShapes shape = CardShapes.valueOf(randomShapeIdx);
 
-        return number + shape;
+        return new Card(number, shape);
     }
 
-    static boolean isMinAceNumber(char number, int sum) {
-        return isAceCard(number) && sum + MAX_ACE_NUMBER > STANDARD_NUMBER;
+    public static boolean isMinAceNumber(int cardsNumberSum) {
+        return cardsNumberSum + MAX_ACE_NUMBER > STANDARD_NUMBER;
     }
 
-    static boolean isMaxAceNumber(char number, int sum) {
-        return isAceCard(number) && sum + MAX_ACE_NUMBER <= STANDARD_NUMBER;
-    }
-
-    static boolean isJackAndQueenAndKingCard(char number) {
+    public static boolean isSpecialCard(char number) {
         return isJackCard(number) || isQueenCard(number) || isKingCard(number);
     }
 
-    private static boolean isAceCard(char number) {
+    public static boolean isAceCard(char number) {
         return number == ACE;
+    }
+
+    public String getCard() {
+        return number.getNumber() + shape.getShape();
     }
 
     private static boolean isJackCard(char number) {

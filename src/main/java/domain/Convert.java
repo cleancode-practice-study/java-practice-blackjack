@@ -4,12 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Convert {
-    // 입력 받은 String, 쉼표 기준으로 String[] 반환 메서드
     public static String[] splitNames(String names) {
         return names.split(",");
     }
 
-    // 콤마 포함 문자열 반환
     public static String getNamesWithComma(List<Player> users) {
         List<String> names = new ArrayList<>();
 
@@ -17,6 +15,15 @@ public class Convert {
             String userName = user.getName();
             names.add(userName);
         }
+
+        return String.join(", ", names);
+    }
+
+    public static String getCardsWithComma(Cards cards) {
+        List<String> names = new ArrayList<>();
+
+        for (Card card : cards.getCards())
+            names.add(card.getCard());
 
         return String.join(", ", names);
     }

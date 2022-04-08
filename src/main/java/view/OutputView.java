@@ -1,5 +1,6 @@
 package view;
 
+import domain.Convert;
 import domain.Player;
 import domain.ResultTypes;
 
@@ -13,8 +14,8 @@ public class OutputView {
     private static final String LOSE = ResultTypes.LOSE.getResultType();
     private static final String TIE = ResultTypes.TIE.getResultType();
 
-    public static void printPlayerInitialMessage(String fullNames) {
-        System.out.print("딜러와 " + fullNames + GIVE_A_PLAYER_2_CARDS_MESSAGE);
+    public static void printPlayersInitialMessage(String names) {
+        System.out.print("딜러와 " + names + GIVE_A_PLAYER_2_CARDS_MESSAGE);
     }
 
     public static void printDealerOneMoreCardMessage() {
@@ -22,17 +23,19 @@ public class OutputView {
     }
 
     public static void printPlayerOwnCard(Player player) {
-        System.out.print(player.getName() + " 카드 : " + player.getCards());
+        System.out.print(player.getName() + " 카드 : ");
+        String cards = Convert.getCardsWithComma(player.getCards());
+        System.out.print(cards);
     }
 
-    public static void printTotalPlayerResult(Player player, int result) {
+    public static void printPlayersResultNumber(Player player, int result) {
         printPlayerOwnCard(player);
         System.out.println(" - 결과 : " + result);
     }
 
-    public static void printUserResult(Map<String, String> userResult) {
-        for (String userName : userResult.keySet())
-            System.out.println(userName + " : " + userResult.get(userName));
+    public static void printParticipantsResult(Map<String, String> ParticipantsResult) {
+        for (String userName : ParticipantsResult.keySet())
+            System.out.println(userName + " : " + ParticipantsResult.get(userName));
     }
 
     public static void printDealerResult(Map<String, Integer> dealerResult) {

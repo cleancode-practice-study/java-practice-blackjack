@@ -1,3 +1,5 @@
+import domain.Cards;
+import domain.Participants;
 import domain.Player;
 import org.junit.jupiter.api.Test;
 
@@ -15,7 +17,7 @@ public class PlayerTest {
         names.add("jinhee");
 
         //when
-        List<Player> users = Player.createUserPlayers(names);
+        List<Player> users = Participants.create(names);
 
         //then
         assertThat(users.size()).isEqualTo(2);
@@ -26,9 +28,9 @@ public class PlayerTest {
     @Test
     void 초기_랜덤_카드를_지급하는_경우() {
         //when
-        List<String> cards = Player.getInitialCards();
+        Cards cards = Cards.create();
 
         //then
-        assertThat(cards.size()).isEqualTo(2);
+        assertThat(cards.getCards().size()).isEqualTo(2);
     }
 }

@@ -1,12 +1,13 @@
 package domain;
 
-public enum CardShapes {
-    클로버(0, "클로버"),
-    하트(1, "하트"),
-    다이아몬드(2, "다이아몬드"),
-    스페이드(3, "스페이드");
+import java.util.Arrays;
 
-    private static int count = 0;
+public enum CardShapes {
+    CLOVER(0, "클로버"),
+    HEART(1, "하트"),
+    DIAMOND(2, "다이아몬드"),
+    SPADE(3, "스페이드");
+
     private final int idx;
     private final String shape;
 
@@ -15,12 +16,11 @@ public enum CardShapes {
         this.idx = idx;
     }
 
-    public static String getShape(int cardIdx) {
-        for (CardShapes cardShapes : CardShapes.values()) {
-            if (cardIdx == cardShapes.idx)
-                return cardShapes.shape;
-        }
-        return null;
+    public static CardShapes valueOf(int cardIdx) {
+        return Arrays.stream(CardShapes.values()).filter(shape -> shape.idx == cardIdx).findAny().orElse(null);
     }
 
+    public String getShape() {
+        return this.shape;
+    }
 }

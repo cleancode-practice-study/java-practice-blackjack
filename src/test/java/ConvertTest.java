@@ -1,3 +1,4 @@
+import domain.Cards;
 import domain.Convert;
 import domain.Player;
 import org.junit.jupiter.api.Test;
@@ -24,14 +25,16 @@ public class ConvertTest {
     @Test
     void 콤마를_포함하여_출력하는_경우() {
         //given
-        List<Player> users = new ArrayList<>();
-        Player user1 = Player.create("halim");
-        Player user2 = Player.create("jinhee");
-        users.add(user1);
-        users.add(user2);
+        List<Player> players = new ArrayList<Player>() {
+            {
+                add(new Player("halim", Cards.create()));
+                add(new Player("jinhee", Cards.create()));
+            }
+        };
+
 
         //when
-        String names = Convert.getNamesWithComma(users);
+        String names = Convert.getNamesWithComma(players);
 
         //then
         assertThat(names).isEqualTo("halim, jinhee");
