@@ -3,7 +3,7 @@ package domain;
 import java.util.*;
 
 public class RandomCardCreator {
-    private static final int CARD_NUMBER_PER_TYPE = 14;
+    private static final int CARD_NUMBER_PER_TYPE = 13;
     private static final int CARD_TYPE_COUNT = 4;
 
     private static final Random random = new Random();
