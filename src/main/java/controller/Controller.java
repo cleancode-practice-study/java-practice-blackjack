@@ -15,17 +15,17 @@ public class Controller {
     public static final String NO = "n";
 
     public void play() {
-        List<String> participantsNames = getParticipantsNames();
-        List<Player> players = Creator.createParticipants(participantsNames);
-        Participants participants = new Participants(players);
+        List<String> names = inputParticipantsNames();
+        List<Player> players = Creator.createParticipants(names);
 
-        Player dealer = new Player(DEALER, Creator.getInitialCards());
+        Participants participants = new Participants(players);
+        Player dealer = new Player(DEALER, Cards.getInitialCards());
 
         printPlayersInitialCards(dealer, participants); // 플레이어들의 초기 부여 받은 카드 출력
         printGameResult(getFinalParticipants(participants), getFinalDealer(dealer)); // 최종 승패 출력
     }
 
-    private List<String> getParticipantsNames() {
+    private List<String> inputParticipantsNames() {
         String names = InputView.inputPlayerNames(); // view 호출, 게임의 참여할 사람 이름 입력 받기
         String[] userNames = Convert.splitNames(names); // model 호출, 쉼표 기준으로 잘라서 배열에 저장
         System.out.println("");
@@ -34,12 +34,12 @@ public class Controller {
     }
 
     private void printPlayersInitialCards(Player dealer, Participants participants) {
-        printParticipantsInitialMessage(participants);
+        printPlayersInitialMessage(participants);
         System.out.println("");
 
-        printPlayerOwnCard(dealer);
+        printPlayerCards(dealer);
         for (Player user : participants.getParticipants())
-            printPlayerOwnCard(user);
+            printPlayerCards(user);
 
         System.out.println("");
     }
@@ -50,7 +50,7 @@ public class Controller {
 
         for (Player player : participants.getParticipants()) {
             Player finalUserCard = checkOneMoreCard(player);
-            printPlayerOwnCard(finalUserCard);
+            printPlayerCards(finalUserCard);
             players.add(finalUserCard);
         }
 
@@ -63,7 +63,7 @@ public class Controller {
     private Player getFinalDealer(Player dealer) {
         Cards cards = dealer.getCards();
 
-        if (Creator.getNumbersSum(cards) <= DEALER_ONE_MORE_CARD_STANDARD_NUMBER) {
+        if (Cards.getSum(cards) <= DEALER_ONE_MORE_CARD_STANDARD_NUMBER) {
             Card randomCard = Card.getRandomCard();
             cards.addCard(randomCard);
             printDealerOneMoreCardMessage();
@@ -76,17 +76,17 @@ public class Controller {
         Cards cards = participant.getCards();
 
         while (!isNoAnswer(participant)) {
-            Card randomCard = Card.getRandomCard();
-            cards.addCard(randomCard);
-            printPlayerOwnCard(participant);
+            Card card = Card.getRandomCard();
+            cards.addCard(card);
+            printPlayerCards(participant);
         }
 
         return participant;
     }
 
     private boolean isNoAnswer(Player participant) {
-        String userName = participant.getName();
-        String answer = InputView.inputYesOrNoOneCard(userName);
+        String name = participant.getName();
+        String answer = InputView.inputYesOrNoOneMoreCard(name);
 
         return answer.equals(NO);
     }
@@ -96,45 +96,41 @@ public class Controller {
         System.out.println("");
     }
 
-    private void printPlayerOwnCard(Player participant) {
-        OutputView.printPlayerOwnCard(participant);
+    private void printPlayerCards(Player participant) {
+        OutputView.printPlayerCards(participant);
         System.out.println("");
     }
 
-    private void printParticipantsInitialMessage(Participants participants) {
+    private void printPlayersInitialMessage(Participants participants) {
         String names = Convert.getNamesWithComma(participants.getParticipants());
 
         OutputView.printPlayersInitialMessage(names);
         System.out.println("");
     }
 
-    private void printPlayersResult(Player dealer, Participants participants) {
-        printPlayerResult(dealer);
+    private void printPlayersCardsResult(Player dealer, Participants participants) {
+        printPlayerCardsResult(dealer);
 
         for (Player participant : participants.getParticipants())
-            printPlayerResult(participant);
+            printPlayerCardsResult(participant);
 
         System.out.println("");
     }
 
-    private void printPlayerResult(Player player) {
+    private void printPlayerCardsResult(Player player) {
         Cards cards = player.getCards();
 
-        int playersResult = Creator.getNumbersSum(cards);
-        OutputView.printPlayersResultNumber(player, playersResult);
-    }
-
-    private void printWinOrLoseResult(Map<String, String> participantsResult) {
-        Map<String, Integer> dealerResult = Creator.getDealerResult(participantsResult);
-
-        OutputView.printDealerResult(dealerResult); // 딜러 승패 결과
-        OutputView.printParticipantsResult(participantsResult); // 참여자 승패 결과
+        int playersResult = Cards.getSum(cards);
+        OutputView.printPlayerCardsSumResult(player, playersResult);
     }
 
     private void printGameResult(Participants participants, Player dealer) {
-        printPlayersResult(dealer, participants); // 플레이어들의 최종 카드와 결과 출력
-        Map<String, String> participantsResult = Creator.getParticipantsResult(dealer, participants); // 유저 승패 결과 구하기
+        printPlayersCardsResult(dealer, participants);
 
-        printWinOrLoseResult(participantsResult); // 최종 승패 결과 출력 (딜러+유저)
+        Map<String, String> participantsResult = Creator.getParticipantsResult(dealer, participants);
+        Map<String, Integer> dealerResult = Creator.getDealerResult(participantsResult);
+
+        OutputView.printDealerGameResult(dealerResult);
+        OutputView.printParticipantsGameResult(participantsResult);
     }
 }

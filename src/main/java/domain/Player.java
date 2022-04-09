@@ -10,6 +10,10 @@ public class Player {
         this.cards = cards;
     }
 
+    public static boolean isLargerThanDealerNumber(Player dealer, Player user) {
+        return Cards.getSum(dealer.getCards()) < Cards.getSum(user.getCards());
+    }
+
     public String getName() {
         return this.name;
     }
@@ -30,16 +34,12 @@ public class Player {
         return isValidPlayerNumber(dealer) && !isValidPlayerNumber(user);
     }
 
-    public static boolean isLargerThanDealerNumber(Player dealer, Player user) {
-        return Creator.getNumbersSum(dealer.getCards()) < Creator.getNumbersSum(user.getCards());
-    }
-
     public static boolean isEqualUserAndDealerNumber(Player dealer, Player user) {
-        return Creator.getNumbersSum(dealer.getCards()) == Creator.getNumbersSum(user.getCards());
+        return Cards.getSum(dealer.getCards()) == Cards.getSum(user.getCards());
     }
 
-    public static boolean isValidPlayerNumber(Player player) {
-        return Creator.getNumbersSum(player.getCards()) <= STANDARD_NUMBER;
+    private static boolean isValidPlayerNumber(Player player) {
+        return Cards.getSum(player.getCards()) <= STANDARD_NUMBER;
     }
 
     public Cards getCards() {

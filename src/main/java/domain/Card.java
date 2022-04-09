@@ -26,8 +26,8 @@ public class Card {
         int randomNumberIdx = random.nextInt(NUMBERS_COUNT);
         int randomShapeIdx = random.nextInt(SHAPES_COUNT);
 
-        CardNumbers number = CardNumbers.valueOf(randomNumberIdx);
-        CardShapes shape = CardShapes.valueOf(randomShapeIdx);
+        CardNumbers number = CardNumbers.getCardNumber(randomNumberIdx);
+        CardShapes shape = CardShapes.getCardShape(randomShapeIdx);
 
         return new Card(number, shape);
     }

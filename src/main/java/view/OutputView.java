@@ -22,23 +22,23 @@ public class OutputView {
         System.out.println(GET_DEALER_ONE_CARD_MESSAGE);
     }
 
-    public static void printPlayerOwnCard(Player player) {
+    public static void printPlayerCards(Player player) {
         System.out.print(player.getName() + " 카드 : ");
         String cards = Convert.getCardsWithComma(player.getCards());
         System.out.print(cards);
     }
 
-    public static void printPlayersResultNumber(Player player, int result) {
-        printPlayerOwnCard(player);
+    public static void printPlayerCardsSumResult(Player player, int result) {
+        printPlayerCards(player);
         System.out.println(" - 결과 : " + result);
     }
 
-    public static void printParticipantsResult(Map<String, String> ParticipantsResult) {
+    public static void printParticipantsGameResult(Map<String, String> ParticipantsResult) {
         for (String userName : ParticipantsResult.keySet())
             System.out.println(userName + " : " + ParticipantsResult.get(userName));
     }
 
-    public static void printDealerResult(Map<String, Integer> dealerResult) {
+    public static void printDealerGameResult(Map<String, Integer> dealerResult) {
         String winCount = dealerResult.get(LOSE) + WIN;
         String loseCount = dealerResult.get(WIN) + LOSE;
         String tieCount = dealerResult.get(TIE) + TIE;

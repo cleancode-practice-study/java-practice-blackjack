@@ -16,7 +16,7 @@ public enum CardShapes {
         this.idx = idx;
     }
 
-    public static CardShapes valueOf(int cardIdx) {
+    public static CardShapes getCardShape(int cardIdx) {
         return Arrays.stream(CardShapes.values()).filter(shape -> shape.idx == cardIdx).findAny().orElse(null);
     }
 
