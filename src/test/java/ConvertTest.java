@@ -27,11 +27,10 @@ public class ConvertTest {
         //given
         List<Player> players = new ArrayList<Player>() {
             {
-                add(new Player("halim", Cards.create()));
-                add(new Player("jinhee", Cards.create()));
+                add(new Player("halim", Cards.getInitialCards()));
+                add(new Player("jinhee", Cards.getInitialCards()));
             }
         };
-
 
         //when
         String names = Convert.getNamesWithComma(players);

@@ -17,7 +17,10 @@ public enum CardShapes {
     }
 
     public static CardShapes getCardShape(int cardIdx) {
-        return Arrays.stream(CardShapes.values()).filter(shape -> shape.idx == cardIdx).findAny().orElse(null);
+        return Arrays.stream(CardShapes.values())
+                .filter(shape -> shape.idx == cardIdx)
+                .findAny()
+                .orElse(null);
     }
 
     public String getShape() {

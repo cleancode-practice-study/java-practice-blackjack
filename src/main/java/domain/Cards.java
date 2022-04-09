@@ -58,5 +58,4 @@ public class Cards {
 
         return sum;
     }
-
 }

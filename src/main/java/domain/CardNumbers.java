@@ -25,7 +25,10 @@ public enum CardNumbers {
     }
 
     public static CardNumbers getCardNumber(int cardIdx) {
-        return Arrays.stream(CardNumbers.values()).filter(num -> num.idx == cardIdx).findAny().orElse(null);
+        return Arrays.stream(CardNumbers.values())
+                .filter(num -> num.idx == cardIdx)
+                .findAny()
+                .orElse(null);
     }
 
     public char getNumber() {

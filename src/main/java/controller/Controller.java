@@ -16,21 +16,22 @@ public class Controller {
 
     public void play() {
         List<String> names = inputParticipantsNames();
-        List<Player> players = Creator.createParticipants(names);
+        List<Player> players = Participants.create(names);
 
         Participants participants = new Participants(players);
         Player dealer = new Player(DEALER, Cards.getInitialCards());
 
-        printPlayersInitialCards(dealer, participants); // 플레이어들의 초기 부여 받은 카드 출력
-        printGameResult(getFinalParticipants(participants), getFinalDealer(dealer)); // 최종 승패 출력
+        printPlayersInitialCards(dealer, participants);
+        GameResult gameResult = getGameResult(getFinalParticipants(participants), getFinalDealer(dealer));
+        printGameResult(gameResult);
     }
 
     private List<String> inputParticipantsNames() {
-        String names = InputView.inputPlayerNames(); // view 호출, 게임의 참여할 사람 이름 입력 받기
-        String[] userNames = Convert.splitNames(names); // model 호출, 쉼표 기준으로 잘라서 배열에 저장
+        String names = InputView.inputPlayerNames();
+        String[] participantsNames = Convert.splitNames(names);
         System.out.println("");
 
-        return new ArrayList<>(Arrays.asList(userNames));
+        return new ArrayList<>(Arrays.asList(participantsNames));
     }
 
     private void printPlayersInitialCards(Player dealer, Participants participants) {
@@ -124,13 +125,17 @@ public class Controller {
         OutputView.printPlayerCardsSumResult(player, playersResult);
     }
 
-    private void printGameResult(Participants participants, Player dealer) {
+    private GameResult getGameResult(Participants participants, Player dealer) {
         printPlayersCardsResult(dealer, participants);
 
-        Map<String, String> participantsResult = Creator.getParticipantsResult(dealer, participants);
-        Map<String, Integer> dealerResult = Creator.getDealerResult(participantsResult);
+        Map<String, String> participantsResult = GameResultCreator.getParticipantsResult(dealer, participants);
+        Map<String, Integer> dealerResult = GameResultCreator.getDealerResult(participantsResult);
 
-        OutputView.printDealerGameResult(dealerResult);
-        OutputView.printParticipantsGameResult(participantsResult);
+        return new GameResult(participantsResult, dealerResult);
+    }
+
+    private void printGameResult(GameResult gameResult) {
+        OutputView.printDealerGameResult(gameResult.getDealerResult());
+        OutputView.printParticipantsGameResult(gameResult.getParticipantsResult());
     }
 }

@@ -28,7 +28,7 @@ public class PlayerTest {
     @Test
     void 초기_랜덤_카드를_지급하는_경우() {
         //when
-        Cards cards = Cards.create();
+        Cards cards = Cards.getInitialCards();
 
         //then
         assertThat(cards.getCards().size()).isEqualTo(2);

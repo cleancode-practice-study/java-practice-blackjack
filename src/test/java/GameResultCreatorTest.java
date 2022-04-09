@@ -9,7 +9,7 @@ import java.util.Map;
 import static org.assertj.core.api.AssertionsForClassTypes.entry;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
-public class CreatorTest {
+public class GameResultCreatorTest {
     @Test
     void 카드_숫자들의_합을_구하는_경우() {
         //given
@@ -23,7 +23,7 @@ public class CreatorTest {
         Cards cards = new Cards(card);
 
         //when
-        int result = Creator.getNumbersSum(cards);
+        int result = Cards.getSum(cards);
 
         //then
         assertThat(result).isEqualTo(14);
@@ -39,7 +39,7 @@ public class CreatorTest {
         userResult.put("dowon", "무");
 
         //when
-        Map<String, Integer> dealerResult = Creator.getDealerResult(userResult);
+        Map<String, Integer> dealerResult = GameResultCreator.getDealerResult(userResult);
 
         //then
         int winCount = dealerResult.get(ResultTypes.LOSE.getResultType());
@@ -99,7 +99,7 @@ public class CreatorTest {
         Participants participants = new Participants(players);
 
         //when
-        Map<String, String> userResult = Creator.getParticipantsResult(dealer, participants);
+        Map<String, String> userResult = GameResultCreator.getParticipantsResult(dealer, participants);
 
         //then
         assertThat(userResult).contains(entry("halim", "무"), entry("jinhee", "승"));

@@ -18,6 +18,10 @@ public class Player {
         return this.name;
     }
 
+    public Cards getCards() {
+        return this.cards;
+    }
+
     public static boolean isValidDealerAndUserNumber(Player dealer, Player user) {
         return isValidPlayerNumber(dealer) && isValidPlayerNumber(user);
     }
@@ -40,9 +44,5 @@ public class Player {
 
     private static boolean isValidPlayerNumber(Player player) {
         return Cards.getSum(player.getCards()) <= STANDARD_NUMBER;
-    }
-
-    public Cards getCards() {
-        return this.cards;
     }
 }

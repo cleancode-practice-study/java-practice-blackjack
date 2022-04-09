@@ -4,13 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
-public class Creator {
-    public static List<Player> createParticipants(List<String> names) {
-        return names.stream().map(name -> new Player(name, Cards.getInitialCards())).collect(Collectors.toList());
-    }
-
+public class GameResultCreator {
     public static Map<String, Integer> getDealerResult(Map<String, String> participantsResult) {
         Map<String, Integer> dealerResult = new HashMap<String, Integer>() {
             {
