@@ -9,13 +9,16 @@ public class Participant extends Player{
     }
 
     public GameResultType getGameResult(int dealerCardSum) {
-        int cardSum = Calculator.getCardSum(cards);
+        int ParticipantCardSum = Calculator.getCardSum(cards);
 
-        if (dealerCardSum > cardSum || cardSum > STANDARD_NUMBER) {
+        int diffParticipant = Math.abs(ParticipantCardSum - STANDARD_NUMBER);
+        int diffDealer = Math.abs(dealerCardSum - STANDARD_NUMBER);
+
+        if (diffParticipant > diffDealer || ParticipantCardSum > STANDARD_NUMBER) {
             return GameResultType.LOSE;
         }
 
-        if (dealerCardSum < cardSum) {
+        if (diffDealer > diffParticipant) {
             return GameResultType.WIN;
         }
 
