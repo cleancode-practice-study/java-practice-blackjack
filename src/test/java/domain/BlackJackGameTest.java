@@ -45,7 +45,7 @@ public class BlackJackGameTest {
         Dealer dealer = new Dealer(dealerCards);
 
         Cards cardsOne = new Cards(Arrays.asList
-                (new Card(CardNumber.ONE, CardType.HEART), new Card(CardNumber.ACE, CardType.SPADE), new Card(CardNumber.NINE, CardType.CLOVER)));
+                (new Card(CardNumber.TWO, CardType.HEART), new Card(CardNumber.NINE, CardType.SPADE), new Card(CardNumber.NINE, CardType.CLOVER)));
         Participant participantOne = new Participant("진희", cardsOne);
 
         Cards cardsTwo = new Cards(Arrays.asList
@@ -57,8 +57,8 @@ public class BlackJackGameTest {
 
         ParticipantGameResult participantGameResult = BlackJackGame.getParticipantGameResult(participants, dealer);
 
-        assertThat(participantGameResult.getParticipantResult(participantOne)).isEqualTo("승");
-        assertThat(participantGameResult.getParticipantResult(participantTwo)).isEqualTo("승");
+        assertThat(participantGameResult.getParticipantResult(participantOne)).isEqualTo(GameResultType.WIN);
+        assertThat(participantGameResult.getParticipantResult(participantTwo)).isEqualTo(GameResultType.WIN);
     }
 
     @Test
@@ -68,7 +68,7 @@ public class BlackJackGameTest {
         Dealer dealer = new Dealer(dealerCards);
 
         Cards cardsOne = new Cards(Arrays.asList
-                (new Card(CardNumber.ONE, CardType.HEART), new Card(CardNumber.ACE, CardType.SPADE), new Card(CardNumber.NINE, CardType.CLOVER)));
+                (new Card(CardNumber.TWO, CardType.HEART), new Card(CardNumber.NINE, CardType.SPADE), new Card(CardNumber.NINE, CardType.CLOVER)));
         Participant participantOne = new Participant("진희", cardsOne);
 
         Cards cardsTwo = new Cards(Arrays.asList
